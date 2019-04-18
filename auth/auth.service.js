@@ -1,10 +1,7 @@
 'use strict';
 
 var mssql = require('mssql');
-var config = require('../config/environment');
 var compose = require('composable-middleware');
-
-let connection = config.config;
 
 function isAuthenticated() {
     return compose()
