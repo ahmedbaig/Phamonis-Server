@@ -98,7 +98,7 @@ UserSchema
             '_id': this._id,
             'firstName': this.firstName,
             'lastName': this.lastName,
-            'type': this.type,
+            'role': this.role,
             'email' : this.email,
             'password' : this.password
             

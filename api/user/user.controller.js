@@ -6,17 +6,10 @@ var crypto = require('crypto');
 
 
 const UserService = require('./user.service');
-const UserModel = require('./user.model');
-const AuthService = require('../../auth/auth.service');
+const UserModel = require('./user.model'); 
 const UtilService = require('../utility/util');
 const htmlTemplateService = require('../utility/htmltemplates');
-const UserSession = require('../userSession/userSession.model');
-const DistributorModel = require('../distributors/distributors.model');
-const PlaylistModel = require('../analytics/playlistAnalytics.model');
-const listenedModel = require('../analytics/listenedAnalytics.model');
-const ChannelModel = require("../channel/channel.model");
-const CatalogModel = require("../catalogs/catalogs.model")
-const TrackModel = require("../tracks/tracks.model");
+const UserSession = require('../userSession/userSession.model'); 
 const _ = require('lodash');
 
 exports.create = function(req,res){
@@ -156,14 +149,8 @@ exports.loginUser = function (req, res){
                         message: 'Sorry! Your account is not approved by admin.'
                       })
                     }
-                    if(user.role=='user'||user.role=="artist"){
-                        return res.send({
-                            success: false,
-                            message: 'Sorry! Your account is not accessable on this website.'
-                        })
-                    }
                   const userSession = new UserSession();
-                  userSession.userId = user._id;
+                  userSession.user = user._id;
                   userSession.save((err, doc) => {
                     if (err) {
                       //console.log(err);
@@ -176,8 +163,7 @@ exports.loginUser = function (req, res){
                     var user = {
                       success: true,
                       message: 'Valid sign in',
-                      token: doc._id,
-                      data: variation
+                      token: doc._id
                     };
                     return res.send(user);
                   });

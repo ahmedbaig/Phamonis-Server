@@ -16,7 +16,7 @@ const _ = require('lodash');
 const moment = require('moment');
 
 // mongoose.connect('mongodb://localhost/gramie_player');
-let url = 'mongodb://phamonisTeam:Defragment123@ds046027.mlab.com:46027/phamonis'
+let url = 'mongodb://phamonisTeam:abc123@ds046027.mlab.com:46027/phamonis'
 mongoose.connect(url, (err,db)=>{
   if(err) { 
     throw err
