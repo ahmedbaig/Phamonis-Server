@@ -10,7 +10,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "concurrently \"node server\" \"ng serve --proxy-config proxy.config.json\"",
+    "start": "node server",
     "start:dev": "node server",
     "build": "ng build",
     "test": "ng test",
