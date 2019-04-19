@@ -4,7 +4,6 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { EasyPieChartModule } from 'ng2modules-easypiechart';
 
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
@@ -14,18 +13,29 @@ import { AppComponent } from './app.component';
 
 import { AuthComponent } from './components/auth/auth.component';
 import { LoginComponent } from './components/login/login.component';
-import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
-import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
-import { AccountactivitionComponent } from './components/accountactivition/accountactivition.component';
+import { AccountActivitionComponent } from './components/account-activition/account-activition.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { HomeComponent } from './components/home/home.component';
+
 const appRoutes: Routes = [
   {
     path: '',
     component: AuthComponent,
     children: [
       {path: '', component: LoginComponent},
-      {path: 'forgot-password', component: ForgotpasswordComponent},
-      {path: 'reset-password/:token', component: ResetpasswordComponent},
-      {path: 'account-activation/:token', component: AccountactivitionComponent}
+      {path: 'forgot-password', component: ForgotPasswordComponent},
+      {path: 'reset-password/:token', component: ResetPasswordComponent},
+      {path: 'account-activation/:token', component: AccountActivitionComponent}
+    ]
+  }, {
+    path: 'dashboard',
+    component: DashboardComponent,
+    children:[
+      {path: '', component:HomeComponent}
     ]
   }
 ];
@@ -37,13 +47,16 @@ const config = {useHash:true};
     AppComponent,
     AuthComponent,
     LoginComponent,
-    ForgotpasswordComponent,
-    ResetpasswordComponent,
-    AccountactivitionComponent
+    AccountActivitionComponent,
+    RegisterComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    DashboardComponent,
+    NavigationComponent,
+    HomeComponent
   ],
   imports: [
     NgbModule,
-    EasyPieChartModule,
     LoadingBarHttpClientModule,
     BrowserModule,
     FormsModule,

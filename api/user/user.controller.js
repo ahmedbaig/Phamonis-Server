@@ -7,6 +7,9 @@ var crypto = require('crypto');
 
 const UserService = require('./user.service');
 const UserModel = require('./user.model'); 
+const PatientModel = require('../patient/patient.model')
+const DoctorModel = require('../doctor/doctor.model')
+const NurseModel = require('../nurse/nurse.model')
 const UtilService = require('../utility/util');
 const htmlTemplateService = require('../utility/htmltemplates');
 const UserSession = require('../userSession/userSession.model'); 
@@ -163,7 +166,8 @@ exports.loginUser = function (req, res){
                     var user = {
                       success: true,
                       message: 'Valid sign in',
-                      token: doc._id
+                      token: doc._id,
+                      user: doc
                     };
                     return res.send(user);
                   });
@@ -257,6 +261,19 @@ exports.activateAccount = async function(req, res){
 
         user.accountActivated.isTrue = true;
         user.accountActivated.token = null;
+        if(user.role == 'user'){
+            let patient = new PatientModel();
+            patient.user = user._id;
+            await patient.save();
+        }else if(user.role == 'nurse'){
+            let nurse = new NurseModel();
+            nurse.user = user._id
+            await nurse.save()
+        }else if(user.role == 'doctor'){
+            let doctor = new DoctorModel();
+            doctor.user = user._id
+            await doctor.save();
+        }
 
         await user.save();
 

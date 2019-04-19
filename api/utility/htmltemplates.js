@@ -184,7 +184,7 @@ exports.accountActivation = function(user,token){
           <!-- Logo -->
           <tr>
             <td class="email-masthead">
-              <a href="#" class="email-masthead_name"><img src="" alt="PHAMONIS"></a>
+              <a href="https://phamonis.herokuapp.com" class="email-masthead_name"><img src="" alt="PHAMONIS"></a>
             </td>
           </tr>
           <!-- Email Body -->
@@ -201,7 +201,7 @@ exports.accountActivation = function(user,token){
                       <tr>
                         <td align="center">
                           <div>
-                            <a style="text-decoration: none;color: white;" href="http://localhost:4200.com/#/activate-account/${token}" class="button button--blue">Verify Email</a>
+                            <a style="text-decoration: none;color: white;" href="https://phamonis.herokuapp.com/#/activate-account/${token}" class="button button--blue">Verify Email</a>
                           </div>
                         </td>
                       </tr>
@@ -213,7 +213,7 @@ exports.accountActivation = function(user,token){
                         <td>
                           <p class="sub">If you’re having trouble clicking the button, copy and paste the URL below into your web browser.
                           </p>
-                          <p class="sub"><a href="http://localhost:4200/#/activate-account/${token}">http://localhost:4200/#/activate-account/${token}  </a></p>
+                          <p class="sub"><a href="https://phamonis.herokuapp.com/#/activate-account/${token}">https://phamonis.herokuapp.com/#/activate-account/${token}  </a></p>
                         </td>
                       </tr>
                     </table>
@@ -427,7 +427,7 @@ exports.ForgotPassword = function(user,token){
           <!-- Logo -->
           <tr>
             <td class="email-masthead">
-              <a href="http://localhost:4200/" class="email-masthead_name"><img src="" alt="PHAMONIS"></a>
+              <a href="https://phamonis.herokuapp.com" class="email-masthead_name"><img src="" alt="PHAMONIS"></a>
             </td>
           </tr>
           <!-- Email Body -->
@@ -444,7 +444,7 @@ exports.ForgotPassword = function(user,token){
                       <tr>
                         <td align="center">
                           <div>
-                          <a style="text-decoration:none;color:white" href="http://localhost:4200/#/reset-password/${token}" class="button button--red">Reset your password</a>
+                          <a style="text-decoration:none;color:white" href="https://phamonis.herokuapp.com/#/reset-password/${token}" class="button button--red">Reset your password</a>
                           </div>
                         </td>
                       </tr>
@@ -457,7 +457,7 @@ exports.ForgotPassword = function(user,token){
                       <tr>
                         <td>
                           <p class="sub">If you’re having trouble clicking the password reset button, copy and paste the URL below into your web browser.</p>
-                          <p class="sub"><a href="http://localhost:4200/#/reset-password/${token}">http://localhost:4200/#/reset-password/${token}</a></p>
+                          <p class="sub"><a href="https://phamonis.herokuapp.com/#/reset-password/${token}">https://phamonis.herokuapp.com/#/reset-password/${token}</a></p>
                         </td>
                       </tr>
                     </table>
@@ -473,7 +473,7 @@ exports.ForgotPassword = function(user,token){
                   <td class="content-cell">
                     <p class="sub center">&copy; 2019 Phamonis. All rights reserved.</p>
                     <p class="sub center">
-                        Phamonis
+                    Phamonis Core, Inc.
                     </p>
                   </td>
                 </tr>
