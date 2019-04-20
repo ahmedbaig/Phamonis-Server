@@ -6,8 +6,8 @@ const UserModel = require("../api/user/user.model")
 function isAuthenticated() {
     return compose()
         // Attach user to request
-        .use(function(req, res, next) {
-            await UserSession.findById(req.query.token).exec((err, session)=>{
+        .use(async function(req, res, next) {
+            await UserSession.findById(req.query.token).exec(async (err, session)=>{
                 if(err){
                     res.send({
                         success: false,
@@ -65,8 +65,8 @@ function isPiAuthenticated() {
 function isAdmin() {
     return compose()
         // Attach user to request
-        .use(function(req, res, next) {
-            await UserSession.findById(req.query.token).exec((err, session)=>{
+        .use(async function(req, res, next) {
+            await UserSession.findById(req.query.token).exec(async (err, session)=>{
                 if(err){
                     res.send({
                         success: false,
