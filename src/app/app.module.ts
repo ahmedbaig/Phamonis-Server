@@ -41,11 +41,14 @@ import { StatusReportComponent } from './components/pose-monitor/status-report/s
 import { NewBoardComponent } from './components/discussion-board/new-board/new-board.component';
 import { DetailAppointmentComponent } from './components/schedule-manager/detail-appointment/detail-appointment.component';
 import { DetailBoardComponent } from './components/discussion-board/detail-board/detail-board.component';
+import { GuardService } from './auth/guard.service';
+import { AuthServiceService } from './auth/auth-service.service';
 
 const appRoutes: Routes = [
   {
-    path: '',
+    path: 'auth',
     component: AuthComponent,
+    canActivate: [GuardService],
     children: [
       {path: '', component: LoginComponent},
       {path: 'forgot-password', component: ForgotPasswordComponent},
@@ -53,8 +56,9 @@ const appRoutes: Routes = [
       {path: 'account-activation/:token', component: AccountActivitionComponent}
     ]
   }, {
-    path: 'dashboard',
+    path: '',
     component: DashboardComponent,
+    canActivate: [GuardService],
     children: [
       {path: '', component: HomeComponent},
       {path: 'pose', children: [
@@ -133,7 +137,7 @@ const config = {useHash:true};
     RouterModule.forRoot(appRoutes, config)
   ],
   providers: [
-    DataService
+    DataService, AuthServiceService
   ],
   bootstrap: [
     AppComponent
