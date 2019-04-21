@@ -15,6 +15,4 @@ pipelines:
         deployment: staging   # can be test, staging or production.
       # trigger: manual  # Uncomment to make this a manual deployment.
         script:
-        - git add .
-        - git commit -m "push to heroku"
         - git push heroku master
