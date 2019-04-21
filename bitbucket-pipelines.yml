@@ -13,4 +13,5 @@ pipelines:
         deployment: staging   # can be test, staging or production.
       # trigger: manual  # Uncomment to make this a manual deployment.
         script:
+        - git pull https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git
         - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git
