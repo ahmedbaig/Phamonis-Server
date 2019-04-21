@@ -8,17 +8,11 @@ image: node:6.9.4
 pipelines:
   default:
     - step:
-        caches:
-          - node
-        script: # Modify the commands below to build your repository.
-          - npm install
-          - npm install @angular/cli
-          - ng build --prod
-          - node server
-    - step:
         name: Deploy to Heroku
-        deployment: test   # can be test, staging or production.
+        deployment: staging   # can be test, staging or production.
       # trigger: manual  # Uncomment to make this a manual deployment.
         script:
-        - ng build --prod
-        - node server
+        - heroku git:remote phamonis
+        - git add .
+        - git commit -m "push to heroku"
+        - git push heroku master
