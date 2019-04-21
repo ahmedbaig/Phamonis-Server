@@ -8,11 +8,13 @@ image: node:6.9.4
 pipelines:
   default:
     - step:
+        script:
+          - git remote add heroku https://git.heroku.com/phamonis.git
+    - step:
         name: Deploy to Heroku
         deployment: staging   # can be test, staging or production.
       # trigger: manual  # Uncomment to make this a manual deployment.
         script:
-        - heroku git:remote phamonis
         - git add .
         - git commit -m "push to heroku"
         - git push heroku master
