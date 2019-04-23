@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthServiceService } from 'src/app/auth/auth-service.service';
 declare var $:any;
 @Component({
   selector: 'app-dashboard',
@@ -7,12 +9,14 @@ declare var $:any;
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route:Router, private _auth:AuthServiceService) {}
 
   ngOnInit() {
-    this.sideNav() 
-    this.sideNavToggle() 
-    this.sidePanelToggle()
+    this._auth.isAuthenticated()
+
+    this.sideNav(),
+    this.sideNavToggle(), 
+    this.sidePanelToggle();
   }
 
   sideNav() {

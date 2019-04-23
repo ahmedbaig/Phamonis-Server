@@ -11,32 +11,33 @@ export class AuthServiceService {
   user: any = {};
   logged: Boolean = false
   origin:String = getOrigin();
-  constructor(private http:HttpClient, private route:Router) { }
+  constructor(private http:HttpClient,private route:Router) { }
 
-  isAuthenticated(){
-    if(localStorage.getItem('session_t')!=null&&localStorage.getItem('session_t')!=undefined){
-      if(this.isTokenExpired(localStorage.getItem('session_t'))){
-        return true;
-      }
-      return false;
+   isAuthenticated(){
+    if(localStorage.getItem('session_t')!=null){ 
+      this.isTokenExpired(localStorage.getItem('session_t'))
+    }else{
+      this.clear();
+      this.route.navigate(['/auth'])
     }
-    return false;
   }
 
-  isTokenExpired(token:String): boolean {
+  isTokenExpired(token:any){
     this.verifyToken(token).subscribe(res=>{
-      if(res.success){
+      if(res.success){ 
         this.user = res.user;
-        return true;
-      }
-
+        this.logged = true
+        this.route.navigate(['/'])
+      } 
+      this.clear();
+      this.route.navigate(['/auth'])
       return false;
     })
-    return false;
   }
 
   clear(){
     this.logged = false,
+    localStorage.removeItem('session_t')
     this.user = {};
   }
 

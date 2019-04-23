@@ -48,7 +48,6 @@ const appRoutes: Routes = [
   {
     path: 'auth',
     component: AuthComponent,
-    canActivate: [GuardService],
     children: [
       {path: '', component: LoginComponent},
       {path: 'forgot-password', component: ForgotPasswordComponent},
@@ -58,7 +57,6 @@ const appRoutes: Routes = [
   }, {
     path: '',
     component: DashboardComponent,
-    canActivate: [GuardService],
     children: [
       {path: '', component: HomeComponent},
       {path: 'pose', children: [

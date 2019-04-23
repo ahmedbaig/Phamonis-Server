@@ -12,10 +12,9 @@ export class GuardService implements CanActivate {
 
   canActivate(){
     if(this._auth.isAuthenticated()){
+      this.route.navigate(['/'])
       return true;
     }
-    
-    this.route.navigate(['/auth']);
-    return false;
+    this.route.navigate(['/auth']); return false;
   }
 }
