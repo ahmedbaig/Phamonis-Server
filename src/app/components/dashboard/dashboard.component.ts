@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   }
 
   sideNav() {
-    $('.side-nav .side-nav-menu li a').on('click', function(e) {
+    $('.side-nav .side-nav-menu li a').on('click', function(e:any) {
         $(this).parent().hasClass('open') ? $(this).parent().children('.dropdown-menu').slideUp(200, function() {
             $(this).parent().removeClass('open');
         }) : ($(this).parent().parent()
