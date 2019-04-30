@@ -9,11 +9,12 @@ import { Observable } from 'rxjs';
 })
 export class AuthServiceService {
   user: any = {};
+  role:String = "";
   logged: Boolean = false;
   origin: String = getOrigin();
   constructor(private http: HttpClient, private route: Router) { }
 
-   isAuthenticated() {
+   isAuthenticated(){
     if (localStorage.getItem('session_t') != null) {
       this.isTokenExpired(localStorage.getItem('session_t'));
     } else {
@@ -26,6 +27,7 @@ export class AuthServiceService {
     this.verifyToken(token).subscribe(res => {
       if (res.success) {
         this.user = res.user;
+        this.role = res.user.role
         this.logged = true;
         this.route.navigate(['/']);
       } else {
@@ -36,10 +38,19 @@ export class AuthServiceService {
     });
   }
 
+  getUser(){
+    return this.user
+  }
+
+  getRole(){
+    return this.role
+  }
+
   clear() {
     this.logged = false,
     localStorage.removeItem('session_t');
     this.user = {};
+    this.role = ""
   }
 
   verifyToken(token: String): Observable<any> {

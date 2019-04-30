@@ -35,7 +35,7 @@
         </a>
       </li>
 
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" *ngIf="_auth.role=='user'">
         <a
           class="dropdown-toggle"
           href="javascript:void(0);"
@@ -53,30 +53,72 @@
 
         <ul class="dropdown-menu">
           <li>
-            <a href="email.html">View Data</a>
+            <a [routerLink]="[ '/pose/view-data' ]">View Data</a>
           </li>
 
           <li>
-            <a href="calendar.html">Analytics</a>
+            <a [routerLink]="[ '/pose/analytics' ]">Analytics</a>
           </li>
 
           <li>
-            <a href="social.html">Status Report</a>
+            <a [routerLink]="[ '/pose/status-report' ]">Status Report</a>
           </li>
 
           <li>
-              <a href="task.html">User Connections</a>
+              <a [routerLink]="[ '/pose/connections' ]">User Connections</a>
             </li>
             <li>
-              <a href="task.html">Device Configuration</a>
+              <a [routerLink]="[ '/pose/configuration' ]">Device Configuration</a>
             </li>
         </ul>
       </li>
 
+      <li class="nav-item dropdown" *ngIf="_auth.role=='doctor'||_auth.role=='nurse'">
+        <a
+          class="dropdown-toggle"
+          [routerLink]="[ '/patient-monitor' ]"
+        >
+          <span class="icon-holder">
+            <i class="ti-pulse"></i>
+          </span>
+
+          <span class="title">Patient Monitor</span>
+
+        </a>
+
+      </li>
+      
       <li class="nav-item dropdown">
         <a
           class="dropdown-toggle"
-          href="javascript:void(0);" 
+          href="javascript:void(0);"
+        >
+          <span class="icon-holder">
+            <i class="ti-agenda"></i>
+          </span>
+
+          <span class="title">Schedule Manager</span>
+
+          <span class="arrow">
+            <i class="ti-angle-right"></i>
+          </span>
+        </a>
+
+        <ul class="dropdown-menu">
+          <li>
+            <a [routerLink]="[ '/schedule/upcoming' ]">Upcoming Appointments</a>
+          </li>
+
+          <li>
+            <a [routerLink]="[ '/schedule/past' ]">Past Appointments</a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item dropdown" *ngIf="_auth.role=='user'">
+        <a
+          class="dropdown-toggle"
+          [routerLink]="[ '/diagnosis' ]"
           
         >
         <!-- View all -->
@@ -108,20 +150,20 @@
 
         <ul class="dropdown-menu">
           <li>
-            <a href="form-elements.html">Search Board</a>
+            <a [routerLink]="[ '/boards/search' ]">Search Board</a>
           </li>
 
-          <li>
-            <a href="form-layouts.html">My Boards</a>
+          <li *ngIf="_auth.role=='user'">
+            <a [routerLink]="[ '/boards/my-boards' ]">My Boards</a>
           </li>
 
         </ul>
       </li>
 
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" *ngIf="_auth.role=='user'||_auth.role=='doctor'">
         <a
           class="dropdown-toggle"
-          href="javascript:void(0);"
+          [routerLink]="[ '/messages' ]"
         >
           <span class="icon-holder">
             <i class="ti-comments"></i>
@@ -133,52 +175,11 @@
 
       </li>
 
-      <li class="nav-item dropdown">
+
+      <li class="nav-item dropdown" *ngIf="_auth.role=='nurse'">
         <a
           class="dropdown-toggle"
-          href="javascript:void(0);"
-        >
-          <span class="icon-holder">
-            <i class="ti-agenda"></i>
-          </span>
-
-          <span class="title">Schedule Manager</span>
-
-          <span class="arrow">
-            <i class="ti-angle-right"></i>
-          </span>
-        </a>
-
-        <ul class="dropdown-menu">
-          <li>
-            <a href="google-map.html">Upcoming Appointments</a>
-          </li>
-
-          <li>
-            <a href="vector-map.html">Past Appointments</a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a
-          class="dropdown-toggle"
-          href="javascript:void(0);"
-        >
-          <span class="icon-holder">
-            <i class="ti-pulse"></i>
-          </span>
-
-          <span class="title">Patient Monitor</span>
-
-        </a>
-
-      </li>
-
-      <li class="nav-item dropdown">
-        <a
-          class="dropdown-toggle"
-          href="javascript:void(0);"
+          [routerLink]="[ '/new-user' ]"
         >
           <span class="icon-holder">
             <i class="ti-user"></i>
@@ -189,6 +190,11 @@
         </a>
 
       </li>
+      
+      <a (click)="changeRole('admin')" class="btn btn-inverse btn-primary">Admin</a>
+      <a (click)="changeRole('doctor')" class="btn btn-inverse btn-primary">Doctor</a>
+      <a (click)="changeRole('nurse')" class="btn btn-inverse btn-primary">Nurse</a>
+      <a (click)="changeRole('user')" class="btn btn-inverse btn-primary">User</a>
     </ul>
   </div>
 </div>

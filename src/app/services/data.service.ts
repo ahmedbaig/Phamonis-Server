@@ -14,6 +14,10 @@ export class DataService {
   constructor(public http:HttpClient) {
 
   }
+
+  getUserImage(filename: String){
+    return this.origin+"/dist-user-images/"+filename
+  }
   
   verifyUser(id: String):Observable<any>{
     const headers = new HttpHeaders()

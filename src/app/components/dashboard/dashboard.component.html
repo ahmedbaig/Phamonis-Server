@@ -25,12 +25,12 @@
           >
             <img
               class="profile-img img-fluid"
-              src="assets/images/user.jpg"
+              [src] = "_service.getUserImage(_auth.user.profilePicture)"
               alt=""
             >
   
             <div class="user-info">
-              <span class="name pdd-right-5">Nate Leong</span>
+              <span class="name pdd-right-5">{{_auth.user.firstName}} {{_auth.user.lastName}}</span>
   
               <i class="ti-angle-down font-size-10"></i>
             </div>
@@ -213,7 +213,6 @@
             </li>
           </ul>
         </li>
-   
       </ul>
     </div>
   </div>
