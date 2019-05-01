@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from 'src/app/auth/auth-service.service';
 import { delay } from 'lodash' 
+import Swal from 'sweetalert2'
 declare var app:any;
 @Component({
   selector: 'app-navigation',
@@ -13,13 +14,31 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     delay(()=>{
-      this.type=this._auth.getRole()
-    }, 1000)
+      // Swal.fire({
+      //   toast: true,
+      //   position: 'top',
+      //   showConfirmButton: false,
+      //   timer: 3000,
+      //   type: 'success',
+      //   title: 'Signed in successfully'
+      // });
+      
+      app.init();
+    }, 2000)
   }
 
-  changeRole(type:String){
+  changeRole(type:String){  
     this._auth.role = type
     this.type=this._auth.role
+    Swal.fire({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 3000,
+      type: 'success',
+      title: 'Role Changed'
+    });
+    
     app.init();
   }
 

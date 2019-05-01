@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/auth/auth-service.service';
 import { DataService } from 'src/app/services/data.service';
 import { delay } from 'lodash'
+import Swal from 'sweetalert2';
 declare var $: any;
 declare var app:any;
 @Component({
@@ -17,11 +18,20 @@ export class DashboardComponent implements OnInit {
   constructor(private route: Router, private _auth: AuthServiceService, private _service: DataService) {}
 
   async ngOnInit() { 
-    this._auth.isAuthenticated();
-    this.user = this._auth.getUser();
-    console.log(this.user)
-    this.image = this._service.getUserImage(this.user.profilePicture)
+    this._auth.isAuthenticated(); 
     app.init();
+  }
+
+
+  logout(){
+    this._service.logout(localStorage.getItem('session_t')).subscribe(res=>{
+      if(res.success){
+        this._auth.clear()
+        this.route.navigate(['/auth'])
+      }else{
+        Swal.fire("Opps", res.message, 'error')
+      }
+    })
   }
 
 }

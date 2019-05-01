@@ -25,7 +25,7 @@
           >
             <img
               class="profile-img img-fluid"
-              [src] = "_service.getUserImage(_auth.user.profilePicture)"
+              [src] = "_auth.image"
               alt=""
             >
   
@@ -60,8 +60,8 @@
               class="divider"
             ></li>
   
-            <li>
-              <a href="">
+            <li (click)="logout()">
+              <a >
                 <i class="ti-power-off pdd-right-10"></i>
   
                 <span>Logout</span>
@@ -207,7 +207,7 @@
                 >
                   Check all notifications
   
-                  <i class="ei-right-chevron pdd-left-5 font-size-10"></i>
+                  <i class="ti-angle-right pdd-left-5 font-size-10"></i>
                 </a>
               </span>
             </li>

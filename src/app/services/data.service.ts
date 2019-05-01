@@ -26,12 +26,34 @@ export class DataService {
       headers: headers
     });
   }
-  logout(id: String):Observable<any>{
+  login(body: any):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.origin+"/api/user/login-user", body,  {
+      headers: headers
+    });
+  }
+  logout(id: any):Observable<any>{
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
     return this.http.get(this.origin+"/api/userSession/logout/?token="+id, {
       headers: headers
     });
   }
+  forgotPassword(body:any):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.origin+"/api/user/send-forgot-password-email", body,{
+      headers: headers
+    });
+  }
+  resetPassword(body:any, forgotPasswordToken: String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.origin+"/api/user/reset-password/"+forgotPasswordToken, body,{
+      headers: headers
+    });
+  }
+  
 
 }

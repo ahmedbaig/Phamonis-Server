@@ -5,8 +5,8 @@
           <div class="col-md-8 no-pdd-horizon d-none d-md-block">
               <div class="full-height bg" style="background-image: url('assets/images/others/img-29.jpg')">
                   <div class="img-caption">
-                      <h1 class="caption-title">We make spectacular</h1>
-                      <p class="caption-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                      <h1 class="caption-title">We make spectacular products</h1>
+                      <p class="caption-text">Making products nessecary for the modern age and the modern people</p>
                   </div>
               </div>
           </div>
@@ -16,26 +16,30 @@
                       <div class="table-cell">
                           <div class="pdd-horizon-15">
                               <h2>Login</h2>
-                              <p class="mrg-btm-15 font-size-13">Please enter your user name and password to login</p>
-                              <form>
+                              <p class="mrg-btm-15 font-size-13">Please enter your email and password to login</p>
+                              <form [formGroup]="registerForm">
                                   <div class="form-group">
-                                      <input type="email" class="form-control" placeholder="User name">
+                                    <input type="email" placeholder="Enter email address" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.email.errors.required">Email is required</div>
+                                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                    </div>
                                   </div>
                                   <div class="form-group">
-                                      <input type="password" class="form-control" placeholder="Password">
-                                  </div>
-                                  <div class="checkbox font-size-12">
-                                      <input id="agreement" name="agreement" type="checkbox">
-                                      <label for="agreement">Keep Me Signed In</label>
-                                  </div>
-                                  <button class="btn btn-info">Login</button>
+                                    <input type="password" placeholder="Enter password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.password.errors.required">Password is required</div>
+                                        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                                    </div>
+                                  </div> 
+                                  <button (click)="send()" class="btn btn-info">Login</button>
                               </form>
                           </div>
                       </div>
                   </div>
                   <div class="login-footer">
                       <img class="img-responsive inline-block" src="assets/images/logo/logo.png" width="100" alt="">
-                      <span class="font-size-13 pull-right pdd-top-10">Don't have an account? <a href="">Sign Up Now</a></span>
+                      <span class="font-size-13 pull-right pdd-top-10">Forgot your password? <a [routerLink]="[ '/auth/forgot-password' ]">Click Here</a></span>
                   </div>
               </div>
           </div>

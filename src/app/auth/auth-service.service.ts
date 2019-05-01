@@ -3,16 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { getOrigin } from '../origin';
 import { Observable } from 'rxjs';
-
+import { DataService } from '../services/data.service';
+declare var app:any;
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
   user: any = {};
+  image: String = ""
   role:String = "";
   logged: Boolean = false;
   origin: String = getOrigin();
-  constructor(private http: HttpClient, private route: Router) { }
+  constructor(private http: HttpClient, private route: Router, private _service: DataService) { }
 
    isAuthenticated(){
     if (localStorage.getItem('session_t') != null) {
@@ -29,7 +31,9 @@ export class AuthServiceService {
         this.user = res.user;
         this.role = res.user.role
         this.logged = true;
+        this.image = this._service.getUserImage(this.user.profilePicture)
         this.route.navigate(['/']);
+        app.init();
       } else {
         this.clear();
         this.route.navigate(['/auth']);

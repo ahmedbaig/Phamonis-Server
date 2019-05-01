@@ -25,7 +25,7 @@ exports.create = function(req,res){
             await UtilService.sendEmail(user.email,'Account Activation',htmlTemplate)
           
             // saving token in user model
-            await UserService.update({ _id : user._id },{ 'accountActivated.token': emailtoken })
+            await UserService.update({ _id : user._id },{ 'accountActivated.token': emailtoken,profileApproved: false })
             
         }).then( function (){
             // sending access token
@@ -300,3 +300,49 @@ exports.delete = async function(req, res) {
         })
     }
 };
+
+exports.getUserById = async function (req, res){
+    try{
+        await UserModel.findById(req.params.userId).exec((err, doc)=>{
+            //TODO: Need re evalutaion after pose module
+            if(err){
+                res.send({
+                    success: false,
+                    message: err
+                })
+            }
+            res.send({
+                success: true,
+                user: doc
+            })
+        })
+    }catch(e){
+        res.send({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
+exports.createUser = async function (req, res){
+    try{
+        await UserModel.create(req.body).exec((err, doc)=>{
+            //TODO: Need re evalutaion after pose module
+            if(err){
+                res.send({
+                    success: false,
+                    message: err
+                })
+            }
+            res.send({
+                success: true,
+                user: doc
+            })
+        })
+    }catch(e){
+        res.send({
+            success: false,
+            message: e.message
+        })
+    }
+}
