@@ -10,7 +10,7 @@ declare var app:any;
 })
 export class NavigationComponent implements OnInit {
   type: String = ""
-  constructor(private _auth:AuthServiceService) { }
+  constructor(public _auth:AuthServiceService) { }
 
   ngOnInit() {
     delay(()=>{

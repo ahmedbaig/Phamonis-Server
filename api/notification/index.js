@@ -7,10 +7,10 @@ var auth = require('../../auth/auth.service');
 
 var router = express.Router();
 
-router.post('/create-notification/:token', auth.isAuthenticated(), controller.create)
+// router.post('/create-notification/:token', auth.isAuthenticated(), controller.create)
 
-router.get('/read-notification/:token/:user', auth.isAuthenticated(), controller.read)
+// router.get('/read-notification/:token/:user', auth.isAuthenticated(), controller.read)
 
-router.get('/read-all-notification/:token/:user', auth.isAuthenticated(), controller.readAll)
+// router.get('/read-all-notification/:token/:user', auth.isAuthenticated(), controller.readAll)
 
 module.exports = router;

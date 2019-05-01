@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
 
   user: any = {};
   image: String = ''
-  constructor(private route: Router, private _auth: AuthServiceService, private _service: DataService) {}
+  constructor(private route: Router, public _auth: AuthServiceService, private _service: DataService) {}
 
   async ngOnInit() { 
     this._auth.isAuthenticated(); 

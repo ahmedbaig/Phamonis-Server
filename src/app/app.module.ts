@@ -134,7 +134,7 @@ const config = {useHash:true};
     RouterModule.forRoot(appRoutes, config)
   ],
   providers: [
-    DataService, AuthServiceService
+    DataService
   ],
   bootstrap: [
     AppComponent
