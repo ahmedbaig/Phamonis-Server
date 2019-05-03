@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
     this._service.login(body).subscribe(res=>{
       if(res.success){
         localStorage.setItem('session_t', res.token)
+        localStorage.setItem('session_u', res.user.user)
+        this._auth.token = res.token
         this._auth.isAuthenticated()
       }else{
         Swal.fire("Opps", res.message, 'error')

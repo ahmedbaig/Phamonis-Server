@@ -2,13 +2,10 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const passport = require('passport');
-const session = require('express-session');
+const mongoose = require('mongoose'); 
 const busboyBodyParser = require('busboy-body-parser');
 const path = require('path');
-const app = express();
-const fs = require('fs')
+const app = express(); 
 
 const PORT = process.env.PORT || 4040;
 global.ROOTPATH = __dirname;
@@ -60,16 +57,8 @@ app.use(bodyParser.json({
 }));
 
 app.use(busboyBodyParser());
-
-app.use(passport.initialize());
-
-app.use(session({
-  secret: 'ssshhhhh'
-}));
-app.use('/auth', require('./auth'))
-app.locals.moment = require('moment');
-
-var sess;
+  
+app.use('/auth', require('./auth')) 
 
 app.get('/dist-user-images/:filename', function(req, res) {
   var filename = req.params.filename.replace(/'/g, '');

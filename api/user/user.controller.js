@@ -304,6 +304,14 @@ exports.delete = async function(req, res) {
 exports.getUserById = async function (req, res){
     try{
         await UserModel.findById(req.params.userId).exec((err, doc)=>{
+            doc.accountActivated.token = null
+            doc.points = null
+            doc.profileApproved = null
+            doc.forgotPasswordToken = null
+            doc.salt = null
+            doc.hashedPassword = null
+            doc.phone = null
+            
             //TODO: Need re evalutaion after pose module
             if(err){
                 res.send({
@@ -326,6 +334,32 @@ exports.getUserById = async function (req, res){
 
 exports.createUser = async function (req, res){
     try{
+        req.body.role = "user";
+        req.body.profileApproved = true;
+        req.body.terms = true;
+        await UserModel.create(req.body).exec((err, doc)=>{
+            //TODO: Need re evalutaion after pose module
+            if(err){
+                res.send({
+                    success: false,
+                    message: err
+                })
+            }
+            res.send({
+                success: true,
+                user: doc
+            })
+        })
+    }catch(e){
+        res.send({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
+exports.createUserAdmin = async function (req, res){
+    try{ 
         await UserModel.create(req.body).exec((err, doc)=>{
             //TODO: Need re evalutaion after pose module
             if(err){

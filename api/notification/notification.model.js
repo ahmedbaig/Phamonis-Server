@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var DoctorSchema = new Schema({
+var NotificationSchema = new Schema({
     user: String,
     message: String,
     link: String,
@@ -11,4 +11,4 @@ var DoctorSchema = new Schema({
     createdt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Doctor', DoctorSchema);
+module.exports = mongoose.model('Notification', NotificationSchema);

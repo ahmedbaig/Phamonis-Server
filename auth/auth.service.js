@@ -7,7 +7,7 @@ function isAuthenticated() {
     return compose()
         // Attach user to request
         .use(async function(req, res, next) {
-            await UserSession.findById(req.query.token).exec(async (err, session)=>{
+            await UserSession.findById(req.params.token).exec(async (err, session)=>{
                 if(err){
                     res.send({
                         success: false,
@@ -66,7 +66,7 @@ function isStaff() {
     return compose()
         // Attach user to request
         .use(async function(req, res, next) {
-            await UserSession.findById(req.query.token).exec(async (err, session)=>{
+            await UserSession.findById(req.params.token).exec(async (err, session)=>{
                 if(err){
                     res.send({
                         success: false,
@@ -120,7 +120,7 @@ function isAdmin() {
     return compose()
         // Attach user to request
         .use(async function(req, res, next) {
-            await UserSession.findById(req.query.token).exec(async (err, session)=>{
+            await UserSession.findById(req.params.token).exec(async (err, session)=>{
                 if(err){
                     res.send({
                         success: false,

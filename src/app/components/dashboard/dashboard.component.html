@@ -1,222 +1,116 @@
+
+
 <app-navigation></app-navigation>
 <div class="page-container">
-
-<!-- Header START -->
-
-<div class="header navbar">
-    <div class="header-container">
-      <ul class="nav-left">
-        <li>
-          <a
-            class="side-nav-toggle"
-            href="javascript:void(0);"
-          >
-            <i class="ti-view-grid"></i>
-          </a>
+	<!-- Header START -->
+	<div class="header navbar">
+		<div class="header-container">
+			<ul class="nav-left">
+				<li>
+					<a
+						class="side-nav-toggle"
+						href="javascript:void(0);"
+						>
+					<i class="ti-view-grid"></i>
+					</a>
+				</li>
+			</ul>
+			<ul  class="nav-right">
+			<li class="user-profile dropdown">
+				<a
+					href=""
+					class="dropdown-toggle"
+					data-toggle="dropdown"
+					>
+					<img
+						class="profile-img img-fluid"
+						[src] = "_auth.image"
+						alt=""
+						>
+					<div class="user-info">
+						<span class="name pdd-right-5">{{_auth.user.firstName}} {{_auth.user.lastName}}</span>
+						<i class="ti-angle-down font-size-10"></i>
+					</div>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="">
+						<i class="ti-user pdd-right-10"></i>
+						<span>Profile</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+						<i class="ti-comments pdd-right-10"></i>
+						<span>Messages</span>
+						</a>
+					</li>
+					<li
+						role="separator"
+						class="divider"
+						></li>
+					<li (click)="logout()">
+						<a >
+						<i class="ti-power-off pdd-right-10"></i>
+						<span>Logout</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="notifications dropdown">
+				<span *ngIf="notifications.length != 0" class="counter">{{notifications.length}}</span>
+				<a
+					href=""
+					class="dropdown-toggle"
+					data-toggle="dropdown"
+					>
+				<i class="ti-bell"></i>
+				</a>
+				<ul class="dropdown-menu">
+					<li class="notice-header">
+						<i class="ti-bell pdd-right-10"></i>
+						<span>Notifications</span>
+					</li>
+					<li>
+						<ul class="list-info overflow-y-auto relative scrollable">
+							<li *ngFor="let notification of notifications">
+								<a [href]="notification.link">
+									<img
+										class="thumb-img"
+										[src]="user_images[notification.user]"
+										alt="Profile Picture"
+										>
+									<div class="info">
+										<span class="title">
+										<span class="font-size-14 text-semibold">{{users[notification.user]}}</span>
+										<span class="text-gray">
+										{{notification.message}}
+										</span>
+										</span>
+										<span class="sub-title">{{fullDate[notification._id]}}-{{timestamp[notification._id]}}</span>
+									</div>
+								</a>
+							</li>
+							<li class="notice-footer">
+								<span>
+								<a
+									[routerLink]="[ '/notifications' ]"
+									class="text-gray"
+									>
+								Check all notifications
+								<i class="ti-angle-right pdd-left-5 font-size-10"></i>
+								</a>
+								</span>
+							</li>
+						</ul>
+					</li>
+        </ul>
         </li>
-      </ul>
-  
-      <ul class="nav-right">
-        <li class="user-profile dropdown">
-          <a
-            href=""
-            class="dropdown-toggle"
-            data-toggle="dropdown"
-          >
-            <img
-              class="profile-img img-fluid"
-              [src] = "_auth.image"
-              alt=""
-            >
-  
-            <div class="user-info">
-              <span class="name pdd-right-5">{{_auth.user.firstName}} {{_auth.user.lastName}}</span>
-  
-              <i class="ti-angle-down font-size-10"></i>
-            </div>
-          </a>
-  
-          <ul class="dropdown-menu">
-  
-            <li>
-              <a href="">
-                <i class="ti-user pdd-right-10"></i>
-  
-                <span>Profile</span>
-              </a>
-            </li>
-  
-            <li>
-                
-              <a href="">
-                <i class="ti-comments pdd-right-10"></i>
-  
-                <span>Messages</span>
-              </a>
-            </li>
-  
-            <li
-              role="separator"
-              class="divider"
-            ></li>
-  
-            <li (click)="logout()">
-              <a >
-                <i class="ti-power-off pdd-right-10"></i>
-  
-                <span>Logout</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-  
-        <li class="notifications dropdown">
-          <span class="counter">2</span>
-  
-          <a
-            href=""
-            class="dropdown-toggle"
-            data-toggle="dropdown"
-          >
-            <i class="ti-bell"></i>
-          </a>
-  
-          <ul class="dropdown-menu">
-            <li class="notice-header">
-              <i class="ti-bell pdd-right-10"></i>
-  
-              <span>Notifications</span>
-            </li>
-  
-            <li>
-              <ul class="list-info overflow-y-auto relative scrollable">
-                <li>
-                  <a href="">
-                    <img
-                      class="thumb-img"
-                      src="assets/images/avatars/thumb-5.jpg"
-                      alt=""
-                    >
-  
-                    <div class="info">
-                      <span class="title">
-                        <span class="font-size-14 text-semibold">Jennifer Watkins</span>
-  
-                        <span class="text-gray">
-                          commented on your
-  
-                          <span class="text-dark">post</span>
-                        </span>
-                      </span>
-   
-                    </div>
-                  </a>
-                </li>
-  
-                <li>
-                  <a href="">
-                    <img
-                      class="thumb-img"
-                      src="assets/images/avatars/thumb-4.jpg"
-                      alt=""
-                    >
-  
-                    <div class="info">
-                      <span class="title">
-                        <span class="font-size-14 text-semibold">Samuel Field</span>
-  
-                        <span class="text-gray">
-                          likes your
-  
-                          <span class="text-dark">photo</span>
-                        </span>
-                      </span>
-  
-                      <span class="sub-title">8 hours ago</span>
-                    </div>
-                  </a>
-                </li>
-  
-                <li>
-                  <a href="">
-                    <span class="thumb-img bg-primary">
-                      <span class="text-white">M</span>
-                    </span>
-  
-                    <div class="info">
-                      <span class="title">
-                        <span class="font-size-14 text-semibold">Michael Birch</span>
-  
-                        <span class="text-gray">
-                          likes your
-  
-                          <span class="text-dark">photo</span>
-                        </span>
-                      </span>
-  
-                      <span class="sub-title">5 hours ago</span>
-                    </div>
-                  </a>
-                </li>
-  
-                <li>
-                  <a href="">
-                    <span class="thumb-img bg-success">
-                      <span class="text-white">
-                        <i class="fa fa-paper-plane-o"></i>
-                      </span>
-                    </span>
-  
-                    <div class="info">
-                      <span class="title">
-                        <span class="font-size-14 text-semibold">Message sent</span>
-                      </span>
-  
-                      <span class="sub-title">8 hours ago</span>
-                    </div>
-                  </a>
-                </li>
-  
-                <li>
-                  <a href="">
-                    <span class="thumb-img bg-info">
-                      <span class="text-white">
-                        <i class="ti-user"></i>
-                      </span>
-                    </span>
-  
-                    <div class="info">
-                      <span class="title">
-                        <span class="font-size-14 text-semibold">Admin</span>
-  
-                        <span class="text-gray">Welcome on board</span>
-                      </span>
-  
-                      <span class="sub-title">8 hours ago</span>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-  
-            <li class="notice-footer">
-              <span>
-                <a
-                  href=""
-                  class="text-gray"
-                >
-                  Check all notifications
-  
-                  <i class="ti-angle-right pdd-left-5 font-size-10"></i>
-                </a>
-              </span>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-  
-  <!-- Header END -->
-  <router-outlet></router-outlet>
+        </ul>
+        
+		</div>
+	</div>
+	<!-- Header END -->
+	<router-outlet></router-outlet>
 </div>
+

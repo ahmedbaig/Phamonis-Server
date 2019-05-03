@@ -42,6 +42,7 @@ import { DetailAppointmentComponent } from './components/schedule-manager/detail
 import { DetailBoardComponent } from './components/discussion-board/detail-board/detail-board.component';
 import { GuardService } from './auth/guard.service';
 import { AuthServiceService } from './auth/auth-service.service';
+import { RequestsComponent } from './components/requests/requests.component';
 
 const appRoutes: Routes = [
   {
@@ -84,7 +85,8 @@ const appRoutes: Routes = [
         {path: 'detail/:id', component: DetailAppointmentComponent}
       ]},
       {path: 'patient-monitor', component: PatientMonitorComponent},
-      {path: 'new-user', component: NewUserComponent}
+      {path: 'new-user', component: NewUserComponent},
+      {path: 'requests', component: RequestsComponent}
     ]
   }
 ];
@@ -122,7 +124,8 @@ const config = {useHash:true};
     StatusReportComponent,
     NewBoardComponent,
     DetailAppointmentComponent,
-    DetailBoardComponent
+    DetailBoardComponent,
+    RequestsComponent
   ],
   imports: [
     NgbModule,

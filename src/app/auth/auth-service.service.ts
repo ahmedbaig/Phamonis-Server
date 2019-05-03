@@ -12,6 +12,7 @@ export class AuthServiceService {
   user: any = {};
   image: String = ""
   role:String = "";
+  token:String = "";
   logged: Boolean = false;
   origin: String = getOrigin();
   constructor(private http: HttpClient, private route: Router, private _service: DataService) { }
@@ -28,12 +29,14 @@ export class AuthServiceService {
   isTokenExpired(token: any) {
     this.verifyToken(token).subscribe(res => {
       if (res.success) {
-        this.user = res.user;
+        this.user = res.user; 
+        this.token = token
         this.role = res.user.role
         this.logged = true;
         this.image = this._service.getUserImage(this.user.profilePicture)
         this.route.navigate(['/']);
-        app.init();
+        app.init(); 
+        return true
       } else {
         this.clear();
         this.route.navigate(['/auth']);
@@ -54,6 +57,8 @@ export class AuthServiceService {
     this.logged = false,
     localStorage.removeItem('session_t');
     this.user = {};
+    this.image = "";
+    this.token = "";
     this.role = ""
   }
 

@@ -27,6 +27,8 @@ router.post('/update/:userId/:token',auth.isAuthenticated(),controller.update);
 
 router.post('/new-user/:token', auth.isStaff(), controller.createUser)
 
+router.post('/new-user-admin/:token', auth.isAdmin(), controller.createUserAdmin)
+
 router.post('/remove-user/:token', auth.isAdmin(), controller.delete);
 
 module.exports = router;
