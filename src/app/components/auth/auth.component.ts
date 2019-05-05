@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthServiceService } from 'src/app/auth/auth-service.service';
-
+import { AuthServiceService } from 'src/app/auth/auth-service.service'; 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -11,8 +10,11 @@ export class AuthComponent implements OnInit {
 
   constructor(private route:Router, private _auth:AuthServiceService) {}
 
-  ngOnInit() { 
+  ngOnInit() {  
     this._auth.isAuthenticated()
+    if(this._auth.logged == true){
+      this.route.navigate(['/'])
+    }
   }
 
 }

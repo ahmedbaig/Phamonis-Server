@@ -190,6 +190,21 @@
         </a>
 
       </li>
+      
+      <li class="nav-item dropdown" *ngIf=" _auth.role=='admin'">
+        <a
+          class="dropdown-toggle"
+          [routerLink]="[ '/pi' ]"
+        >
+          <span class="icon-holder">
+            <i class="fab fa-raspberry-pi"></i>
+          </span>
+
+          <span class="title">Pi Modules</span>
+
+        </a>
+
+      </li>
       <li class="nav-item dropdown" *ngIf="_auth.role=='admin'">
         <a
           class="dropdown-toggle"

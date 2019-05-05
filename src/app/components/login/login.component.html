@@ -18,15 +18,17 @@
                               <h2>Login</h2>
                               <p class="mrg-btm-15 font-size-13">Please enter your email and password to login</p>
                               <form [formGroup]="registerForm">
-                                  <div class="form-group">
-                                    <input type="email" placeholder="Enter email address" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                  <div class="input-field form-group">
+                                      <input type="email"  formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                      <label>Email</label>
                                     <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                         <div *ngIf="f.email.errors.required">Email is required</div>
                                         <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
                                     </div>
                                   </div>
-                                  <div class="form-group">
-                                    <input type="password" placeholder="Enter password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                  <div class=" input-field form-group">
+                                      <input type="password"  formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                      <label>Password</label>
                                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                         <div *ngIf="f.password.errors.required">Password is required</div>
                                         <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>

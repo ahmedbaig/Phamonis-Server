@@ -12,15 +12,21 @@ exports.verify = async function(req,res){
                     message: err.message
                 })
             }
+            if(doc == null){
+                res.send({
+                    success: false,
+                    message: "Not Found"
+                })
+            }
 
-            await UserModel.findById(doc.user).exec((err, doc)=>{
+            await UserModel.findById(doc.user).exec(async (err, doc)=>{
                 if(err){
                     res.send({
                         success: false,
                         message: err.message
                     })
                 }
-
+                await UserSessionModel.findOneAndUpdate({_id: req.query.token}, {lastUsed: Date.now()})
                 res.send({
                     success: true, 
                     message: "valid token",

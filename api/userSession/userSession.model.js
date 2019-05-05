@@ -12,6 +12,11 @@ var UserSessionSchema = new Schema({
         type:Boolean,
         default: false
     },
+    geoLocationData: Object,
+    lastUsed: {
+        type:Date,
+        default: Date.now()
+    },
     timeStamp: {
         type: Date,
         default: Date.now()

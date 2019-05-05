@@ -3,13 +3,15 @@ import { UserService } from 'src/app/services/user.service';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class SettingsComponent implements OnInit {
   user: any = {}
   image: String = ""
+  firstName: String = "";
+  lastName: String = "";
   constructor(private user_service:UserService, private data_service: DataService) { }
 
   ngOnInit() {
@@ -18,5 +20,4 @@ export class ProfileComponent implements OnInit {
       this.image = this.data_service.getUserImage(res.user.profilePicture)
     })
   }
-
 }

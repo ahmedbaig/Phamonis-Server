@@ -1,5 +1,5 @@
 import { Component,ViewEncapsulation } from '@angular/core';
-import { DataService } from './services/data.service';
+import { DataService } from './services/data.service'; 
 
 @Component({
   selector: 'app-root',
@@ -29,4 +29,5 @@ export class AppComponent {
   //     location.pathname = "/"; 
   //   }
   }
+ 
 }

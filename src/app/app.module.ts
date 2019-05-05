@@ -3,7 +3,7 @@ import { NgModule, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap'; 
 
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
@@ -39,10 +39,14 @@ import { AnalyticsComponent } from './components/pose-monitor/analytics/analytic
 import { StatusReportComponent } from './components/pose-monitor/status-report/status-report.component';
 import { NewBoardComponent } from './components/discussion-board/new-board/new-board.component';
 import { DetailAppointmentComponent } from './components/schedule-manager/detail-appointment/detail-appointment.component';
-import { DetailBoardComponent } from './components/discussion-board/detail-board/detail-board.component';
-import { GuardService } from './auth/guard.service';
-import { AuthServiceService } from './auth/auth-service.service';
+import { DetailBoardComponent } from './components/discussion-board/detail-board/detail-board.component';  
 import { RequestsComponent } from './components/requests/requests.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { CreateHardwareComponent } from './components/pi/create-hardware/create-hardware.component';
+import { ListHardwareComponent } from './components/pi/list-hardware/list-hardware.component';
+import { DetailHardwareComponent } from './components/pi/detail-hardware/detail-hardware.component';
+import { EditHardwareComponent } from './components/pi/edit-hardware/edit-hardware.component';
+import { SecureStorageService } from './auth/secure-storage.service';
 
 const appRoutes: Routes = [
   {
@@ -78,6 +82,7 @@ const appRoutes: Routes = [
       {path: 'messages', component: MessagesComponent},
       {path: 'notifications', component: NotificationsComponent},
       {path: 'profile', component: ProfileComponent},
+      {path: 'settings', component: SettingsComponent},
       {path: 'schedule', children: [
         {path: 'upcoming', component: UpcomingAppointmentsComponent},
         {path: 'past', component: PastAppointmentsComponent},
@@ -86,7 +91,13 @@ const appRoutes: Routes = [
       ]},
       {path: 'patient-monitor', component: PatientMonitorComponent},
       {path: 'new-user', component: NewUserComponent},
-      {path: 'requests', component: RequestsComponent}
+      {path: 'requests', component: RequestsComponent},
+      {path: 'pi', children: [
+        {path: '', component: ListHardwareComponent}, 
+        {path: 'create', component: CreateHardwareComponent},
+        {path: 'detail/:id', component: DetailHardwareComponent},
+        {path: 'edit/:id', component: EditHardwareComponent}
+      ]},
     ]
   }
 ];
@@ -125,19 +136,24 @@ const config = {useHash:true};
     NewBoardComponent,
     DetailAppointmentComponent,
     DetailBoardComponent,
-    RequestsComponent
+    RequestsComponent,
+    SettingsComponent,
+    CreateHardwareComponent,
+    ListHardwareComponent,
+    DetailHardwareComponent,
+    EditHardwareComponent
   ],
   imports: [
     NgbModule,
     LoadingBarHttpClientModule,
-    BrowserModule,
+    BrowserModule, 
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, config)
   ],
   providers: [
-    DataService
+    DataService, SecureStorageService
   ],
   bootstrap: [
     AppComponent

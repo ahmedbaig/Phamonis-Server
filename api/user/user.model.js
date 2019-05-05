@@ -55,6 +55,8 @@ var UserSchema = new Schema({
         default: false
     }, 
 
+    devices: [String],
+    
     points: {
         type: Number,
         default: 0

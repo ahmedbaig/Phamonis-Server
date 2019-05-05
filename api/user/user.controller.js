@@ -153,7 +153,9 @@ exports.loginUser = function (req, res){
                       })
                     }
                   const userSession = new UserSession();
+                  
                   userSession.user = user._id;
+                  userSession.geoLocationData = req.body.data
                   userSession.save((err, doc) => {
                     if (err) {
                       //console.log(err);

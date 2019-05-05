@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AuthServiceService } from 'src/app/auth/auth-service.service';
-import { DataService } from 'src/app/services/data.service';
-import { delay } from 'lodash'
+import { DataService } from 'src/app/services/data.service'; 
 import Swal from 'sweetalert2';
 import { NotificationService } from 'src/app/services/notification.service';
-declare var $: any;
-declare var app:any;
+import { SecureStorageService } from 'src/app/auth/secure-storage.service';  
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'] 
 })
 export class DashboardComponent implements OnInit {
 
@@ -20,24 +18,26 @@ export class DashboardComponent implements OnInit {
   fullDate:any = []
   timestamp:any = []
   notifications: any = []
-  constructor(private route: Router, public _auth: AuthServiceService, private _service: DataService, private _notification:NotificationService) {}
+  constructor(private secureStorage:SecureStorageService, private route: Router, public _auth: AuthServiceService, private _service: DataService, private _notification:NotificationService) {}
 
-  ngOnInit() { 
+  ngOnInit() {   
+    if(this._auth.logged == false){
+      this.route.navigate(['/auth'])
+    }
     new Promise((resolve, reject)=>{
       this._auth.isAuthenticated()
       resolve(1)
     }).then(()=>{
-      this._notification.getNotifications(localStorage.getItem('session_u'), localStorage.getItem('session_t')).subscribe(res=>{
+      this._notification.getNotifications(this.secureStorage.getUserId(), JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
         this.notifications = res.unread
-      }) 
-      delay(()=>{ 
-      }, 1000)
+      })  
     })
   }
 
 
   logout(){
-    this._service.logout(localStorage.getItem('session_t')).subscribe(res=>{
+     
+    this._service.logout(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
       if(res.success){
         this._auth.clear()
         this.route.navigate(['/auth'])
@@ -46,5 +46,5 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
-
+ 
 }

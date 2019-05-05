@@ -1,0 +1,90 @@
+<!-- Content Wrapper START -->
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="page-title">
+          <h4></h4>
+      </div>
+      <div class="row">
+          <div class="col-md-12">
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="widget-profile-1 card">
+                          <div class="profile border bottom">
+                              <img class="mrg-top-30" [src]="image" alt="">
+                              <h4 class="mrg-top-20 no-mrg-btm text-semibold">{{user.firstName}} {{user.lastName}}</h4>
+                              <p>{{user.role}}</p>
+                          </div> 
+                      </div>
+                  </div>
+                  <div class="col-md-8">
+                      <div class="card">
+                          <div class="card-heading border bottom">
+                              <h4 class="card-title">General Info</h4>
+                          </div>
+                          <div class="card-block">
+                              <div class="row">
+                                  <div class="col-md-3">
+                                      <p class="mrg-top-10 text-dark"> <b>Name</b></p>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <input type="text" class="form-control">
+                                  </div>
+                              </div>
+                              <hr>
+                              <div class="row">
+                                  <div class="col-md-3">
+                                      <p class="mrg-top-10 text-dark"> <b>Email</b></p>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <p class="mrg-top-10">victoria93@gmail.com</p>
+                                  </div>
+                              </div>
+                              <hr>
+                              <div class="row">
+                                  <div class="col-md-3">
+                                      <p class="mrg-top-10 text-dark"> <b>Avatar</b></p>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <div>
+                                          <label for="img-upload" class="pointer">
+                                              <img src="assets/images/others/img-10.jpg" width="117" alt="">
+                                              <span class="btn btn-default display-block no-mrg-btm">Choose file</span>
+                                              <input class="d-none" type="file" name="uploadedimages0" multiple id="img-upload">
+                                          </label>
+                                      </div>
+                                  </div>
+                              </div>  
+                          </div>
+                      </div>
+                      <div class="card">
+                          <div class="card-heading border bottom">
+                              <h4 class="card-title">Conneted Devices</h4>
+                          </div>
+                          <div class="card-block">
+                              <div class="row">
+                                  <div class="col-md-4">
+                                      <span class="border-radius-4 inline-block">
+                                        <span class="pdd-horizon-10 lh-2-5 display-block">
+                                          <img src="./assets/images/logo/raspberry-pi-icon.png" style="height: 30px;" alt="">
+                                        </span>
+                                      </span>
+                                      <span class="mrg-left-10 font-size-16 text-dark text-bold"> </span>
+                                  </div>
+                                  <div class="col-md-8 text-right">
+                                      <p class="mrg-top-10">
+                                          <span>https://www.facebook.com/profile</span>
+                                          <a href="" class="btn btn-danger btn-inverse btn-xs no-mrg-btm mrg-left-10 border-radius-4">
+                                              <i class="ti-close"></i>
+                                          </a>
+                                      </p>
+                                  </div>
+                              </div> 
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Content Wrapper END -->

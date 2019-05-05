@@ -18,7 +18,7 @@ module.exports = function(app){
     // app.use('/api/services', require('./api/services'));
     // app.use('/api/qualification', require('./api/qualification'));
     // app.use('/api/emergency', require('./api/emergency'));
-    // app.use('/api/pi', require('./api/pi'));
+    app.use('/api/pi', require('./api/pi'));
     // app.use('/api/card', require('./api/card'));
     // app.use('/api/transaction', require('./api/transaction'));
     // app.use('/api/dispute', require('./api/dispute'));

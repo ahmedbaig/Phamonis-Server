@@ -53,8 +53,7 @@ function isAuthenticated() {
 function isPiAuthenticated() {
     return compose()
         // Attach user to request
-        .use(function(req, res, next) {
-            
+        .use(function(req, res, next) { 
         });
 }
 
