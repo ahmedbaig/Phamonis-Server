@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   fullDate:any = []
   timestamp:any = []
   notifications: any = []
-  constructor(private secureStorage:SecureStorageService, private route: Router, public _auth: AuthServiceService, private _service: DataService, private _notification:NotificationService) {}
+  constructor(public secureStorage:SecureStorageService, private route: Router, public _auth: AuthServiceService, private _service: DataService, private _notification:NotificationService) {}
 
   ngOnInit() {   
     if(this._auth.logged == false){
