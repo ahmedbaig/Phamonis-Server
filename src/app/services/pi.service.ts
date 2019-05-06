@@ -15,7 +15,31 @@ export class PiService {
   getAll(token:String):Observable<any>{
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
-    return this.http.get(this.origin+"/get-device-all/"+token,{
+    return this.http.get(this.origin+"/api/pi/get-device-all/"+token,{
+      headers: headers
+    });
+  }
+  
+  getDevice(token:String, device: String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.get(this.origin+`/api/pi/get-device-detail/${token}/${device}`,{
+      headers: headers
+    });
+  }
+
+  createDevice(body:any, token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.origin+"/api/pi/create-device/"+token, body, {
+      headers: headers
+    });
+  }
+
+  updateDevice(body:any, token:String, device:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.origin+`/api/pi/update-device/${token}/${device}`, body, {
       headers: headers
     });
   }

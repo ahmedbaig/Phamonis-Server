@@ -12,7 +12,7 @@ import { SecureStorageService } from 'src/app/auth/secure-storage.service';
 })
 export class DashboardComponent implements OnInit {
 
-  user: any = {};
+  user: any;
   image: String = ''
   user_images:any = []
   fullDate:any = []
@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
     new Promise((resolve, reject)=>{
       this._auth.isAuthenticated()
       resolve(1)
-    }).then(()=>{
+    }).then(()=>{ 
       this._notification.getNotifications(this.secureStorage.getUserId(), JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
         this.notifications = res.unread
       })  

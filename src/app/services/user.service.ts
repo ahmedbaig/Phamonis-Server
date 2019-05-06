@@ -17,4 +17,12 @@ export class UserService {
       headers: headers
     });
   }
+
+  getAllUsers(token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.get(this.origin+`/api/user/get-users/${token}`, {
+      headers: headers
+    });
+  }
 }

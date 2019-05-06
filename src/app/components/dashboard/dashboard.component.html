@@ -34,7 +34,7 @@
 				</a>
 				<ul class="dropdown-menu">
 					<li>
-						<a [routerLink]="[ '/profile' ]">
+						<a [routerLink]="[ '/profile', secureStorage.getUserId() ]">
 						<i class="ti-user pdd-right-10"></i>
 						<span>Profile</span>
 						</a>

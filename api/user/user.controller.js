@@ -303,6 +303,29 @@ exports.delete = async function(req, res) {
     }
 };
 
+
+exports.getUsers = async function (req, res){
+    try{
+        await UserModel.find({}).exec((err, doc)=>{ 
+            if(err){
+                res.send({
+                    success: false,
+                    message: err
+                })
+            }
+            res.send({
+                success: true,
+                users: doc
+            })
+        })
+    }catch(e){
+        res.send({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
 exports.getUserById = async function (req, res){
     try{
         await UserModel.findById(req.params.userId).exec((err, doc)=>{

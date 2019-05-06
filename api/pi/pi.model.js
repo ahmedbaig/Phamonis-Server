@@ -9,10 +9,14 @@ var PiSchema = new Schema({
         type: Boolean,
         default: false
     },
+    user: {
+        type: String,
+        default: null
+    },
     active: {
         type: Boolean,
         default: false
     }
 });
 
-module.exports = mongoose.model('PiSchema', PiSchema);
+module.exports = mongoose.model('Pi', PiSchema);

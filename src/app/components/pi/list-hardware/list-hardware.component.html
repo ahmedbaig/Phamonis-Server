@@ -13,7 +13,7 @@
                 <thead>
                   <tr>
                     <th>Model</th>
-                    <th>FCC ID</th>
+                    <th>Serial Number</th>
                     <th>Status</th>
                     <th>Active</th>
                     <th>User</th>
@@ -21,7 +21,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of items"> 
+                  <tr *ngFor="let item of devices"> 
+                    <td><a [routerLink]="[ '/pi/edit', item._id ]">{{item.model}}</a></td>
+                    <td>{{item.serial_number}}</td>
+                    <td *ngIf="item.active == true"><span class="label label-success ">Activated</span></td>
+                    <td *ngIf="item.active == false"><span class="label label-danger ">Deactivated</span></td>
+                    <td *ngIf="item.status == true"><span class="label label-success ">Online</span></td>
+                    <td *ngIf="item.status == false"><span class="label label-danger ">Offline</span></td>
+                    <td *ngIf="item.detail != undefined"><a [routerLink]="[ '/profile', item.detail._id ]"> {{item.detail.firstName}} {{item.detail.lastName}}</a></td>
                   </tr> 
                 </tbody>
               </table>

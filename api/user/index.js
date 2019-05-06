@@ -19,7 +19,7 @@ router.post('/reset-password/:forgotPasswordToken', controller.resetPassword);
 
 router.get('/activate-account/:token', controller.activateAccount);
 
-// router.get('/get-users/:token', auth.isAdmin(), controller.getUsers);
+router.get('/get-users/:token', auth.isAdmin(), controller.getUsers);
 
 router.get('/get-user/:userId/:token', auth.isAuthenticated(), controller.getUserById);
 

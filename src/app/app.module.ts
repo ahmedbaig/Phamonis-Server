@@ -81,7 +81,7 @@ const appRoutes: Routes = [
       ]},
       {path: 'messages', component: MessagesComponent},
       {path: 'notifications', component: NotificationsComponent},
-      {path: 'profile', component: ProfileComponent},
+      {path: 'profile/:id', component: ProfileComponent},
       {path: 'settings', component: SettingsComponent},
       {path: 'schedule', children: [
         {path: 'upcoming', component: UpcomingAppointmentsComponent},

@@ -2,6 +2,7 @@
 
 
 const PiModel = require('./pi.model');
+const UserModel = require('../user/user.model');
 const _ = require('lodash');
 
 exports.create = async function(req,res){
@@ -42,19 +43,29 @@ exports.update = async function(req,res){
 
 exports.getDeviceById = async function (req, res){
     try{
+        let devices = {}
+        let users = await UserModel.find({}) 
         await PiModel.findById(req.params.device)
         .exec(function (err, doc){
-            // sending access token
-            if(doc == null){
+            if(doc.user != null){ 
+                Promise.all(users.map(user=>{
+                    if(user._id == doc.user){ 
+                        let newdoc = doc.toObject() 
+                        newdoc.detail = _.clone(user)
+                        devices = newdoc 
+                    }
+                })).then(()=>{
+                    res.send({
+                        success: true,
+                        device: devices
+                    }); 
+                }) 
+            }else{ 
                 res.send({
-                    success: false,
-                    message: "Device not found"
-                })
-            }
-            res.send({
-                success: true,
-                device: doc
-            }); 
+                    success: true,
+                    devices: doc
+                }); 
+            } 
         }) 
     }catch(e){
         res.send({
@@ -66,13 +77,28 @@ exports.getDeviceById = async function (req, res){
 
 exports.getDeviceAll = async function (req, res){
     try{
+        let devices = []
+        let users = await UserModel.find({}) 
         await PiModel.find({})
         .exec(function (err, doc){
-            // sending access token
-            res.send({
-                success: true,
-                devices: doc
-            }); 
+            Promise.all(doc.map(async device=>{ 
+                if(device.user != null){ 
+                    Promise.all(users.map(user=>{
+                        if(user._id == device.user){ 
+                            let newdoc = device.toObject() 
+                            newdoc.detail = _.clone(user)
+                            devices.push(newdoc) 
+                        }
+                    })) 
+                }else{
+                    devices.push(device)
+                }
+            })).then(()=>{
+                res.send({
+                    success: true,
+                    devices: devices
+                }); 
+            }) 
         }) 
     }catch(e){
         res.send({
