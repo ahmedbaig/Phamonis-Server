@@ -2,6 +2,9 @@
   "name": "Phamonis",
   "version": "2.0.0",
   "description": "",
+  "engines": {
+    "node": "10.3.0"
+  },
   "author": "Ahmed Baig (ahmed_baig45@outlook.com)",
   "repository": {
     "type": "git",
