@@ -22,15 +22,15 @@ export class AuthServiceService {
 
    isAuthenticated(){
     if (this.secureStorage.getItem('session_t') != null) {
-      this.isTokenExpired(JSON.parse(this.secureStorage.getItem('session_t')));
+      return this.isTokenExpired(JSON.parse(this.secureStorage.getItem('session_t')));
     } else {
       this.clear();
       this.route.navigate(['/auth']);
+      return false
     }
   }
 
   isTokenExpired(data: any) {
-    
     this.geoLocation.getIP().subscribe(ipResponse=>{ 
       this.geoLocation.getData(ipResponse.ip).subscribe(dataResponse=>{
         if(navigator.appVersion!==data.appVersion&&
@@ -50,17 +50,15 @@ export class AuthServiceService {
         this.user = res.user; 
         this.token = data.jwt
         this.role = res.user.role
-        this.logged = true;
+        this.logged = true;  
         this.image = this._service.getUserImage(this.user.profilePicture)
-        this.route.navigate(['/']);
         app.init(); 
         return true
       } else {
-        this.clear();
-        this.route.navigate(['/auth']);
+        this.clear(); 
         return false;
       }
-    }); 
+    });
   }
 
   getUser(){
@@ -71,7 +69,7 @@ export class AuthServiceService {
     return this.role
   }
 
-  clear() {
+  clear() {  
     this.logged = false,
     this.secureStorage.removeItem('session_t');
     this.secureStorage.removeItem('USER_ID');

@@ -12,7 +12,8 @@ const DoctorModel = require('../doctor/doctor.model')
 const NurseModel = require('../nurse/nurse.model')
 const UtilService = require('../utility/util');
 const htmlTemplateService = require('../utility/htmltemplates');
-const UserSession = require('../userSession/userSession.model'); 
+const UserSession = require('../userSession/userSession.model');
+const PiSession = require('../pi/pi.model') 
 const _ = require('lodash');
 
 exports.create = function(req,res){
@@ -362,7 +363,7 @@ exports.createUser = async function (req, res){
         req.body.role = "user";
         req.body.profileApproved = true;
         req.body.terms = true;
-        await UserModel.create(req.body).exec((err, doc)=>{
+        await UserModel.create(req.body).then(async (doc)=>{
             //TODO: Need re evalutaion after pose module
             if(err){
                 res.send({
@@ -370,9 +371,11 @@ exports.createUser = async function (req, res){
                     message: err
                 })
             }
-            res.send({
-                success: true,
-                user: doc
+            await PiModel.update({_id: req.body.device,}, {user: doc._id, active: false, status: false}).then(()=>{
+                res.send({
+                    success: true,
+                    user: doc
+                })
             })
         })
     }catch(e){
@@ -385,12 +388,23 @@ exports.createUser = async function (req, res){
 
 exports.createUserAdmin = async function (req, res){
     try{ 
-        await UserModel.create(req.body).exec((err, doc)=>{
+        req.body.role = "user";
+        req.body.profileApproved = true;
+        req.body.terms = true;
+        await UserModel.create(req.body).exec(async (doc)=>{
             //TODO: Need re evalutaion after pose module
             if(err){
                 res.send({
                     success: false,
                     message: err
+                })
+            }
+            if(doc.role == "user"&&req.body.device!=null){
+                await PiModel.update({_id: req.body.device,}, {user: doc._id, active: false, status: false}).then(()=>{
+                    res.send({
+                        success: true,
+                        user: doc
+                    })
                 })
             }
             res.send({

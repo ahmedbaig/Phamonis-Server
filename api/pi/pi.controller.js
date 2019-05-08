@@ -63,7 +63,7 @@ exports.getDeviceById = async function (req, res){
             }else{ 
                 res.send({
                     success: true,
-                    devices: doc
+                    device: doc
                 }); 
             } 
         }) 

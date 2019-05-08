@@ -55,21 +55,14 @@ var UserSchema = new Schema({
         default: false
     }, 
 
-    devices: [String],
+    device: String,
     
     points: {
         type: Number,
         default: 0
     },
-    
-    description : String,
-    shortDescription : String,
-    
-    city : String,
-    state: String,
-    country : String,
- 
-    birthSign: String, 
+     
+     
     terms: {
         type:Boolean, 
         required: true

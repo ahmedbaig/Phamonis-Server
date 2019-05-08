@@ -5,6 +5,7 @@ import { DataService } from 'src/app/services/data.service';
 import { AuthServiceService } from 'src/app/auth/auth-service.service'; 
 import { GeolocationService } from 'src/app/services/geolocation.service'; 
 import { SecureStorageService } from 'src/app/auth/secure-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   registerForm!: FormGroup; 
   submitted:boolean = false
-  constructor(private secureStorage:SecureStorageService, private geoLocation:GeolocationService, private formBuilder: FormBuilder, private _service: DataService, private _auth: AuthServiceService) { }
+  constructor(private secureStorage:SecureStorageService, private geoLocation:GeolocationService, private formBuilder: FormBuilder, private _service: DataService, private _auth: AuthServiceService, private route:Router) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({ 
@@ -51,9 +52,10 @@ export class LoginComponent implements OnInit {
                 ip: ip_,
                 e_ip: data.ip
               }
-              if(this.secureStorage.setItem('session_t', secureSession)==true){
+              if(this.secureStorage.setItem('session_t', secureSession)==true){ 
                 this._auth.token = res.token 
                 this._auth.isAuthenticated()
+                this.route.navigate(['/']);
               }
             }
           }else{

@@ -25,4 +25,21 @@ export class UserService {
       headers: headers
     });
   }
+
+  createUserAdmin(body:any, token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.origin+`/api/user/new-user-admin/${token}`, body, {
+      headers: headers
+    });
+  }
+
+  createUser(body:any, token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.origin+`/api/user/new-user/${token}`, body, {
+      headers: headers
+    });
+  }
+
 }

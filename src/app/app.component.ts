@@ -1,5 +1,6 @@
 import { Component,ViewEncapsulation } from '@angular/core';
 import { DataService } from './services/data.service'; 
+import { AuthServiceService } from './auth/auth-service.service';
 
 @Component({
   selector: 'app-root',
@@ -9,25 +10,10 @@ import { DataService } from './services/data.service';
 })
 export class AppComponent {
 
-  constructor(private AuthService:DataService){}
+  constructor(private AuthService:DataService, private _auth:AuthServiceService){}
 
-  ngOnInit(): void {
-  //   var session_token;
-  //   if(localStorage.getItem('session_token')){
-  //     session_token = localStorage.getItem('session_token');
-  //     this.AuthService.verifyUser(session_token).subscribe(async (res) => {
-  //       //console.log(res);
-  //       if(!res.success){ //denied access
-  //         localStorage.removeItem('session_token');
-  //         localStorage.removeItem('token');
-  //         location.pathname = "/"; 
-  //       }
-  //     })
-  //   }else{ //no session
-  //     localStorage.removeItem('session_token');
-  //     localStorage.removeItem('token');
-  //     location.pathname = "/"; 
-  //   }
+  ngOnInit(): void { 
+    this._auth.isAuthenticated()
   }
  
 }

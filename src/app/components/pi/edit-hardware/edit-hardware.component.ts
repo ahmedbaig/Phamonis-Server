@@ -27,7 +27,9 @@ export class EditHardwareComponent implements OnInit {
           this.serial_number = res.device.serial_number
           this.active = res.device.active
           this.status = res.device.status
-          this.user = res.device.user
+          if(res.device.user != null){
+            this.user = res.device.user
+          }
         }) 
       }
     });

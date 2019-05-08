@@ -5,6 +5,7 @@ import { DataService } from 'src/app/services/data.service';
 import Swal from 'sweetalert2';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SecureStorageService } from 'src/app/auth/secure-storage.service';  
+import { delay } from 'lodash'
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -20,12 +21,14 @@ export class DashboardComponent implements OnInit {
   notifications: any = []
   constructor(public secureStorage:SecureStorageService, private route: Router, public _auth: AuthServiceService, private _service: DataService, private _notification:NotificationService) {}
 
-  ngOnInit() {   
-    if(this._auth.logged == false){
-      this.route.navigate(['/auth'])
-    }
+  ngOnInit() {     
     new Promise((resolve, reject)=>{
       this._auth.isAuthenticated()
+      this._auth.verifyToken(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res => {
+        if (!res.success) {  
+          this.route.navigate(['/auth'])
+        }
+      });
       resolve(1)
     }).then(()=>{ 
       this._notification.getNotifications(this.secureStorage.getUserId(), JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
@@ -35,8 +38,7 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  logout(){
-     
+  logout(){ 
     this._service.logout(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
       if(res.success){
         this._auth.clear()

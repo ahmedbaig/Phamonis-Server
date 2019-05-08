@@ -72,7 +72,7 @@
                             <div class="col-md-12 col s12 center-align">
                                 <div class="input-field col s12"> 
                                     <select [(ngModel)]="user" (ngModelChange)="userChange($event)" name="user">
-                                        <option value="" disabled>Connected User</option> {{users}} 
+                                        <option value="" disabled>Connected User</option>  
                                         <option [value]="user._id" *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</option>  
                                     </select>
                                 </div>
