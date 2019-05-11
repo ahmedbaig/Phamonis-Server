@@ -11,7 +11,7 @@ var PiSchema = new Schema({
     },
     user: {
         type: String,
-        default: null
+        default: ""
     },
     active: {
         type: Boolean,

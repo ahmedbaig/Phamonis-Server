@@ -21,7 +21,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of devices"> 
+                  <tr *ngFor="let item of inactive"> 
                     <td><a [routerLink]="[ '/pi/edit', item._id ]">{{item.model}}</a></td>
                     <td>{{item.serial_number}}</td>
                     <td *ngIf="item.active == true"><span class="label label-success ">Activated</span></td>
@@ -29,6 +29,41 @@
                     <td *ngIf="item.status == true"><span class="label label-success ">Online</span></td>
                     <td *ngIf="item.status == false"><span class="label label-danger ">Offline</span></td>
                     <td *ngIf="item.detail != undefined"><a [routerLink]="[ '/profile', item.detail._id ]"> {{item.detail.firstName}} {{item.detail.lastName}}</a></td>
+                    <td (click)="remove(item._id)"><span class="ti-close"></span></td>
+                  </tr> 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-block">
+            <div class="table-overflow">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>Serial Number</th>
+                    <th>Status</th>
+                    <th>Active</th>
+                    <th>User</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of active"> 
+                    <td><a [routerLink]="[ '/pi/edit', item._id ]">{{item.model}}</a></td>
+                    <td>{{item.serial_number}}</td>
+                    <td *ngIf="item.active == true"><span class="label label-success ">Activated</span></td>
+                    <td *ngIf="item.active == false"><span class="label label-danger ">Deactivated</span></td>
+                    <td *ngIf="item.status == true"><span class="label label-success ">Online</span></td>
+                    <td *ngIf="item.status == false"><span class="label label-danger ">Offline</span></td>
+                    <td *ngIf="item.detail != undefined"><a [routerLink]="[ '/profile', item.detail._id ]"> {{item.detail.firstName}} {{item.detail.lastName}}</a></td>
+                    <td (click)="remove(item._id)"><span class="ti-close"></span></td>
                   </tr> 
                 </tbody>
               </table>

@@ -28,7 +28,7 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { UpcomingAppointmentsComponent } from './components/schedule-manager/upcoming-appointments/upcoming-appointments.component';
 import { PastAppointmentsComponent } from './components/schedule-manager/past-appointments/past-appointments.component';
 import { PatientMonitorComponent } from './components/patient-monitor/patient-monitor.component';
-import { NewUserComponent } from './components/new-user/new-user.component';
+import { NewUserComponent } from './components/users/new-user/new-user.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { PlaceAppointmentComponent } from './components/schedule-manager/place-appointment/place-appointment.component';
@@ -46,7 +46,10 @@ import { CreateHardwareComponent } from './components/pi/create-hardware/create-
 import { ListHardwareComponent } from './components/pi/list-hardware/list-hardware.component';
 import { DetailHardwareComponent } from './components/pi/detail-hardware/detail-hardware.component';
 import { EditHardwareComponent } from './components/pi/edit-hardware/edit-hardware.component';
-import { SecureStorageService } from './auth/secure-storage.service';
+import { SecureStorageService } from './auth/secure-storage.service'; 
+import { NewHospitalComponent } from './components/users/new-hospital/new-hospital.component';
+import { AllHospitalsComponent } from './components/users/all-hospitals/all-hospitals.component';
+import { EditHospitalComponent } from './components/users/edit-hospital/edit-hospital.component';
 
 const appRoutes: Routes = [
   {
@@ -91,6 +94,9 @@ const appRoutes: Routes = [
       ]},
       {path: 'patient-monitor', component: PatientMonitorComponent},
       {path: 'new-user', component: NewUserComponent},
+      {path: 'all-hospitals', component: AllHospitalsComponent},
+      {path: 'new-hospital', component: NewHospitalComponent},
+      {path: 'edit-hospital/:hospital', component: EditHospitalComponent},
       {path: 'requests', component: RequestsComponent},
       {path: 'pi', children: [
         {path: '', component: ListHardwareComponent}, 
@@ -141,7 +147,10 @@ const config = {useHash:true};
     CreateHardwareComponent,
     ListHardwareComponent,
     DetailHardwareComponent,
-    EditHardwareComponent
+    EditHardwareComponent, 
+    NewHospitalComponent,
+    AllHospitalsComponent,
+    EditHospitalComponent
   ],
   imports: [
     NgbModule,

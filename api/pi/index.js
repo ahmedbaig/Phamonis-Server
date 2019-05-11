@@ -13,7 +13,7 @@ router.post('/update-device/:token/:device', auth.isAdmin(), controller.update)
 
 router.get('/get-device-detail/:token/:device', auth.isAuthenticated(), controller.getDeviceById)
 
-router.get('/get-device-all/:token', auth.isAdmin(), controller.getDeviceAll)
+router.get('/get-device-all/:token', auth.isAuthenticated(), controller.getDeviceAll)
 
 router.get('/remove-device/:token/:device', auth.isAdmin(), controller.removeDeviceById)
 

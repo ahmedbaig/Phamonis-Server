@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { getOrigin } from '../origin';
 import { Observable } from 'rxjs';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PiService {
+export class HospitalService {
 
   origin : String = getOrigin()
   
@@ -15,36 +15,39 @@ export class PiService {
   getAll(token:String):Observable<any>{
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
-    return this.http.get(this.origin+"/api/pi/get-device-all/"+token,{
+    return this.http.get(this.origin+"/api/hospital/all-hospitals/"+token,{
       headers: headers
     });
   } 
-  getDevice(token:String, device: String):Observable<any>{
+
+  createHospital(body:any, token:String):Observable<any>{
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
-    return this.http.get(this.origin+`/api/pi/get-device-detail/${token}/${device}`,{
-      headers: headers
-    });
-  }
-  removeDevice(token:String, device: String):Observable<any>{
-    const headers = new HttpHeaders()
-    .set('Content-Type', 'application/json');
-    return this.http.get(this.origin+`/api/pi/remove-device/${token}/${device}`,{
-      headers: headers
-    });
-  }
-  createDevice(body:any, token:String):Observable<any>{
-    const headers = new HttpHeaders()
-    .set('Content-Type', 'application/json');
-    return this.http.post(this.origin+"/api/pi/create-device/"+token, body, {
+    return this.http.post(this.origin+"/api/hospital/create/"+token, body, {
       headers: headers
     });
   }
 
-  updateDevice(body:any, token:String, device:String):Observable<any>{
+  updateHospital(body:any, token:String):Observable<any>{
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
-    return this.http.post(this.origin+`/api/pi/update-device/${token}/${device}`, body, {
+    return this.http.post(this.origin+`/api/hospital/update/${token}`, body, {
+      headers: headers
+    });
+  }
+  
+  detailHospital(id:String, token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.origin+`/api/hospital/detail/${token}?id=${id}`, {
+      headers: headers
+    });
+  }
+
+  deleteHospital(body:any, token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.origin+`/api/hospital/delete/${token}`, body, {
       headers: headers
     });
   }

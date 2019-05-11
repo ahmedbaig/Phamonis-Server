@@ -7,8 +7,14 @@ var auth = require('../../auth/auth.service');
 
 var router = express.Router();
 
-router.post('/create', auth.isAdmin(), controller.create);
+router.post('/create/:token', auth.isAdmin(), controller.create);
 
-router.post('/update', auth.isAdmin(), controller.update);
+router.post('/detail/:token', auth.isAdmin(), controller.detail);
 
-router.post('/delete', auth.isAdmin(), controller.delete)
+router.post('/update/:token', auth.isAdmin(), controller.update);
+
+router.post('/delete/:token', auth.isAdmin(), controller.delete)
+
+router.get('/all-hospitals/:token', auth.isAdmin(), controller.all)
+
+module.exports = router;

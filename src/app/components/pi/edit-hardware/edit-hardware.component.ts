@@ -3,7 +3,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { PiService } from 'src/app/services/pi.service';
 import { UserService } from 'src/app/services/user.service';
 import { SecureStorageService } from 'src/app/auth/secure-storage.service';
-import { delay } from 'lodash' 
+import { delay, filter } from 'lodash' 
 import Swal from 'sweetalert2';
 declare var $:any
 declare var M:any
@@ -37,7 +37,7 @@ export class EditHardwareComponent implements OnInit {
 
   ngOnInit() {
     this._userService.getAllUsers(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
-      this.users = res.users
+      this.users = filter(res.users, o=>{return o.role!='admin'}) 
       delay(()=>{
         M.AutoInit();
         $('select').formSelect();

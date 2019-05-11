@@ -22,24 +22,20 @@
 					class="dropdown-toggle"
 					data-toggle="dropdown"
 					>
-					<img
-						class="profile-img img-fluid"
-						[src] = "_auth.image"
-						alt=""
-						>
+					 
 					<div class="user-info">
 						<span class="name pdd-right-5">{{_auth.user.firstName}} {{_auth.user.lastName}}</span>
 						<i class="ti-angle-down font-size-10"></i>
 					</div>
 				</a>
 				<ul class="dropdown-menu">
-					<li>
+					<li *ngIf="_auth.role!='admin'">
 						<a [routerLink]="[ '/profile', secureStorage.getUserId() ]">
 						<i class="ti-user pdd-right-10"></i>
 						<span>Profile</span>
 						</a>
 					</li> 
-					<li>
+					<li *ngIf="_auth.role!='admin'">
 						<a [routerLink]="[ '/settings' ]">
 						<i class="ti-settings pdd-right-10"></i>
 						<span>Settings</span>
@@ -81,11 +77,7 @@
 						<ul class="list-info overflow-y-auto relative scrollable">
 							<li *ngFor="let notification of notifications">
 								<a [href]="notification.link">
-									<img
-										class="thumb-img"
-										[src]="user_images[notification.user]"
-										alt="Profile Picture"
-										>
+									 
 									<div class="info">
 										<span class="title">
 										<span class="font-size-14 text-semibold">{{users[notification.user]}}</span>

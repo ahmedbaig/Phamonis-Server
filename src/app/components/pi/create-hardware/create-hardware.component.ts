@@ -4,7 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { SecureStorageService } from 'src/app/auth/secure-storage.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { delay } from 'lodash'
+import { delay, filter } from 'lodash'
 declare var $:any;
 declare var M:any;
 @Component({
@@ -23,7 +23,7 @@ export class CreateHardwareComponent implements OnInit {
 
   ngOnInit() { 
     this._userService.getAllUsers(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
-      this.users = res.users 
+      this.users = filter(res.users, o=>{return o.role!='admin'}) 
       delay(()=>{
         M.AutoInit();
         $('select').formSelect();

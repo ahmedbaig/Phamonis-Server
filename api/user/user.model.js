@@ -55,14 +55,23 @@ var UserSchema = new Schema({
         default: false
     }, 
 
-    device: String,
-    
+    position:String,
+    services:[String], 
+    hospital:String,
+    patients:[String],
+
+    qualification:[{
+        degree:String,
+        grade:String,
+        institute:String,
+        path:String,
+        createdt: { type: Date, default: Date.now }
+    }],
     points: {
         type: Number,
         default: 0
     },
-     
-     
+      
     terms: {
         type:Boolean, 
         required: true

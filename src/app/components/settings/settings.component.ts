@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { DataService } from 'src/app/services/data.service';
+import { SecureStorageService } from 'src/app/auth/secure-storage.service';
 
 @Component({
   selector: 'app-settings',
@@ -12,12 +13,13 @@ export class SettingsComponent implements OnInit {
   image: String = ""
   firstName: String = "";
   lastName: String = "";
-  constructor(private user_service:UserService, private data_service: DataService) { }
+  device: any = {}
+  constructor(private user_service:UserService, private data_service: DataService, private secureStorage:SecureStorageService) { }
 
   ngOnInit() {
-    this.user_service.getUser(localStorage.getItem('session_u')!, localStorage.getItem('session_t')!).subscribe(res=>{
-      this.user = res.user
-      this.image = this.data_service.getUserImage(res.user.profilePicture)
+    this.user_service.getUser(this.secureStorage.getUserId()!, JSON.parse(this.secureStorage.getItem('session_t')).jwt!).subscribe(res=>{
+      this.user = res.user 
+      
     })
   }
 }

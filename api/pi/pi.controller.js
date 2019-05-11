@@ -47,7 +47,7 @@ exports.getDeviceById = async function (req, res){
         let users = await UserModel.find({}) 
         await PiModel.findById(req.params.device)
         .exec(function (err, doc){
-            if(doc.user != null){ 
+            if(doc.user != ""){ 
                 Promise.all(users.map(user=>{
                     if(user._id == doc.user){ 
                         let newdoc = doc.toObject() 
@@ -82,7 +82,7 @@ exports.getDeviceAll = async function (req, res){
         await PiModel.find({})
         .exec(function (err, doc){
             Promise.all(doc.map(async device=>{ 
-                if(device.user != null){ 
+                if(device.user != ""){ 
                     Promise.all(users.map(user=>{
                         if(user._id == device.user){ 
                             let newdoc = device.toObject() 
@@ -94,6 +94,7 @@ exports.getDeviceAll = async function (req, res){
                     devices.push(device)
                 }
             })).then(()=>{
+                console.log(devices)
                 res.send({
                     success: true,
                     devices: devices
@@ -110,13 +111,20 @@ exports.getDeviceAll = async function (req, res){
 
 exports.removeDeviceById = async function(req, res){
     try{
-        await PiModel.remove({_id: req.params.device})
-        .exec(function (err){  
-            res.send({
-                success: true,
-                message: "Device removed"
-            }); 
-        }) 
+        await PiModel.findById(req.params.device).then(async (doc)=>{
+            if(doc.user!=""){
+                await UserModel.remove({_id:req.params.device}).then(()=>{
+
+                })
+            }
+            await PiModel.remove({_id: req.params.device})
+            .exec(function (err){  
+                res.send({
+                    success: true,
+                    message: "Device removed"
+                }); 
+            }) 
+        })
     }catch(e){
         res.send({
             success: false,

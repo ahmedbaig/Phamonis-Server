@@ -6,10 +6,7 @@ var crypto = require('crypto');
 
 
 const UserService = require('./user.service');
-const UserModel = require('./user.model'); 
-const PatientModel = require('../patient/patient.model')
-const DoctorModel = require('../doctor/doctor.model')
-const NurseModel = require('../nurse/nurse.model')
+const UserModel = require('./user.model');  
 const UtilService = require('../utility/util');
 const htmlTemplateService = require('../utility/htmltemplates');
 const UserSession = require('../userSession/userSession.model');
@@ -263,21 +260,7 @@ exports.activateAccount = async function(req, res){
         }
 
         user.accountActivated.isTrue = true;
-        user.accountActivated.token = null;
-        if(user.role == 'user'){
-            let patient = new PatientModel();
-            patient.user = user._id;
-            await patient.save();
-        }else if(user.role == 'nurse'){
-            let nurse = new NurseModel();
-            nurse.user = user._id
-            await nurse.save()
-        }else if(user.role == 'doctor'){
-            let doctor = new DoctorModel();
-            doctor.user = user._id
-            await doctor.save();
-        }
-
+        user.accountActivated.token = null; 
         await user.save();
 
         res.send({success: true, message: 'Your account has been activated successfully'});
@@ -360,6 +343,12 @@ exports.getUserById = async function (req, res){
 
 exports.createUser = async function (req, res){
     try{
+        if(req.body.role!=null){
+            res.send({
+                success: false,
+                message: "Cannot create this type of user from your account"
+            })
+        }
         req.body.role = "user";
         req.body.profileApproved = true;
         req.body.terms = true;
@@ -371,7 +360,7 @@ exports.createUser = async function (req, res){
                     message: err
                 })
             }
-            await PiModel.update({_id: req.body.device,}, {user: doc._id, active: false, status: false}).then(()=>{
+            await PiSession.update({_id: req.body.device,}, {user: doc._id, active: false, status: false}).then(()=>{
                 res.send({
                     success: true,
                     user: doc
@@ -387,20 +376,14 @@ exports.createUser = async function (req, res){
 }
 
 exports.createUserAdmin = async function (req, res){
-    try{ 
-        req.body.role = "user";
+    try{  
         req.body.profileApproved = true;
         req.body.terms = true;
-        await UserModel.create(req.body).exec(async (doc)=>{
-            //TODO: Need re evalutaion after pose module
-            if(err){
-                res.send({
-                    success: false,
-                    message: err
-                })
-            }
+        await UserModel.create(req.body).then(async (doc)=>{
+            //TODO: Need re evalutaion after pose module 
+            console.log(doc.role, req.body.device)
             if(doc.role == "user"&&req.body.device!=null){
-                await PiModel.update({_id: req.body.device,}, {user: doc._id, active: false, status: false}).then(()=>{
+                await PiSession.update({_id: req.body.device,}, {user: doc._id, active: false, status: false}).then(()=>{
                     res.send({
                         success: true,
                         user: doc

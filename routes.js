@@ -10,11 +10,11 @@ module.exports = function(app){
     app.use('/api/user', require('./api/user'));
     app.use('/api/userSession', require('./api/userSession'));
     app.use('/api/notification', require('./api/notification'));
+    app.use('/api/hospital', require('./api/hospital'));
     // app.use('/api/pose', require('./api/pose'));
     // app.use('/api/patient', require('./api/patient'));
     // app.use('/api/doctor', require('./api/doctor'));
     // app.use('/api/nurse', require('./api/nurse'));
-    // app.use('/api/hospital', require('./api/hospital'));
     // app.use('/api/services', require('./api/services'));
     // app.use('/api/qualification', require('./api/qualification'));
     // app.use('/api/emergency', require('./api/emergency'));
