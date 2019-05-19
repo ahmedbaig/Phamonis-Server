@@ -102,7 +102,6 @@ exports.uploadUserPicture = async function(req,res){
            message: err.message
        })
     }
-
 }
 
 function handleError(res,error,code){
@@ -378,7 +377,7 @@ exports.createUser = async function (req, res){
 exports.createUserAdmin = async function (req, res){
     try{  
         req.body.profileApproved = true;
-        req.body.terms = true;
+        req.body.terms = true; 
         await UserModel.create(req.body).then(async (doc)=>{
             //TODO: Need re evalutaion after pose module 
             console.log(doc.role, req.body.device)
@@ -400,5 +399,34 @@ exports.createUserAdmin = async function (req, res){
             success: false,
             message: e.message
         })
+    }
+}
+
+exports.uploadQualification = async function(req,res){
+    try{
+        console.log(req.files, req.body)
+        // fetching user by its id 
+        // var filename = Date.now();
+        // let dir = ROOTPATH+'/dist/App/assets/image/user/qualification'
+        // if (!fs.existsSync(dir)){
+        //     console.log("not exist", dir)
+        //     fs.mkdirSync(dir, { recursive: true }, (err) => {
+        //         if (err) throw err;
+        //       });;
+        // }
+        // let filePath = path.join( ROOTPATH  , 'dist/App/assets/image/user/qualification' ,   filename+"."+ req.files.image.mimetype.split("/")[1]  )
+
+        // fs.writeFileSync(filePath,req.files.image.data);
+        // req.body.path = filename+"."+ req.files.image.mimetype.split("/")[1];  
+        // await UserModel.findOneAndUpdate({_id: req.user._id}, {$push: {qualification: req.body}})
+        res.send({
+            success: true,
+            message: "Uploaded successfully",
+        }) 
+    }catch(err){
+       res.send({
+           success: false,
+           message: err.message
+       })
     }
 }

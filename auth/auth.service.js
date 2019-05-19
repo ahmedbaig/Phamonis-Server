@@ -34,6 +34,7 @@ function isAuthenticated() {
                                 message: "Account not approved by a supervisor."
                             })
                         }
+                        res.user = user; 
                         next();
                     })
                 }else{

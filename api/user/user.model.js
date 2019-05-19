@@ -46,7 +46,7 @@ var UserSchema = new Schema({
     accountActivated: {
         isTrue : {
             type: Boolean,
-            default: false
+            default: true
         },
         token: String
     },
@@ -55,8 +55,7 @@ var UserSchema = new Schema({
         default: false
     }, 
 
-    position:String,
-    services:[String], 
+    position:String, 
     hospital:String,
     patients:[String],
 

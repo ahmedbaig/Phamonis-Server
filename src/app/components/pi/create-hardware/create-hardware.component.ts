@@ -23,7 +23,7 @@ export class CreateHardwareComponent implements OnInit {
 
   ngOnInit() { 
     this._userService.getAllUsers(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
-      this.users = filter(res.users, o=>{return o.role!='admin'}) 
+      this.users = filter(res.users, o=>{return o.role=='user'}) 
       delay(()=>{
         M.AutoInit();
         $('select').formSelect();

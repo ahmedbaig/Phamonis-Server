@@ -19,6 +19,10 @@ export class DataService {
     return this.origin+"/dist-user-images/"+filename
   }
   
+  getUserQualification(filename: String){
+    return this.origin+"/dist-user-qualification/"+filename
+  }
+  
   verifyUser(id: String):Observable<any>{
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');

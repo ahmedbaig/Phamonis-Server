@@ -31,4 +31,6 @@ router.post('/new-user-admin/:token', auth.isAdmin(), controller.createUserAdmin
 
 router.post('/remove-user/:token', auth.isAdmin(), controller.delete);
 
+router.post('/upload-qualification/:token', auth.isAuthenticated(), controller.uploadQualification)
+
 module.exports = router;

@@ -32,26 +32,90 @@
                               </div>  
                           </div>
                       </div>
-                      <div class="card">
+                      <div class="card" *ngIf="_auth.role=='user'">
                           <div class="card-heading border bottom">
                               <h4 class="card-title">Conneted Device</h4>
                           </div>
                           <div class="card-block">
-                              <div class="row">
+                              <div class="row" *ngFor="let item of device">
                                   <div class="col-md-4">
                                       <span class="border-radius-4 inline-block">
                                         <span class="pdd-horizon-10 lh-2-5 display-block">
                                           <img src="./assets/images/logo/raspberry-pi-icon.png" style="height: 30px;" alt="">
                                         </span>
                                       </span>
-                                      <span class="mrg-left-10 font-size-16 text-dark text-bold"> </span>
+                                      <span class="mrg-left-10 font-size-16 text-dark text-bold">{{item.model}}</span>
+                                  </div>
+                                  <div class="col-md-8">
+                                      <p class="mrg-top-10">
+                                          <span>{{item.serial_number}}</span> 
+                                      </p>
+                                  </div>
+                              </div> 
+                          </div>
+                      </div>
+                      <div class="card" *ngIf="_auth.role!='user'">
+                          <div class="card-heading border bottom">
+                              <div class="row">
+                                  <div class="col-md-10">
+                                      <h4 class="card-title">Qualification</h4>
+                                  </div>
+                                  <div class="col-md-2">
+                                      <button (click)="showQualificationForm()" class="right btn btn-default btn-inverse btn-rounded">Upload</button>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="card-block" *ngIf="showQualification==true">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p class="mrg-top-10 text-dark"> <b>Degree</b></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <input type="text" name="degree" [(ngModel)]="degree" id="">
+                                    </div>
+                                </div>
+                                <hr>  
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p class="mrg-top-10 text-dark"> <b>Grade</b></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <input type="text" name="grade" [(ngModel)]="grade" id="">
+                                    </div>
+                                </div>
+                                <hr> 
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p class="mrg-top-10 text-dark"> <b>Institute</b></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <input type="text" name="institute" [(ngModel)]="institute" id="">
+                                    </div>
+                                </div>
+                                <hr> 
+                                <div class="row"> 
+                                    <div class="col-md-6">
+                                        <input type="file" id="fileUpload" hidden (change)="onSelectFile($event)"/>
+                                        <img *ngIf="imageSelected==true" [src]="qualification" height="200"> <br/>
+                                        <label *ngIf="imageSelected==false" class="btn btn-default" for="fileUpload">Upload Certificate</label>
+                                        <button *ngIf="imageSelected==true" (click)="save()" class="btn btn-default" >Save</button>
+                                    </div>
+                                </div>
+                                <hr> 
+                          </div>
+                          <div class="card-block">
+                              <div class="row" *ngFor="let item of qualification">
+                                  <div class="col-md-4">
+                                      <span class="border-radius-4 inline-block">
+                                        <span class="pdd-horizon-10 lh-2-5 display-block">
+                                          <img [src]="images[item._id]" style="height: 30px;" alt="">
+                                        </span>
+                                      </span>
+                                      <span class="mrg-left-10 font-size-16 text-dark text-bold">{{item.degree}}</span>
                                   </div>
                                   <div class="col-md-8 text-right">
                                       <p class="mrg-top-10">
-                                          <span>https://www.facebook.com/profile</span>
-                                          <a href="" class="btn btn-danger btn-inverse btn-xs no-mrg-btm mrg-left-10 border-radius-4">
-                                              <i class="ti-close"></i>
-                                          </a>
+                                          <span>{{item.institute}}</span> 
                                       </p>
                                   </div>
                               </div> 
@@ -60,7 +124,7 @@
                   </div>
               </div>
           </div>
-      </div>
+      </div> 
   </div>
 </div>
-<!-- Content Wrapper END -->
+<!-- Content Wrapper END -->  
