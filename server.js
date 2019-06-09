@@ -5,12 +5,17 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose'); 
 const busboyBodyParser = require('busboy-body-parser');
 const path = require('path');
+var cron = require('node-cron');
+
+const _ = require('lodash');
+const moment = require('moment');
+
+const PiModel = require('./api/pi/pi.model')
+
 const app = express(); 
 
 const PORT = process.env.PORT || 4040;
-global.ROOTPATH = __dirname;
-const _ = require('lodash');
-const moment = require('moment');
+
 
 // mongoose.connect('mongodb://localhost/gramie_player');
 let url = 'mongodb://phamonisTeam:abc123@ds046027.mlab.com:46027/phamonis'
@@ -60,6 +65,11 @@ app.use(busboyBodyParser());
   
 app.use('/auth', require('./auth')) 
 
+app.get('/dist-image/:filename', function(req, res){
+  var filename = req.params.filename.replace(/'/g, '');
+  res.sendFile(path.resolve('./dist/App/assets/images/' + filename));
+})
+
 app.get('/dist-user-images/:filename', function(req, res) {
   var filename = req.params.filename.replace(/'/g, '');
   res.sendFile(path.resolve('./dist/App/assets/images/user/' + filename));
@@ -71,6 +81,12 @@ app.get('/dist-user-qualification/:filename', function(req, res) {
 });
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ 
+cron.schedule('*/10 * * * *', async () => {
+  console.log('running every 10 minutes');
+  await PiModel.updateMany({}, {status: false})
+});
+
 
 require('./routes')(app);
 

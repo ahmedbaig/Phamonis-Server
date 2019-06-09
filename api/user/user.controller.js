@@ -77,14 +77,14 @@ exports.uploadUserPicture = async function(req,res){
         // fetching user by its id
         let user = await UserModel.findById(req.params.userId)
         var filename = Date.now();
-        let dir = ROOTPATH+'/dist/App/assets/image/user'
+        let dir = './dist/App/assets/image/user'
         if (!fs.existsSync(dir)){
             console.log("not exist", dir)
             fs.mkdirSync(dir, { recursive: true }, (err) => {
                 if (err) throw err;
               });;
         }
-        let filePath = path.join( ROOTPATH  , 'dist/App/assets/image/user' ,   filename+"."+ req.files.image.mimetype.split("/")[1]  )
+        let filePath = path.join('./dist/App/assets/image/user' ,   filename+"."+ req.files.image.mimetype.split("/")[1]  )
 
         fs.writeFileSync(filePath,req.files.image.data);
 

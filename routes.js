@@ -9,16 +9,17 @@ module.exports = function(app){
 
     app.use('/api/user', require('./api/user'));
     app.use('/api/userSession', require('./api/userSession'));
+    app.use('/api/piSession', require('./api/piSession'));
     app.use('/api/notification', require('./api/notification'));
     app.use('/api/hospital', require('./api/hospital'));
-    // app.use('/api/pose', require('./api/pose'));
+    app.use('/api/pi', require('./api/pi'));
+    app.use('/api/pose', require('./api/pose'));
     // app.use('/api/patient', require('./api/patient'));
     // app.use('/api/doctor', require('./api/doctor'));
     // app.use('/api/nurse', require('./api/nurse'));
     // app.use('/api/services', require('./api/services'));
     // app.use('/api/qualification', require('./api/qualification'));
     // app.use('/api/emergency', require('./api/emergency'));
-    app.use('/api/pi', require('./api/pi'));
     // app.use('/api/card', require('./api/card'));
     // app.use('/api/transaction', require('./api/transaction'));
     // app.use('/api/dispute', require('./api/dispute'));

@@ -3,6 +3,9 @@ var compose = require('composable-middleware');
 const UserSession  = require('../api/userSession/userSession.model')
 const UserModel = require("../api/user/user.model")
 
+const PiSession  = require('../api/piSession/piSession.model')
+const PiModel = require("../api/pi/pi.model")
+
 function isAuthenticated() {
     return compose()
         // Attach user to request
@@ -54,7 +57,40 @@ function isAuthenticated() {
 function isPiAuthenticated() {
     return compose()
         // Attach user to request
-        .use(function(req, res, next) { 
+        .use(async function(req, res, next) { 
+            
+            await PiSession.findById(req.params.token).exec(async (err, session)=>{
+                if(err){
+                    res.send({
+                        success: false,
+                        message: "Invalid token"
+                    })
+                }
+                
+                if(session == null){
+                    res.send({
+                        success: false,
+                        message: "Not Found"
+                    })
+                }
+                if(session.isDeleted == false){
+                    await PiModel.findById(session.pi).exec((err, pi)=>{
+                        if(err){
+                            res.send({
+                                success: false,
+                                message: err.message
+                            })
+                        }
+                        res.pi = pi; 
+                        next();
+                    })
+                }else{
+                    res.send({
+                        success: false,
+                        message: "Authorization error!"
+                    })
+                }
+            })
         });
 }
 
