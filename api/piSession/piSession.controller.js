@@ -5,7 +5,7 @@ const _ = require('lodash');
 
 exports.create = async function(req, res){
     
-    PiModel.findOne({serial_number: req.body.serial_number}).exec(async (err, pi)=>{
+    await PiModel.findOne({serial_number: req.body.serial_number}).exec(async (err, pi)=>{
         console.log(pi)
         if(pi == null){
             res.send({
@@ -58,7 +58,7 @@ exports.verify = async function(req,res){
                 })
             }
 
-            await PiModel.findById(doc.user).exec(async (err, doc)=>{
+            await PiModel.findById(doc.pi).exec(async (err, doc)=>{
                 if(err){
                     res.send({
                         success: false,
@@ -66,6 +66,7 @@ exports.verify = async function(req,res){
                     })
                 }
                 await PiSessionModel.findOneAndUpdate({_id: req.query.token}, {lastUsed: Date.now()})
+                await PiModel.findByIdAndUpdate(doc.pi, {status: true, active: true})
                 res.send({
                     success: true, 
                     message: "valid token",
