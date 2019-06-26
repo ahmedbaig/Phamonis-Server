@@ -94,14 +94,6 @@ tr > td {
     vertical-align: middle !important;
     text-align: left;
 }
-tr > td:nth-child(1) {
-    width: 25%!important;
-}
-
-tr > th:nth-child(1) {
-    width: 25%!important;
-}
-
 app-detailuser{
     width: 100%
 }
