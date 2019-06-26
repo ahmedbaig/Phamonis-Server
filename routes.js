@@ -14,7 +14,7 @@ module.exports = function(app){
     app.use('/api/hospital', require('./api/hospital'));
     app.use('/api/pi', require('./api/pi'));
     app.use('/api/pose', require('./api/pose'));
-    app.use('/api/emergency', require('./api/emergencyRequests'));
+    // app.use('/api/emergency', require('./api/emergencyRequests'));
     // app.use('/api/discussion', require('./api/discussionBoard'));
     // app.use('/api/schedule', require('./api/scheduleManager'));
     // app.use('/api/diagnosis', require('./api/diagnosis'));
