@@ -2,11 +2,14 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var HospitalSchema = new Schema({   
-    name:String,
-    phone:String,
-    address:String,
+var EmergencySchema = new Schema({  
+    user: String,
+    pi: String,
+    read: {
+        type: Boolean,
+        default: false
+    },
     createdt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Hospital', HospitalSchema);
+module.exports = mongoose.model('Emergency', EmergencySchema);

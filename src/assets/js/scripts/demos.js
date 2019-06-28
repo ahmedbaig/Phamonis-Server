@@ -1,4 +1,5 @@
-﻿var jqxSchedular = {}
+﻿
+var jqxSchedular = {}
 var adapter
 var jqxInstance = $.jqx
 function getHeight(name) {
@@ -310,10 +311,10 @@ function getDemoTheme() {
 		}
 	}
 
-    var url = "./assets/js/jqwidgets/styles/jqx." + theme + '.css';
+    var url = "../jqwidgets/styles/jqx." + theme + '.css';
     if (window.location.href.toString().indexOf("angularjs") >= 0) {
         var loc = window.location.href.toString();
-        url = "./assets/js/jqwidgets/styles/jqx." + theme + '.css';
+        url = "../jqwidgets/styles/jqx." + theme + '.css';
          
 		if (loc.indexOf('angular-') >= 0) {		 
 			  if (loc.indexOf('button') >= 0 ||
@@ -327,15 +328,15 @@ function getDemoTheme() {
 				loc.indexOf('calendar') >= 0 ||
 				loc.indexOf('datetimeinput') >= 0 ||
 				(loc.indexOf('chart') >= 0 && loc.indexOf('bulletchart') == -1)) {
-					url = "./assets/js/jqwidgets/styles/jqx." + theme + '.css';
+					url = "../jqwidgets/styles/jqx." + theme + '.css';
 				}
 		}
     }
     if (window.location.href.toString().indexOf("typescript") >= 0) {
-        url = "./assets/js/jqwidgets/styles/jqx." + theme + '.css';
+        url = "../jqwidgets/styles/jqx." + theme + '.css';
     }
     if (window.location.href.toString().indexOf("angularjs2") >= 0) {
-        url = "./assets/js/jqwidgets/styles/jqx." + theme + '.css';
+        url = "../jqwidgets/styles/jqx." + theme + '.css';
     }
     if (document.createStyleSheet != undefined) {
         var hasStyle = false;
