@@ -17,4 +17,6 @@ router.post('/delete/:token', auth.isAdmin(), controller.delete)
 
 router.get('/all-hospitals/:token', auth.isAdmin(), controller.all)
 
+router.get('/all-hospitals-staff/:token', auth.isStaff(), controller.allStaff)
+
 module.exports = router;

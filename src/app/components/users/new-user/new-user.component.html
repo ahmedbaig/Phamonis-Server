@@ -44,7 +44,7 @@
                                 <select [(ngModel)]="role" (ngModelChange)="userType($event)" name="role"> 
                                     <option value="user">User</option>  
                                     <option value="doctor">Doctor</option>  
-                                    <option value="nurse">nurse</option>   
+                                    <option value="nurse">Nurse</option>   
                                 </select>
                             </div>
                         </div>
@@ -57,6 +57,23 @@
                                     <option value="male">Male</option>  
                                     <option value="female">Female</option>  
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="role=='doctor'&&role=='nurse'"> 
+                        <div class="col-md-12 col s12 center-align">
+                            <div class="input-field col s12"> 
+                                <select [(ngModel)]="gender" name="gender"> 
+                                    <option value="" disabled selected>Hospital</option>   
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="role=='doctor'&&role=='nurse'"> 
+                        <div class="col-md-12 col s12 center-align">
+                            <div class="input-field col s12"> 
+                                <label for="">Position</label>
+                                <input type="text" [(ngModel)]="position" name="position" class="form-control">
                             </div>
                         </div>
                     </div>

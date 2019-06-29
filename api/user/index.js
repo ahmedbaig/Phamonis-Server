@@ -33,4 +33,8 @@ router.post('/remove-user/:token', auth.isAdmin(), controller.delete);
 
 router.post('/upload-qualification/:token', auth.isAuthenticated(), controller.uploadQualification)
 
+router.get('/get-users-doctors/:token', auth.isStaff(), controller.getUserDoctors);
+
+router.get('/get-users-patients/:token', auth.isStaff(), controller.getUserPatients);
+
 module.exports = router;

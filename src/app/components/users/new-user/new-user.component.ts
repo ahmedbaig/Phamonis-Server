@@ -7,6 +7,7 @@ import { AuthServiceService } from 'src/app/auth/auth-service.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { HospitalService } from 'src/app/services/hospital.service';
 declare var M:any;
 declare var $:any
 @Component({
@@ -24,7 +25,7 @@ export class NewUserComponent implements OnInit {
   gender:String = ""
   role:String = ""
   age:String = "" 
-  constructor(private _pi:PiService, private secureStorage:SecureStorageService, private _user:UserService, private _auth:AuthServiceService, private router:Router) { }
+  constructor(private _pi:PiService, private _hospital:HospitalService, private secureStorage:SecureStorageService, private _user:UserService, private _auth:AuthServiceService, private router:Router) { }
 
   ngOnInit() { 
     this._pi.getAll(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{

@@ -309,6 +309,50 @@ exports.getUsers = async function (req, res){
     }
 }
 
+exports.getUserDoctors = async function (req, res){
+    try{
+        await UserModel.find({role:'doctor'}).exec((err, doc)=>{ 
+            if(err){
+                res.send({
+                    success: false,
+                    message: err
+                })
+            }
+            res.send({
+                success: true,
+                users: doc
+            })
+        })
+    }catch(e){
+        res.send({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
+exports.getUserPatients = async function (req, res){
+    try{
+        await UserModel.find({role:'user'}).exec((err, doc)=>{ 
+            if(err){
+                res.send({
+                    success: false,
+                    message: err
+                })
+            }
+            res.send({
+                success: true,
+                users: doc
+            })
+        })
+    }catch(e){
+        res.send({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
 exports.getUserById = async function (req, res){
     try{
         await UserModel.findById(req.params.userId).exec((err, doc)=>{

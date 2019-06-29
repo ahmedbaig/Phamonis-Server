@@ -50,6 +50,7 @@ import { SecureStorageService } from './auth/secure-storage.service';
 import { NewHospitalComponent } from './components/users/new-hospital/new-hospital.component';
 import { AllHospitalsComponent } from './components/users/all-hospitals/all-hospitals.component';
 import { EditHospitalComponent } from './components/users/edit-hospital/edit-hospital.component';
+import { JqxschedulerComponent } from './components/schedule-manager/jqxscheduler/jqxscheduler.component';
 
 const appRoutes: Routes = [
   {
@@ -150,7 +151,8 @@ const config = {useHash:true};
     EditHardwareComponent, 
     NewHospitalComponent,
     AllHospitalsComponent,
-    EditHospitalComponent
+    EditHospitalComponent,
+    JqxschedulerComponent
   ],
   imports: [
     NgbModule,

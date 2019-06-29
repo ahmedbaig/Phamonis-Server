@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PastAppointmentsComponent implements OnInit {
 
+  data: any;
   constructor() { }
 
   ngOnInit() {

@@ -109,3 +109,25 @@ exports.all = async function(req, res){
     }
 }
 
+exports.allStaff = async function(req, res){
+    try{
+        await HospitalModel.find({}).exec((err, doc)=>{
+            if(err){
+                res.send({
+                    success: false,
+                    message: err
+                })
+            }
+
+            res.send({
+                success: true, 
+                hospitals: doc
+            })
+        })
+    }catch(e){
+        res.send({
+            success: false,
+            message: e.message
+        })
+    }
+}
