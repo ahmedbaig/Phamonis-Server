@@ -193,21 +193,20 @@
         <ul class="dropdown-menu">
           <li *ngIf="_auth.role=='nurse'||_auth.role=='admin'">
             <a 
-              [routerLink]="[ '/new-user' ]"
-            >  New User 
+              [routerLink]="[ '/users' ]"
+            >  Users 
             </a>
     
           </li>
-  
+          
 
           <li class="" *ngIf="_auth.role=='admin'">
             <a 
-              [routerLink]="[ '/all-hospitals' ]"
+              [routerLink]="[ '/hospitals' ]"
             >  Hospitals  
             </a>
     
           </li>
-
         </ul>
       </li>
       

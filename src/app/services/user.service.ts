@@ -26,6 +26,22 @@ export class UserService {
     });
   }
 
+  getAllUsersPatients(token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.get(this.origin+`/api/user/get-users-patients/${token}`, {
+      headers: headers
+    });
+  }
+  
+  getAllUsersDoctors(token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.get(this.origin+`/api/user/get-users-doctors/${token}`, {
+      headers: headers
+    });
+  }
+
   createUserAdmin(body:any, token:String):Observable<any>{
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');

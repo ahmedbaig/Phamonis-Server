@@ -51,6 +51,8 @@ import { NewHospitalComponent } from './components/users/new-hospital/new-hospit
 import { AllHospitalsComponent } from './components/users/all-hospitals/all-hospitals.component';
 import { EditHospitalComponent } from './components/users/edit-hospital/edit-hospital.component';
 import { JqxschedulerComponent } from './components/schedule-manager/jqxscheduler/jqxscheduler.component';
+import { AllUsersComponent } from './components/users/all-users/all-users.component';
+import { ProfileDoctorComponent } from './components/profile-doctor/profile-doctor.component';
 
 const appRoutes: Routes = [
   {
@@ -86,6 +88,7 @@ const appRoutes: Routes = [
       {path: 'messages', component: MessagesComponent},
       {path: 'notifications', component: NotificationsComponent},
       {path: 'profile/:id', component: ProfileComponent},
+      {path: 'profile-doctor/:id', component: ProfileDoctorComponent},
       {path: 'settings', component: SettingsComponent},
       {path: 'schedule', children: [
         {path: 'upcoming', component: UpcomingAppointmentsComponent},
@@ -94,10 +97,15 @@ const appRoutes: Routes = [
         {path: 'detail/:id', component: DetailAppointmentComponent}
       ]},
       {path: 'patient-monitor', component: PatientMonitorComponent},
-      {path: 'new-user', component: NewUserComponent},
-      {path: 'all-hospitals', component: AllHospitalsComponent},
-      {path: 'new-hospital', component: NewHospitalComponent},
-      {path: 'edit-hospital/:hospital', component: EditHospitalComponent},
+      {path: 'users', children: [
+        {path: '', component: AllUsersComponent},
+        {path: 'new-user', component: NewUserComponent},
+      ]},
+      {path: 'hospitals', children: [
+        {path: '', component: AllHospitalsComponent},
+        {path: 'new-hospital', component: NewHospitalComponent},
+        {path: 'edit-hospital/:hospital', component: EditHospitalComponent}
+      ]},
       {path: 'requests', component: RequestsComponent},
       {path: 'pi', children: [
         {path: '', component: ListHardwareComponent}, 
@@ -152,7 +160,9 @@ const config = {useHash:true};
     NewHospitalComponent,
     AllHospitalsComponent,
     EditHospitalComponent,
-    JqxschedulerComponent
+    JqxschedulerComponent,
+    AllUsersComponent,
+    ProfileDoctorComponent
   ],
   imports: [
     NgbModule,

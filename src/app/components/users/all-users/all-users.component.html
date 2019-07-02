@@ -1,0 +1,118 @@
+
+
+<!-- Content Wrapper START -->
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="page-title">
+      <h4>Users</h4>
+    </div>
+    <div class="card">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tab-info">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item">
+                <a href="#patients" class="nav-link active" role="tab" data-toggle="tab">Patients</a>
+              </li>
+              <li class="nav-item">
+                <a href="#doctors" class="nav-link" role="tab" data-toggle="tab">Doctors</a>
+              </li>
+              <li class="nav-item">
+                <a href="#nurses" class="nav-link" *ngIf="_auth.role=='admin'" role="tab" data-toggle="tab">Nurses</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade in active" id="patients">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="table-overflow">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Patient Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Gender</th>
+                            <th>Date of Birth</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let patient of patients">
+                            <td><a [routerLink]="[ '/profile', patient._id ]">{{patient.firstName}} {{patient.lastName}}</a></td>
+                            <td>{{patient.email}}</td>
+                            <td>{{patient.phone}}</td>
+                            <td>{{patient.gender}}</td>
+                            <td>{{patient.dateOfBirth}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane fade in" id="doctors">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="table-overflow">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Doctor Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let doctor of doctors">
+                            <td> <a [routerLink]="[ '/profile-doctor', doctor._id ]">{{doctor.firstName}} {{doctor.lastName}}</a></td>
+                            <td>{{doctor.email}}</td>
+                            <td>{{doctor.phone}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane fade in" id="nurses">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="table-overflow">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Nurse Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let nurse of nurses">
+                            <td>{{nurse.firstName}} {{nurse.lastName}}</td>
+                            <td>{{nurse.email}}</td>
+                            <td>{{nurse.phone}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red" [routerLink]="[ 'new-user' ]">
+            <i class="ti-pencil"></i>
+            </a> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Content Wrapper END -->
+</div>
+    

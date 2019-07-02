@@ -60,16 +60,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" *ngIf="role=='doctor'&&role=='nurse'"> 
+                    <div class="row" *ngIf="role=='doctor'||role=='nurse'"> 
                         <div class="col-md-12 col s12 center-align">
                             <div class="input-field col s12"> 
-                                <select [(ngModel)]="gender" name="gender"> 
-                                    <option value="" disabled selected>Hospital</option>   
+                                <select [(ngModel)]="hospital" name="hospital"> 
+                                    <option value="" disabled selected>Hospital</option> 
+                                    <option value="hos._id" *ngFor="let hos of hospitals">{{hos.name}} {{hos.address}}</option>  
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="row" *ngIf="role=='doctor'&&role=='nurse'"> 
+                    <div class="row" *ngIf="role=='doctor'||role=='nurse'"> 
                         <div class="col-md-12 col s12 center-align">
                             <div class="input-field col s12"> 
                                 <label for="">Position</label>
@@ -79,8 +80,9 @@
                     </div>
                     <div class="row" *ngIf="role=='user'"> 
                         <div class="input-field col-md-12 col s12">
-                            <label for="">Age</label>
-                            <input type="text" [(ngModel)]="age" name="age" class="form-control">
+                            <label for="">Date of Birth</label>
+                            <input type="text" [(ngModel)]="dateOfBirth" name="dateOfBirth" class="datepicker">
+        
                         </div>
                     </div>
                     <hr>

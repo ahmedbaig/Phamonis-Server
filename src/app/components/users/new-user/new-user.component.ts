@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { HospitalService } from 'src/app/services/hospital.service';
+import * as moment from 'moment';
 declare var M:any;
 declare var $:any
 @Component({
@@ -17,23 +18,29 @@ declare var $:any
 })
 export class NewUserComponent implements OnInit {
   devices:any = []
-
+  hospitals:any = []
+  hospital:String = ""
+  position:String = ""
   firstName:String = ""
   lastName:String = ""
   email:String = ""
   phone:String = ""
   gender:String = ""
   role:String = ""
-  age:String = "" 
+  dateOfBirth:String = "" 
   constructor(private _pi:PiService, private _hospital:HospitalService, private secureStorage:SecureStorageService, private _user:UserService, private _auth:AuthServiceService, private router:Router) { }
 
   ngOnInit() { 
+    this._hospital.getAll(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
+      this.hospitals = res.hospitals
+    })
     this._pi.getAll(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
       this.devices = filter(res.devices, o=>{return o.user==""})
     })
     delay(()=>{
       M.AutoInit();
       $('select').formSelect();
+      $('.datepicker').datepicker();
     }, 1000)
   }
 
@@ -41,6 +48,7 @@ export class NewUserComponent implements OnInit {
     delay(()=>{
       M.AutoInit();
       $('select').formSelect();
+      $('.datepicker').datepicker();
     }, 1000)
   }
 
@@ -50,12 +58,13 @@ export class NewUserComponent implements OnInit {
       lastName:this.lastName,
       email: this.email,
       password:"abc123123",
+      hospital: this.hospital,
+      position: this.position,
       phone: this.phone,
       gender:this.gender,
       role: this.role, 
-      age:this.age
+      dateOfBirth:this.dateOfBirth
     }
-    alert(this._auth.role)
     if(this._auth.role == 'admin'){
       this._user.createUserAdmin(body, JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
         if(res.success){ 
