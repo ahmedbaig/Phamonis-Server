@@ -74,7 +74,7 @@ var UserSchema = new Schema({
         type:Boolean, 
         required: true
     },
-    dateOfBirth : Date,
+    dateOfBirth : String,
     createdt: { type: Date, default: Date.now }
 });
 

@@ -19,7 +19,7 @@ export class AllUsersComponent implements OnInit {
     delay(()=>{
       if(this._auth.role == 'admin'){
         this._user.getAllUsers(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
-          this.users = reverse(sortBy(res.users,[function(o:any){return o.createdt}]))
+          this.users = reverse(sortBy(res.users,[function(o:any){return o.firstName},function(o:any){return o.lastName}]))
           this.patients = filter(this.users, (o)=>{ return o.role == 'user'})
           this.doctors = filter(this.users, (o)=>{ return o.role == 'doctor'})
           this.nurse = filter(this.users, (o)=>{ return o.role == 'nurse'})
@@ -27,11 +27,11 @@ export class AllUsersComponent implements OnInit {
       }else if(this._auth.role == 'nurse'){
         this._user.getAllUsersPatients(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
           
-          this.patients = reverse(sortBy(res.users,[function(o:any){return o.createdt}]))
+          this.patients = reverse(sortBy(res.users,[function(o:any){return o.firstName},function(o:any){return o.lastName}]))
         })
         this._user.getAllUsersDoctors(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
               
-          this.doctors = reverse(sortBy(res.users,[function(o:any){return o.createdt}]))
+          this.doctors = reverse(sortBy(res.users,[function(o:any){return o.firstName},function(o:any){return o.lastName}]))
         })
       }
     },1000)

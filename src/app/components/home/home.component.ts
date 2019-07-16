@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService } from 'src/app/auth/auth-service.service';
 declare var $:any; 
 declare var jqxSchedular:any;  
 @Component({
@@ -9,7 +10,7 @@ declare var jqxSchedular:any;
 export class HomeComponent implements OnInit {
 
     data: any;
-    constructor() { }
+    constructor(public _auth:AuthServiceService) { }
     ngOnInit(){
         this.data = [
           {

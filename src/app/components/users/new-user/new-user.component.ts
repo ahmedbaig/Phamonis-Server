@@ -52,7 +52,8 @@ export class NewUserComponent implements OnInit {
     }, 1000)
   }
 
-  saveUser(){
+  saveUser(){ 
+    this.dateOfBirth = $('#dob').val(); 
     let body = {
       firstName:this.firstName,
       lastName:this.lastName,
