@@ -15,7 +15,7 @@ exports.create = async function(req, res){
         }
         if(pi.user != ""){
             console.log(pi)
-            await PiModel.findByIdAndUpdate(pi._id, {status: true})
+            await PiModel.findByIdAndUpdate(pi._id, {status: true, route_ip: req.body.route_ip})
         }
         
         let session = new PiSessionModel();

@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var PiSchema = new Schema({
     model: String, 
     serial_number:String,
+    route_ip: String,
     status: {
         type: Boolean,
         default: false

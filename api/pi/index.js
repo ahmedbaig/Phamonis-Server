@@ -17,6 +17,8 @@ router.get('/get-device-all/:token', auth.isAuthenticated(), controller.getDevic
 
 router.get('/remove-device/:token/:device', auth.isAdmin(), controller.removeDeviceById)
 
+router.post('/pi-route-update/:token', auth.isPiAuthenticated(), controller.piRouteUpdate)
+
 // router.post('/device-status/:token/:device', auth.isPiAuthenticated(), controller.deviceStatus)
 
 module.exports = router;

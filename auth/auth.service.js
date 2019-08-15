@@ -81,7 +81,7 @@ function isPiAuthenticated() {
                                 message: err.message
                             })
                         }
-                        res.pi = pi; 
+                        req.pi = pi; 
                         next();
                     })
                 }else{
@@ -130,6 +130,7 @@ function isStaff() {
                             })
                         }
                         if(user.role == 'nurse'){
+                            req.user = user;
                             next();
                         }else{
                             res.send({
@@ -184,6 +185,7 @@ function isAdmin() {
                             })
                         }
                         if(user.role == 'admin'){
+                            req.user = user;
                             next();
                         }else{
                             res.send({

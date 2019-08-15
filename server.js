@@ -77,13 +77,13 @@ app.get('/dist-user-images/:filename', function(req, res) {
 
 app.get('/dist-user-qualification/:filename', function(req, res) {
   var filename = req.params.filename.replace(/'/g, '');
-  res.sendFile(path.resolve('./dist/App/assets/images/user/qualification' + filename));
+  res.sendFile(path.resolve('./dist/App/assets/images/user/qualification' + filWename));
 });
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
  
 cron.schedule('*/10 * * * *', async () => {
-  console.log('running every 10 minutes');
+  console.log('Reset all devices status...');
   await PiModel.updateMany({}, {status: false})
 });
 

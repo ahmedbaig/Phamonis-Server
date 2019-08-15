@@ -23,6 +23,17 @@ exports.create = async function(req,res){
     }  
 }
 
+exports.piRouteUpdate = async function (req, res){
+    try{
+        await PiModel.update({_id: req.pi._id}, {route_ip: req.body.route_ip})
+    }catch(e){
+        res.send({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
 exports.update = async function(req,res){
     try{
         await PiModel.findOneAndUpdate({_id: req.params.device}, req.body)
