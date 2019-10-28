@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose'); 
 const busboyBodyParser = require('busboy-body-parser');
 const path = require('path');
-var cron = require('node-cron');
-
+const cron = require('node-cron');
+const request = require('request');
 const _ = require('lodash');
 const moment = require('moment');
 
@@ -84,7 +84,26 @@ app.get('/dist-user-qualification/:filename', function(req, res) {
  
 cron.schedule('*/10 * * * *', async () => {
   console.log('Reset all devices status...');
-  await PiModel.updateMany({}, {status: false})
+  await PiModel.updateMany({}, {status: false},async (err, raw)=>{
+    await PiModel.find({}, async (err, pis)=>{
+      await Promise.all(_.map(pis, pi=>{
+        if(pi.active == true && pi.route_ip != null){
+          request(`http://${pi.route_ip}:5000/alive`, async function (error, response, body) {
+            console.log('error:', error); // Print the error if one occurred
+            console.log('statusCode:', response, response.statusCode); // Print the response status code if a response was received
+            console.log('body:', JSON.parse(body)); // Print the HTML for the Google homepage.
+            console.log('success:', JSON.parse(body).success); // Print the HTML for the Google homepage
+            if(JSON.parse(body).success == 1){
+              console.log("Active PI");
+              await PiModel.update({serial_number: JSON.parse(body).serial_number}, {status: true}, (err, update)=>{
+                console.log(`PI: ${JSON.parse(body).serial_number} status is alive`)
+              })
+            }
+          });
+        }
+      }))
+    })
+  })
 });
 
 

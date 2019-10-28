@@ -5,7 +5,11 @@ var Schema = mongoose.Schema;
 var PiSchema = new Schema({
     model: String, 
     serial_number:String,
-    route_ip: String,
+    route_ip: {type: String, default: null},
+    session_token: { 
+        type: String,
+        default: null
+    },
     status: {
         type: Boolean,
         default: false

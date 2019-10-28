@@ -13,15 +13,19 @@ exports.create = async function(req, res){
                 message: "Device not registered"
             })
         }
+        let routeIp = req.body.route_ip.split(' ')
         if(pi.user != ""){
             console.log(pi)
-            await PiModel.findByIdAndUpdate(pi._id, {status: true, route_ip: req.body.route_ip})
+            console.log(routeIp)
+            await PiModel.findByIdAndUpdate(pi._id, {status: true, route_ip: routeIp[0]}, (err, update)=>{
+                console.log("PI route set")
+            })
         }
         
         let session = new PiSessionModel();
                         
         session.pi = pi._id;
-        await session.save((err, doc) => {
+        await session.save(async (err, doc) => {
             console.log(err, doc)
             if (err) {
                 //console.log(err);
@@ -30,14 +34,16 @@ exports.create = async function(req, res){
                     message: 'Error: Server error'
                 };
             }
-            //console.log('Session Token: ', doc._id);
-            var device = {
-                success: true,
-                message: 'Valid sign in',
-                token: doc._id,
-                pi: pi
-            };
-            return res.send(device);
+            await PiModel.findByIdAndUpdate(pi._id, {status: true, route_ip: routeIp[0], session_token: doc._id}, (err, update)=>{
+                //console.log('Session Token: ', doc._id);
+                var device = {
+                    success: true,
+                    message: 'Valid sign in',
+                    token: doc._id,
+                    pi: pi
+                };
+                return res.send(device);
+            })
         });
     })
 }

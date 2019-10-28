@@ -65,7 +65,7 @@
                             <div class="input-field col s12"> 
                                 <select [(ngModel)]="hospital" name="hospital"> 
                                     <option value="" disabled selected>Hospital</option> 
-                                    <option value="hos._id" *ngFor="let hos of hospitals">{{hos.name}} {{hos.address}}</option>  
+                                    <option value="{{hos._id}}" *ngFor="let hos of hospitals">{{hos.name}} {{hos.address}}</option>  
                                 </select>
                             </div>
                         </div>
