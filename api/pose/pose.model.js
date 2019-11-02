@@ -14,6 +14,7 @@ var PoseSchema = new Schema({
         required: true
     }, 
     item: String,
+    pose: [Object],
     isDeleted: {
         type:Boolean,
         default: false

@@ -5,88 +5,128 @@
             <h4></h4>
         </div>
         <div class="row">
-            <div class="col-md-6"> 
-              <div class="card">
-                  <div class="card-heading border bottom">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-heading border bottom">
                         <div class="row">
                             <div class="col-md-12">
-                                <h4 class="card-title">Hardware Information</h4> 
+                                <h4 class="card-title">Hardware Information</h4>
                             </div>
                         </div>
-                  </div>
-                  <div class="card-block">
-                      <div class="row"> 
-                          <div class="input-field col-md-12 col s12">
-                              <input type="text" [(ngModel)]="model" name="model" class="form-control">
-                              <label for="">Model</label>
-                          </div>
-                      </div> 
-                      <hr>
-                      <div class="row"> 
-                          <div class="input-field col-md-12 col s12">
-                              <label for="">Serial Number</label>
-                              <input type="text" [(ngModel)]="serial_number" name="serial_number" class="form-control">
-                          </div>
-                      </div> 
-                  </div>
-                </div>  
-            </div>
-            
-            <div class="col-md-6"> 
-                <div class="card">
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="input-field col-md-12 col s12">
+                                <input type="text" [(ngModel)]="model" name="model" class="form-control">
+                                <label for="">Model</label>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="input-field col-md-12 col s12">
+                                <label for="">Serial Number</label>
+                                <input type="text" [(ngModel)]="serial_number" name="serial_number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col s12 center-align">
+                                <div class="input-field col s12">
+                                    <select id="threshold" [(ngModel)]="threshold" name="threshold">
+                                        <option value="0" disabled>Still Capturing Threshold</option>
+                                        <option value="10">10 minutes</option>
+                                        <option value="30">30 minutes</option>
+                                        <option value="60">60 minutes</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-heading border bottom">
                         <div class="row">
                             <div class="col-md-6">
                                 <h4 class="card-title">Hardware Status</h4>
                             </div>
                             <div class="col-md-6">
-                                    <span class="label label-danger right" *ngIf="active==false">Deactivated</span>
-                                <a class="btn-floating pulse green right" *ngIf="status==true&&active==true"><i class="ti-control-record"> </i></a>
-                                <a class="btn-floating red right"  *ngIf="status==false&&active==true"><i class="ti-control-record"> </i></a>
+                                <span class="label label-danger right" *ngIf="active==false">Deactivated</span>
+                                <a class="btn-floating pulse green right" *ngIf="status==true&&active==true"><i
+                                        class="ti-control-record"> </i></a>
+                                <a class="btn-floating red right" *ngIf="status==false&&active==true"><i
+                                        class="ti-control-record"> </i></a>
                             </div>
                         </div>
                     </div>
                     <div class="card-block">
-                        <div class="row"> 
-                            <div class="col-md-2">
+                        <div class="row">
+                            <div class="col-md-4">
                                 <h5 class="">Device Active</h5>
                             </div>
-                            <div class="col-md-4">
-                                <div class="toggle-checkbox checkbox-inline"> 
+                            <div class="col-md-2">
+                                <div class="toggle-checkbox checkbox-inline">
                                     <input type="checkbox" [(ngModel)]="active" name="active" id="active" checked="">
                                     <label for="active"></label>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <h5 class="">Device Status</h5>
                             </div>
-                            <div class="col-md-4">
-                                <div class="toggle-checkbox checkbox-inline"> 
+                            <div class="col-md-2">
+                                <div class="toggle-checkbox checkbox-inline">
                                     <input type="checkbox" [(ngModel)]="status" name="status" id="status" checked="">
                                     <label for="status"></label>
-                                </div>  
+                                </div>
                             </div>
-                        </div> 
+                        </div>
                         <hr>
-                        <div class="row"> 
+                        <div class="row">
                             <div class="col-md-12 col s12 center-align">
-                                <div class="input-field col s12"> 
-                                    <select [(ngModel)]="user" (ngModelChange)="userChange($event)" name="user">
-                                        <option value="" disabled>Connected User</option>  
-                                        <option [value]="user._id" *ngFor="let user of users">{{user.firstName}} {{user.lastName}} {{user.phone}}</option>  
+                                <div class="input-field col s12">
+                                    <select id="user" [(ngModel)]="user" (ngModelChange)="userChange($event)" name="user">
+                                        <option value="" disabled>Connected User</option>
+                                        <option [value]="user._id" *ngFor="let user of users">{{user.firstName}}
+                                            {{user.lastName}} {{user.phone}}</option>
                                     </select>
                                 </div>
                             </div>
-                        </div>  
-                        <hr>
-                        <div class="col-md-12 col s12 center-align" > 
+                        </div>
+                        <div class="col-md-12 col s12 center-align">
                             <button class="waves-effect waves-light btn btn-info" (click)="save()">Save</button>
-                        </div> 
-                    </div> 
-                </div> 
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>  
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-heading border bottom">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="card-title">Captured Poses</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div class="row" *ngFor="let block of poses">
+                            <div class="col-md-4" *ngFor="let item of block">
+                                <div class="demo-card-image mdl-card mdl-shadow--2dp">
+                                    <div class="imageContainer">
+                                        <img class="responsive-img" [src]="item.pose">
+                                    </div>
+                                </div>
+                                <!-- Event card -->
+                                <div class="demo-card-event mdl-card mdl-shadow--2dp">
+                                    <div class="mdl-card__title mdl-card--expand">
+                                        <h5>
+                                            Time Stamp: {{item.createdt}}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- Content Wrapper END -->
-  
+</div>
+<!-- Content Wrapper END -->

@@ -1,100 +1,130 @@
-app-venuelist{
+app-venuelist {
     width: 100%;
 }
-app-userlist{
+
+app-userlist {
     width: 100%;
 }
-app-usercontribution{
+
+app-usercontribution {
     width: 100%;
 }
-app-schedulevenue{
+
+app-schedulevenue {
     width: 100%;
 }
-app-scheduleartist{
+
+app-scheduleartist {
     width: 100%;
 }
-app-liveeventslist{
+
+app-liveeventslist {
     width: 100%;
 }
-app-followlist{
+
+app-followlist {
     width: 100%;
 }
-app-editvenue{
+
+app-editvenue {
     width: 100%;
 }
-app-editprofile{
+
+app-editprofile {
     width: 100%;
 }
-app-edituser{
+
+app-edituser {
     width: 100%;
 }
-app-editevent{
+
+app-editevent {
     width: 100%;
 }
-app-editchannel{
+
+app-editchannel {
     width: 100%;
 }
-app-editartist{
+
+app-editartist {
     width: 100%;
 }
-app-editadmin{
+
+app-editadmin {
     width: 100%!important;
     display: block;
 }
-app-detailvenue{
+
+app-detailvenue {
     width: 100%;
 }
-app-detailevent{
+
+app-detailevent {
     width: 100%;
 }
-app-detailartist{
+
+app-detailartist {
     width: 100%;
 }
-app-crowdfundedeventslist{
+
+app-crowdfundedeventslist {
     width: 100%;
 }
-app-cotributionlist{
+
+app-cotributionlist {
     width: 100%;
 }
-app-contributiondetail{
+
+app-contributiondetail {
     width: 100%;
 }
-app-availableartist{
+
+app-availableartist {
     width: 100%;
 }
-app-availablevenue{
+
+app-availablevenue {
     width: 100%;
 }
-app-channellist{
+
+app-channellist {
     width: 100%;
 }
-app-artistlist{
+
+app-artistlist {
     width: 100%;
 }
-app-addvenue{
+
+app-addvenue {
     width: 100%;
 }
-app-addevent{
+
+app-addevent {
     width: 100%;
 }
-app-addchannel{
+
+app-addchannel {
     width: 100%;
 }
-app-addartist{
+
+app-addartist {
     width: 100%;
 }
-app-admindashboard{
+
+app-admindashboard {
     width: 100%;
 }
-#searchButton{
+
+#searchButton {
     margin-right: 10px;
 }
 
-tr > td {
+tr>td {
     vertical-align: middle !important;
     text-align: left;
 }
-app-detailuser{
+
+app-detailuser {
     width: 100%
 }
 
@@ -102,6 +132,75 @@ app-detailuser{
     background: #3dffa7;
     color: black;
 }
+
 html.sidebar-left-collapsed .sidebar-left {
     width: 73px;
+}
+
+.demo-card-image.mdl-card {
+    width: 356px;
+    height: 226px;
+}
+
+.demo-card-image.mdl-card.imageContainer img {
+    height: 300px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1
+}
+
+.demo-card-image>.mdl-card__actions {
+    height: 52px;
+    padding: 18px;
+    z-index: 2;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.demo-card-image__filename {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.demo-card-event.mdl-card {
+    width: 356px;
+    background: rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.demo-card-event>.mdl-card__actions {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.demo-card-event>.mdl-card__title {
+    align-items: flex-start;
+}
+
+.demo-card-event>.mdl-card__title>h4 {
+    margin-top: 0;
+}
+
+.demo-card-event>.mdl-card__actions {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.demo-card-event>.mdl-card__title,
+.demo-card-event>.mdl-card__actions,
+.demo-card-event>.mdl-card__actions>.mdl-button {
+    color: #fff;
+}
+
+.demo-card-image .demo-card-event {
+    padding: 20px;
+    background: #fafafa;
+    position: relative;
+}
+
+.mdl-card--expand>h5 {
+    color: white!important;
+    text-align: center;
 }

@@ -14,6 +14,10 @@ var PiSchema = new Schema({
         type: Boolean,
         default: false
     },
+    threshold: {
+        type: Number,
+        required: true
+    },
     user: {
         type: String,
         default: ""

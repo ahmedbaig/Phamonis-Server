@@ -19,6 +19,7 @@ export class CreateHardwareComponent implements OnInit {
   status:Boolean = false
   user:String = ""
   users:any = []
+  threshold:number = 0
   constructor(private router:Router, private _piService: PiService, private _userService: UserService, private secureStorage:SecureStorageService) { }
 
   ngOnInit() { 
@@ -44,7 +45,11 @@ export class CreateHardwareComponent implements OnInit {
       Swal.fire("Opps", "Serial number cannot be blank", "error")
       return 
     }
-    let body = {model: this.model, serial_number: this.serial_number, active: this.active, status: this.status, user: this.user}
+    if(this.threshold == 0){
+      Swal.fire("Opps", "Still threshold cannot be 0", "error")
+      return 
+    }
+    let body = {model: this.model, serial_number: this.serial_number, active: this.active, status: this.status, user: this.user, threshold: this.threshold}
     this._piService.createDevice(body, JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
       if(res.success){
         Swal.fire("Success", res.message, "success")

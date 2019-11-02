@@ -5,7 +5,7 @@
             <h4></h4>
         </div>
         <div class="row">
-            <div class="col-md-6"> 
+            <div class="col-md-12"> 
               <div class="card">
                   <div class="card-heading border bottom">
                         <div class="row">
@@ -27,64 +27,71 @@
                               <label for="">Serial Number</label>
                               <input type="text" [(ngModel)]="serial_number" name="serial_number" class="form-control">
                           </div>
-                      </div> 
+                      </div>
+                      <div class="row"> 
+                          <div class="col-md-12 col s12 center-align">
+                              <div class="input-field col s12"> 
+                                  <select [(ngModel)]="threshold" name="threshold">
+                                      <option value="0" disabled>Still Capturing Threshold</option>  
+                                      <option value="10">10 minutes</option>  
+                                      <option value="30">30 minutes</option>  
+                                      <option value="60">60 minutes</option>  
+                                  </select>
+                              </div>
+                          </div>
+                      </div>   
                   </div>
+                  <div class="card-heading border bottom">
+                      <div class="row">
+                          <div class="col-md-6">
+                              <h4 class="card-title">Hardware Status</h4>
+                          </div>
+                          <div class="col-md-6">
+                                  <span class="label label-danger right" *ngIf="active==false">Deactivated</span>
+                              <a class="btn-floating pulse green right" *ngIf="status==true&&active==true"><i class="ti-control-record"> </i></a>
+                              <a class="btn-floating red right"  *ngIf="status==false&&active==true"><i class="ti-control-record"> </i></a>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-block">
+                      <div class="row"> 
+                          <div class="col-md-2">
+                              <h5 class="">Device Active</h5>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="toggle-checkbox checkbox-inline"> 
+                                  <input type="checkbox" [(ngModel)]="active" name="active" id="active" checked="">
+                                  <label for="active"></label>
+                              </div>
+                          </div>
+                          <div class="col-md-2">
+                              <h5 class="">Device Status</h5>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="toggle-checkbox checkbox-inline"> 
+                                  <input type="checkbox" [(ngModel)]="status" name="status" id="status" checked="">
+                                  <label for="status"></label>
+                              </div>  
+                          </div>
+                      </div> 
+                      <hr>
+                      <div class="row"> 
+                          <div class="col-md-12 col s12 center-align">
+                              <div class="input-field col s12"> 
+                                  <select [(ngModel)]="user" (ngModelChange)="userChange($event)" name="user">
+                                      <option value="" disabled>Connected User</option>  
+                                      <option [value]="user._id" *ngFor="let user of users">{{user.firstName}} {{user.lastName}} {{user.phone}}</option>  
+                                  </select>
+                              </div>
+                          </div>
+                      </div>   
+                      <div class="col-md-12 col s12 center-align" > 
+                          <button class="waves-effect waves-light btn btn-info" (click)="save()">Save</button>
+                      </div> 
+                  </div> 
                 </div>  
             </div>
-            
-            <div class="col-md-6"> 
-                <div class="card">
-                    <div class="card-heading border bottom">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="card-title">Hardware Status</h4>
-                            </div>
-                            <div class="col-md-6">
-                                    <span class="label label-danger right" *ngIf="active==false">Deactivated</span>
-                                <a class="btn-floating pulse green right" *ngIf="status==true&&active==true"><i class="ti-control-record"> </i></a>
-                                <a class="btn-floating red right"  *ngIf="status==false&&active==true"><i class="ti-control-record"> </i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-block">
-                        <div class="row"> 
-                            <div class="col-md-2">
-                                <h5 class="">Device Active</h5>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="toggle-checkbox checkbox-inline"> 
-                                    <input type="checkbox" [(ngModel)]="active" name="active" id="active" checked="">
-                                    <label for="active"></label>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <h5 class="">Device Status</h5>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="toggle-checkbox checkbox-inline"> 
-                                    <input type="checkbox" [(ngModel)]="status" name="status" id="status" checked="">
-                                    <label for="status"></label>
-                                </div>  
-                            </div>
-                        </div> 
-                        <hr>
-                        <div class="row"> 
-                            <div class="col-md-12 col s12 center-align">
-                                <div class="input-field col s12"> 
-                                    <select [(ngModel)]="user" (ngModelChange)="userChange($event)" name="user">
-                                        <option value="" disabled>Connected User</option>  
-                                        <option [value]="user._id" *ngFor="let user of users">{{user.firstName}} {{user.lastName}} {{user.phone}}</option>  
-                                    </select>
-                                </div>
-                            </div>
-                        </div>  
-                        <hr>
-                        <div class="col-md-12 col s12 center-align" > 
-                            <button class="waves-effect waves-light btn btn-info" (click)="save()">Save</button>
-                        </div> 
-                    </div> 
-                </div> 
-            </div>
+             
         </div> 
     </div>
   </div>

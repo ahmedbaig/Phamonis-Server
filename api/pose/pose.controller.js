@@ -38,7 +38,7 @@ exports.create = async function(req, res){
         let filePath = path.join('./dist/App/assets/images/pose/'+pi.serial_number ,   filename+".jpeg" )
 
         fs.writeFileSync(filePath,req.files.pose.data);
-        req.body.path = "pose/"+filename+"."+ req.files.pose.mimetype.split("/")[1];        
+        req.body.path = pi.serial_number+"/"+filename+".jpeg";        
         pose.pi = pi._id;
         pose.user = pi.user;
         pose.item = req.body.path

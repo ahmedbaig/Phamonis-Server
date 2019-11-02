@@ -3,18 +3,29 @@
 
 const PiModel = require('./pi.model');
 const UserModel = require('../user/user.model');
+const PoseModel = require('../pose/pose.model')
+const PiSessions = require('../piSession/piSession.model')
 const _ = require('lodash');
 
 exports.create = async function(req,res){
     try{
-        await PiModel.create(req.body)
-        .then(function (){
-            // sending access token
-            res.send({
-                success: true,
-                message: "Pi Created"
-            }); 
-        }) 
+        await PiModel.findOne({serial_number: req.body.serial_number}, async (err, doc)=>{
+            if(doc!=null){
+                res.send({
+                    success: false,
+                    message:"Pi Model already in use"
+                })
+            }else{
+                await PiModel.create(req.body)
+                .then(function (){
+                    // sending access token
+                    res.send({
+                        success: true,
+                        message: "Pi Created"
+                    }); 
+                }) 
+            }
+        })
     }catch(e){
         res.send({
             success: false,
@@ -54,22 +65,29 @@ exports.update = async function(req,res){
 
 exports.getDeviceById = async function (req, res){
     try{
-        let devices = {}
-        let users = await UserModel.find({}) 
+        let device = {}
+        
         await PiModel.findById(req.params.device)
-        .exec(function (err, doc){
+        .exec(async function (err, doc){
             if(doc.user != ""){ 
-                Promise.all(users.map(user=>{
-                    if(user._id == doc.user){ 
-                        let newdoc = doc.toObject() 
-                        newdoc.detail = _.clone(user)
-                        devices = newdoc 
-                    }
-                })).then(()=>{
-                    res.send({
-                        success: true,
-                        device: devices
-                    }); 
+                await UserModel.findById(doc.user, async (err, user)=>{
+                    let newdoc = doc.toObject() 
+                    newdoc.detail = _.clone(user)
+                    await PoseModel.find({pi: doc._id}, async (err, poses)=>{
+                        newdoc.poses = _.cloneDeep(_.sortBy(poses, [(o=>{
+                            return o.timeStamp
+                        })])) 
+                        await PiSessions.find({pi: doc._id}, (err, sessions)=>{
+                            newdoc.sessions = _.cloneDeep(_.sortBy(sessions, [(o)=>{
+                                return o.timeStamp
+                            }])) 
+                            device =newdoc
+                            res.send({
+                                success: true,
+                                device: device
+                            }); 
+                        })
+                    })
                 }) 
             }else{ 
                 res.send({
