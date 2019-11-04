@@ -3,7 +3,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { PiService } from 'src/app/services/pi.service';
 import { UserService } from 'src/app/services/user.service';
 import { SecureStorageService } from 'src/app/auth/secure-storage.service';
-import { delay, filter, map, chunk } from 'lodash' 
+import { delay, filter, map, chunk, clone } from 'lodash' 
 import { getOrigin } from 'src/app/origin';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
@@ -23,6 +23,7 @@ export class EditHardwareComponent implements OnInit {
   users:any = []
   threshold:number = 0
   poses: any = []
+  sessions: any = []
   origin: String = getOrigin()
   constructor(private router:Router, private route:ActivatedRoute, private _piService: PiService, private _userService: UserService, private secureStorage:SecureStorageService) {
     router.events.subscribe(event => {
@@ -32,7 +33,17 @@ export class EditHardwareComponent implements OnInit {
           this.serial_number = res.device.serial_number
           this.active = res.device.active
           this.status = res.device.status
-          this.threshold = res.device.threshold
+          this.threshold = res.device.threshold 
+          let sessions = res.device.sessions.reverse()
+          sessions.splice(8,sessions.length)
+          map(sessions, session=>{
+            let body = {
+              routeIp: session.routeIp,
+              timeStamp: moment(session.timeStamp).format("LLLL") 
+            }
+            this.sessions.push(clone(body))
+          })
+          console.log(res.device.sessions)
           if(res.device.user != null){
             this.user = res.device.user
           }
@@ -66,6 +77,16 @@ export class EditHardwareComponent implements OnInit {
               this.serial_number = res.device.serial_number
               this.active = res.device.active
               this.status = res.device.status
+              let sessions = res.device.sessions.reverse()
+              sessions.splice(8,sessions.length)
+              map(sessions, session=>{
+                let body = {
+                  routeIp: session.routeIp,
+                  timestamp: moment(session.timestamp).format("LLLL") 
+                }
+                this.sessions.push(clone(body))
+              })
+              console.log(res.device.sessions)
               this.threshold = res.device.threshold
               if(res.device.user != null){
                 this.user = res.device.user

@@ -2,18 +2,18 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var PiSessionSchema = new Schema({    
+var PiSessionSchema = new Schema({
     pi: {
-        type:String,
+        type: String,
         default: '',
         required: true
     },
-    isDeleted: {
-        type:Boolean,
-        default: false
+    routeIp: {
+        type: String,
+        default: ""
     },
     lastUsed: {
-        type:Date,
+        type: Date,
         default: Date.now()
     },
     timeStamp: {

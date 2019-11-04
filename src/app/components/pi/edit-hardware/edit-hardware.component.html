@@ -5,7 +5,7 @@
             <h4></h4>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-7">
                 <div class="card">
                     <div class="card-heading border bottom">
                         <div class="row">
@@ -90,6 +90,35 @@
                         </div>
                         <div class="col-md-12 col s12 center-align">
                             <button class="waves-effect waves-light btn btn-info" (click)="save()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card" style="max-height: 855px;">
+                    <div class="card-heading border bottom">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="card-title">Hardware Sessions</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div class="table-overflow">
+                            <table class="table" style="max-height: 800px;overflow-y: scroll;overflow-x: hidden;height: 700px;">
+                                <thead>
+                                    <tr>
+                                        <th>Time Stamp</th>
+                                        <th>Route IP</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of sessions">
+                                        <td>{{item.timeStamp}}</td>
+                                        <td>{{item.routeIp}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

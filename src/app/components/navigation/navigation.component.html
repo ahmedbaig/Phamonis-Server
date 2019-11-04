@@ -1,250 +1,210 @@
 <div class="side-nav">
-  <div class="side-nav-inner">
-    <div style="text-align: center;" class="side-nav-logo">
-      <a [routerLink]="['/']" >
-        <div
-          class="logo logo-dark"
-        >
-        <img style="width: 100%;margin-top: 5px;" src="assets/images/logo/logo1.gif" alt="">
-      </div>
+    <div class="side-nav-inner">
+        <div style="text-align: center;" class="side-nav-logo">
+            <a [routerLink]="['/']">
+                <div class="logo logo-dark">
+                    <img style="width: 100%;margin-top: 5px;" src="assets/images/logo/logo1.gif" alt="">
+                </div>
 
-        <div
-          class="logo logo-white" 
-        >
-        <img style="width: 100%;margin-top: 5px;" src="assets/images/logo/logo1-white.gif" alt="">
-      </div>
-      </a>
+                <div class="logo logo-white">
+                    <img style="width: 100%;margin-top: 5px;" src="assets/images/logo/logo1-white.gif" alt="">
+                </div>
+            </a>
 
-      <div class="mobile-toggle side-nav-toggle">
-        <a href="">
-          <i class="ti-arrow-circle-left"></i>
-        </a>
-      </div>
-    </div>
+            <div class="mobile-toggle side-nav-toggle">
+                <a href="">
+                    <i class="ti-arrow-circle-left"></i>
+                </a>
+            </div>
+        </div>
 
-    <ul class="side-nav-menu scrollable">
-      <li class="nav-item active">
-        <a
-          class="mrg-top-30"
-          [routerLink]="['/']" 
-        >
-          <span class="icon-holder">
+        <ul class="side-nav-menu scrollable">
+            <li class="nav-item active">
+                <a class="mrg-top-30" [routerLink]="['/']">
+                    <span class="icon-holder">
             <i class="ti-home"></i>
           </span>
 
-          <span class="title">Dashboard</span>
-        </a>
-      </li> 
-      <li class="nav-item dropdown" *ngIf="_auth.role=='user'">
-        <a
-          class="dropdown-toggle"
-          href="javascript:void(0);"
-        >
-          <span class="icon-holder">
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown" *ngIf="_auth.role=='user'">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
             <i class="ti-package"></i>
           </span>
 
-          <span class="title">Pose Monitoring</span>
+                    <span class="title">Pose Monitoring</span>
 
-          <span class="arrow">
+                    <span class="arrow">
             <i class="ti-angle-right"></i>
           </span>
-        </a>
+                </a>
 
-        <ul class="dropdown-menu">
-          <li>
-            <a [routerLink]="[ '/pose/view-data' ]">View Data</a>
-          </li>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a [routerLink]="[ '/pose/view-data' ]">View Data</a>
+                    </li>
 
-          <li>
-            <a [routerLink]="[ '/pose/analytics' ]">Analytics</a>
-          </li>
+                    <li>
+                        <a [routerLink]="[ '/pose/analytics' ]">Analytics</a>
+                    </li>
 
-          <li>
-            <a [routerLink]="[ '/pose/status-report' ]">Status Report</a>
-          </li>
+                    <li>
+                        <a [routerLink]="[ '/pose/status-report' ]">Status Report</a>
+                    </li>
 
-          <li>
-              <a [routerLink]="[ '/pose/connections' ]">User Connections</a>
+                    <li>
+                        <a [routerLink]="[ '/pose/connections' ]">User Connections</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="[ '/pose/configuration' ]">Device Configuration</a>
+                    </li>
+                </ul>
             </li>
-            <li>
-              <a [routerLink]="[ '/pose/configuration' ]">Device Configuration</a>
-            </li>
-        </ul>
-      </li>
 
-      <li class="nav-item dropdown" *ngIf="_auth.role=='doctor'||_auth.role=='nurse'">
-        <a
-          class="dropdown-toggle"
-          [routerLink]="[ '/patient-monitor' ]"
-        >
-          <span class="icon-holder">
+            <li class="nav-item dropdown" *ngIf="_auth.role=='doctor'||_auth.role=='nurse'">
+                <a class="dropdown-toggle" [routerLink]="[ '/patient-monitor' ]">
+                    <span class="icon-holder">
             <i class="ti-pulse"></i>
           </span>
 
-          <span class="title">Patient Monitor</span>
+                    <span class="title">Patient Monitor</span>
 
-        </a>
+                </a>
 
-      </li>
-      
-      <li class="nav-item dropdown">
-        <a
-          class="dropdown-toggle"
-          href="javascript:void(0);"
-        >
-          <span class="icon-holder">
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
             <i class="ti-agenda"></i>
           </span>
 
-          <span class="title">Schedule Manager</span>
+                    <span class="title">Schedule Manager</span>
 
-          <span class="arrow">
+                    <span class="arrow">
             <i class="ti-angle-right"></i>
           </span>
-        </a>
+                </a>
 
-        <ul class="dropdown-menu">
-          <li>
-            <a [routerLink]="[ '/schedule/upcoming' ]">Upcoming Appointments</a>
-          </li>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a [routerLink]="[ '/schedule/upcoming' ]">Upcoming Appointments</a>
+                    </li>
 
-          <li>
-            <a [routerLink]="[ '/schedule/past' ]">Past Appointments</a>
-          </li>
-        </ul>
-      </li>
+                    <li>
+                        <a [routerLink]="[ '/schedule/past' ]">Past Appointments</a>
+                    </li>
+                </ul>
+            </li>
 
-      <li class="nav-item dropdown" *ngIf="_auth.role=='user'">
-        <a
-          class="dropdown-toggle"
-          [routerLink]="[ '/diagnosis' ]"
-          
-        >
-        <!-- View all -->
-          <span class="icon-holder">
+            <!-- <li class="nav-item dropdown" *ngIf="_auth.role=='user'">
+                <a class="dropdown-toggle" [routerLink]="[ '/diagnosis' ]"> 
+                    <span class="icon-holder">
             <i class="ti-palette"></i>
           </span>
 
-          <span class="title">Diagnosis</span>
+                    <span class="title">Diagnosis</span>
 
-        </a>
+                </a>
 
-      </li>
+            </li> -->
 
-      <li class="nav-item dropdown">
-        <a
-          class="dropdown-toggle"
-          href="javascript:void(0);"
-        >
-          <span class="icon-holder">
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
             <i class="ti-blackboard"></i>
           </span>
 
-          <span class="title">Discussion Boards</span>
+                    <span class="title">Discussion Boards</span>
 
-          <span class="arrow">
+                    <span class="arrow">
             <i class="ti-angle-right"></i>
           </span>
-        </a>
+                </a>
 
-        <ul class="dropdown-menu">
-          <li>
-            <a [routerLink]="[ '/boards/search' ]">Search Board</a>
-          </li>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a [routerLink]="[ '/boards/search' ]">Search Board</a>
+                    </li>
 
-          <li *ngIf="_auth.role=='user'">
-            <a [routerLink]="[ '/boards/my-boards' ]">My Boards</a>
-          </li>
+                    <li *ngIf="_auth.role=='user'">
+                        <a [routerLink]="[ '/boards/my-boards' ]">My Boards</a>
+                    </li>
 
-        </ul>
-      </li>
+                </ul>
+            </li>
 
-      <li class="nav-item dropdown" *ngIf="_auth.role=='user'||_auth.role=='doctor'">
-        <a
-          class="dropdown-toggle"
-          [routerLink]="[ '/messages' ]"
-        >
-          <span class="icon-holder">
+            <li class="nav-item dropdown" *ngIf="_auth.role=='user'||_auth.role=='doctor'">
+                <a class="dropdown-toggle" [routerLink]="[ '/messages' ]">
+                    <span class="icon-holder">
             <i class="ti-comments"></i>
           </span>
 
-          <span class="title">Messages</span>
+                    <span class="title">Messages</span>
 
-        </a>
+                </a>
 
-      </li> 
-      <li class="nav-item dropdown" *ngIf="_auth.role=='nurse'||_auth.role=='admin'">
-        <a
-          class="dropdown-toggle"
-          href="javascript:void(0);"
-        >
-          <span class="icon-holder">
+            </li>
+            <li class="nav-item dropdown" *ngIf="_auth.role=='nurse'||_auth.role=='admin'">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
             <i class="ti-user"></i>
           </span>
 
-          <span class="title">Advanced</span>
+                    <span class="title">Advanced</span>
 
-          <span class="arrow">
+                    <span class="arrow">
             <i class="ti-angle-right"></i>
           </span>
-        </a>
+                </a>
 
-        <ul class="dropdown-menu">
-          <li *ngIf="_auth.role=='nurse'||_auth.role=='admin'">
-            <a 
-              [routerLink]="[ '/users' ]"
-            >  Users 
+                <ul class="dropdown-menu">
+                    <li *ngIf="_auth.role=='nurse'||_auth.role=='admin'">
+                        <a [routerLink]="[ '/users' ]">  Users 
             </a>
-    
-          </li>
-          
 
-          <li class="" *ngIf="_auth.role=='admin'">
-            <a 
-              [routerLink]="[ '/hospitals' ]"
-            >  Hospitals  
+                    </li>
+
+
+                    <li class="" *ngIf="_auth.role=='admin'">
+                        <a [routerLink]="[ '/hospitals' ]">  Hospitals  
             </a>
-    
-          </li>
-        </ul>
-      </li>
-      
-      <li class="nav-item dropdown" *ngIf=" _auth.role=='admin'">
-        <a
-          class="dropdown-toggle"
-          [routerLink]="[ '/pi' ]"
-        >
-          <span class="icon-holder">
+
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item dropdown" *ngIf=" _auth.role=='admin'">
+                <a class="dropdown-toggle" [routerLink]="[ '/pi' ]">
+                    <span class="icon-holder">
             <i class="fab fa-raspberry-pi"></i>
           </span>
 
-          <span class="title">Pi Modules</span>
+                    <span class="title">Pi Modules</span>
 
-        </a>
+                </a>
 
-      </li>
-      <li class="nav-item dropdown" *ngIf="_auth.role=='admin'">
-        <a
-          class="dropdown-toggle"
-          [routerLink]="[ '/requests' ]"
-        >
-          <span class="icon-holder">
+            </li>
+            <li class="nav-item dropdown" *ngIf="_auth.role=='admin'">
+                <a class="dropdown-toggle" [routerLink]="[ '/requests' ]">
+                    <span class="icon-holder">
             <i class="ti-alert"></i>
           </span>
 
-          <span class="title">Emergency Requests</span>
+                    <span class="title">Emergency Requests</span>
 
-        </a>
+                </a>
 
-      </li>
-      
-      <a (click)="changeRole('admin')" class="btn btn-inverse btn-primary">Admin</a>
-      <a (click)="changeRole('doctor')" class="btn btn-inverse btn-primary">Doctor</a>
-      <a (click)="changeRole('nurse')" class="btn btn-inverse btn-primary">Nurse</a>
-      <a (click)="changeRole('user')" class="btn btn-inverse btn-primary">User</a>
-    </ul>
-  </div>
+            </li>
+
+            <a (click)="changeRole('admin')" class="btn btn-inverse btn-primary">Admin</a>
+            <a (click)="changeRole('doctor')" class="btn btn-inverse btn-primary">Doctor</a>
+            <a (click)="changeRole('nurse')" class="btn btn-inverse btn-primary">Nurse</a>
+            <a (click)="changeRole('user')" class="btn btn-inverse btn-primary">User</a>
+        </ul>
+    </div>
 </div>
 
 <!-- Side Nav END -->

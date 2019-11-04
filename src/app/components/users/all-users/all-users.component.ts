@@ -12,7 +12,7 @@ export class AllUsersComponent implements OnInit {
   users:any = []
   patients: any = []
   doctors: any = []
-  nurse: any = []
+  nurses: any = []
   constructor(private _user:UserService, private secureStorage:SecureStorageService, public _auth:AuthServiceService) { }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class AllUsersComponent implements OnInit {
           this.users = reverse(sortBy(res.users,[function(o:any){return o.firstName},function(o:any){return o.lastName}]))
           this.patients = filter(this.users, (o)=>{ return o.role == 'user'})
           this.doctors = filter(this.users, (o)=>{ return o.role == 'doctor'})
-          this.nurse = filter(this.users, (o)=>{ return o.role == 'nurse'})
+          this.nurses = filter(this.users, (o)=>{ return o.role == 'nurse'})
         })
       }else if(this._auth.role == 'nurse'){
         this._user.getAllUsersPatients(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{

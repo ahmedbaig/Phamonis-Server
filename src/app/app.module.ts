@@ -53,6 +53,10 @@ import { EditHospitalComponent } from './components/users/edit-hospital/edit-hos
 import { JqxschedulerComponent } from './components/schedule-manager/jqxscheduler/jqxscheduler.component';
 import { AllUsersComponent } from './components/users/all-users/all-users.component';
 import { ProfileDoctorComponent } from './components/profile-doctor/profile-doctor.component';
+import { HorizontalBarComponent } from './components/charts/horizontal-bar/horizontal-bar.component';
+import { LineBasicComponent } from './components/charts/line-basic/line-basic.component';
+import { DonutComponent } from './components/charts/donut/donut.component';
+import { LineBasicPoseComponent } from './components/charts/line-basic-pose/line-basic-pose.component'; 
 
 const appRoutes: Routes = [
   {
@@ -162,7 +166,11 @@ const config = {useHash:true};
     EditHospitalComponent,
     JqxschedulerComponent,
     AllUsersComponent,
-    ProfileDoctorComponent
+    ProfileDoctorComponent,
+    HorizontalBarComponent,
+    LineBasicComponent,
+    DonutComponent,
+    LineBasicPoseComponent 
   ],
   imports: [
     NgbModule,
