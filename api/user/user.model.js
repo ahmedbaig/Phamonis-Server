@@ -15,7 +15,7 @@ var UserSchema = new Schema({
         required: true,
         lowercase: true
     },
-    lastName: { 
+    lastName: {
         type: String,
         default: '',
         lowercase: true
@@ -31,39 +31,39 @@ var UserSchema = new Schema({
         type: Email,
         lowercase: true
     },
-    hashedPassword:{
-        type : String,
+    hashedPassword: {
+        type: String,
     },
     salt: {
-        type : String,
+        type: String,
     },
-    forgotPasswordToken : String,
+    forgotPasswordToken: String,
     role: {
         type: String,
         default: 'user',
         enum: ['user', 'doctor', 'nurse', 'pi', 'admin']
     },
     accountActivated: {
-        isTrue : {
+        isTrue: {
             type: Boolean,
-            default: true
+            default: false
         },
         token: String
     },
-    profileApproved :{
+    profileApproved: {
         type: Boolean,
         default: false
-    }, 
+    },
 
-    position:String, 
-    hospital:String,
-    patients:[String],
+    position: String,
+    hospital: String,
+    patients: [String],
 
-    qualification:[{
-        degree:String,
-        grade:String,
-        institute:String,
-        path:String,
+    qualification: [{
+        degree: String,
+        grade: String,
+        institute: String,
+        path: String,
         createdt: { type: Date, default: Date.now }
     }],
     points: {
@@ -71,10 +71,10 @@ var UserSchema = new Schema({
         default: 0
     },
     terms: {
-        type:Boolean, 
+        type: Boolean,
         required: true
     },
-    dateOfBirth : String,
+    dateOfBirth: String,
     createdt: { type: Date, default: Date.now }
 });
 
@@ -101,9 +101,9 @@ UserSchema
             'firstName': this.firstName,
             'lastName': this.lastName,
             'role': this.role,
-            'email' : this.email,
-            'password' : this.password
-            
+            'email': this.email,
+            'password': this.password
+
         };
     });
 
@@ -114,7 +114,7 @@ UserSchema
         return {
             '_id': this._id,
             'role': this.role,
-            'email' : this.email
+            'email': this.email
         };
     });
 
@@ -126,8 +126,8 @@ UserSchema
 UserSchema
     .path('email')
     .validate(function(email) {
-        if (authTypes.indexOf(this.provider) !== -1){
-             return true
+        if (authTypes.indexOf(this.provider) !== -1) {
+            return true
         };
         return email.length;
     }, 'Email cannot be blank');
@@ -171,10 +171,10 @@ var validatePresenceOf = function(value) {
  */
 UserSchema
     .pre('save', function(next) {
-     
+
         if (!this.isNew) return next();
 
-        if ( !validatePresenceOf(this.hashedPassword) && authTypes.indexOf(this.provider) === -1 && this.type != 'artist')
+        if (!validatePresenceOf(this.hashedPassword) && authTypes.indexOf(this.provider) === -1 && this.type != 'artist')
             next(new Error('Invalid password'));
         else
             next();
@@ -215,7 +215,7 @@ UserSchema.methods = {
     encryptPassword: function(password) {
         if (!password || !this.salt) return '';
         var salt = new Buffer.from(this.salt, 'base64');
-        return crypto.pbkdf2Sync(password, salt, 10000, 64 , 'sha512').toString('base64');
+        return crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('base64');
     }
 };
 

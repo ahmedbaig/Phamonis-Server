@@ -44,6 +44,14 @@ export class DataService {
       headers: headers
     });
   }
+  
+  activateAccount(token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.get(this.origin+"/api/user/activate-account"+token,{
+      headers: headers
+    });
+  }
   forgotPassword(body:any):Observable<any>{
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');

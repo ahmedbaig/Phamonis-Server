@@ -1,99 +1,99 @@
 <!-- Content Wrapper START -->
 <div class="main-content">
-  <div class="container-fluid">
-      <div class="page-title">
-          <h4></h4>
-      </div>
-      <div class="row">
-          <div class="col-md-12"> 
-            <div class="card">
-                <div class="card-heading border bottom">
-                      <div class="row">
-                          <div class="col-md-12">
-                              <h4 class="card-title">User Information</h4> 
-                          </div>
-                      </div>
-                </div>
-                <div class="card-block">
-                    <div class="row"> 
-                        <div class="input-field col-md-6 col s6">
-                            <input type="text" [(ngModel)]="firstName" name="firstName" class="form-control">
-                            <label for="">First Name</label>
-                        </div>
-                        <div class="input-field col-md-6 col s6">
-                            <input type="text" [(ngModel)]="lastName" name="lastName" class="form-control">
-                            <label for="">Last Name</label>
-                        </div>
-                    </div> 
-                    <hr>
-                    <div class="row"> 
-                        <div class="input-field col-md-12 col s12">
-                            <label for="">Email</label>
-                            <input type="text" [(ngModel)]="email" name="email" class="form-control">
-                        </div>
-                    </div> 
-                    <div class="row"> 
-                        <div class="input-field col-md-12 col s12">
-                            <label for="">Phone Number</label>
-                            <input type="text" [(ngModel)]="phone" name="phone" class="form-control">
+    <div class="container-fluid">
+        <div class="page-title">
+            <h4></h4>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-heading border bottom">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="card-title">User Information</h4>
+                            </div>
                         </div>
                     </div>
-                    <div class="row"> 
-                        <div class="col-md-12 col s12 center-align">
-                            <div class="input-field col s12"> 
-                                <select [(ngModel)]="role" (ngModelChange)="userType($event)" name="role"> 
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="input-field col-md-6 col s6">
+                                <input type="text" [(ngModel)]="firstName" name="firstName" class="form-control">
+                                <label for="">First Name</label>
+                            </div>
+                            <div class="input-field col-md-6 col s6">
+                                <input type="text" [(ngModel)]="lastName" name="lastName" class="form-control">
+                                <label for="">Last Name</label>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="input-field col-md-12 col s12">
+                                <label for="">Email</label>
+                                <input type="text" [(ngModel)]="email" name="email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col-md-12 col s12">
+                                <label for="">Phone Number (Country Code + Number)</label>
+                                <input type="text" [(ngModel)]="phone" name="phone" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col s12 center-align">
+                                <div class="input-field col s12">
+                                    <select [(ngModel)]="role" (ngModelChange)="userType($event)" name="role"> 
                                     <option value="user">User</option>  
                                     <option value="doctor">Doctor</option>  
                                     <option value="nurse">Nurse</option>   
                                 </select>
+                                </div>
                             </div>
                         </div>
-                    </div> 
-                    <div class="row" *ngIf="role=='user'"> 
-                        <div class="col-md-12 col s12 center-align">
-                            <div class="input-field col s12"> 
-                                <select [(ngModel)]="gender" name="gender"> 
+                        <div class="row" *ngIf="role=='user'">
+                            <div class="col-md-12 col s12 center-align">
+                                <div class="input-field col s12">
+                                    <select [(ngModel)]="gender" name="gender"> 
                                     <option value="" disabled selected>Gender</option>  
                                     <option value="male">Male</option>  
                                     <option value="female">Female</option>  
                                 </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" *ngIf="role=='doctor'||role=='nurse'"> 
-                        <div class="col-md-12 col s12 center-align">
-                            <div class="input-field col s12"> 
-                                <select [(ngModel)]="hospital" name="hospital"> 
+                        <div class="row" *ngIf="role=='doctor'||role=='nurse'">
+                            <div class="col-md-12 col s12 center-align">
+                                <div class="input-field col s12">
+                                    <select [(ngModel)]="hospital" name="hospital"> 
                                     <option value="" disabled selected>Hospital</option> 
                                     <option value="{{hos._id}}" *ngFor="let hos of hospitals">{{hos.name}} {{hos.address}}</option>  
                                 </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" *ngIf="role=='doctor'||role=='nurse'"> 
+                        <div class="row" *ngIf="role=='doctor'||role=='nurse'">
+                            <div class="col-md-12 col s12 center-align">
+                                <div class="input-field col s12">
+                                    <label for="">Position</label>
+                                    <input type="text" [(ngModel)]="position" name="position" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="role=='user'">
+                            <div class="input-field col-md-12 col s12">
+                                <label for="">Date of Birth</label>
+                                <input type="text" [(ngModel)]="dateOfBirth" name="dateOfBirth" id="dob" class="datepicker">
+
+                            </div>
+                        </div>
+                        <hr>
                         <div class="col-md-12 col s12 center-align">
-                            <div class="input-field col s12"> 
-                                <label for="">Position</label>
-                                <input type="text" [(ngModel)]="position" name="position" class="form-control">
-                            </div>
+                            <button class="waves-effect waves-light btn btn-info" (click)="saveUser()">Save</button>
                         </div>
                     </div>
-                    <div class="row" *ngIf="role=='user'"> 
-                        <div class="input-field col-md-12 col s12">
-                            <label for="">Date of Birth</label>
-                            <input type="text" [(ngModel)]="dateOfBirth" name="dateOfBirth" id="dob" class="datepicker">
-        
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="col-md-12 col s12 center-align"> 
-                        <button class="waves-effect waves-light btn btn-info" (click)="saveUser()">Save</button>
-                    </div> 
                 </div>
-              </div>  
-          </div>
-          
-      </div> 
-  </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 <!-- Content Wrapper END -->

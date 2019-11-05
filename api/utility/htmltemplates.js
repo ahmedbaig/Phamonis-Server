@@ -3,7 +3,11 @@
 const fs = require('fs');
 const path = require('path');
 
-exports.accountActivation = function(user,token){
+// const origin = "https://phamonis.herokuapp.com"
+const origin = "https://192.168.8.100:4040"
+
+
+exports.accountActivation = function(user, token) {
     return `
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -184,7 +188,7 @@ exports.accountActivation = function(user,token){
           <!-- Logo -->
           <tr>
             <td class="email-masthead">
-              <a href="https://phamonis.herokuapp.com" class="email-masthead_name"><img src="" alt="PHAMONIS"></a>
+              <a href="${origin}" class="email-masthead_name"><img src="" alt="PHAMONIS"></a>
             </td>
           </tr>
           <!-- Email Body -->
@@ -201,7 +205,7 @@ exports.accountActivation = function(user,token){
                       <tr>
                         <td align="center">
                           <div>
-                            <a style="text-decoration: none;color: white;" href="https://phamonis.herokuapp.com/#/activate-account/${token}" class="button button--blue">Verify Email</a>
+                            <a style="text-decoration: none;color: white;" href="${origin}/#/activate-account/${token}" class="button button--blue">Verify Email</a>
                           </div>
                         </td>
                       </tr>
@@ -213,7 +217,7 @@ exports.accountActivation = function(user,token){
                         <td>
                           <p class="sub">If you’re having trouble clicking the button, copy and paste the URL below into your web browser.
                           </p>
-                          <p class="sub"><a href="https://phamonis.herokuapp.com/#/activate-account/${token}">https://phamonis.herokuapp.com/#/activate-account/${token}  </a></p>
+                          <p class="sub"><a href="${origin}/#/activate-account/${token}">${origin}/#/activate-account/${token}  </a></p>
                         </td>
                       </tr>
                     </table>
@@ -246,7 +250,7 @@ exports.accountActivation = function(user,token){
 }
 
 
-exports.ForgotPassword = function(user,token){
+exports.ForgotPassword = function(user, token) {
     return `
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -427,7 +431,7 @@ exports.ForgotPassword = function(user,token){
           <!-- Logo -->
           <tr>
             <td class="email-masthead">
-              <a href="https://phamonis.herokuapp.com" class="email-masthead_name"><img src="" alt="PHAMONIS"></a>
+              <a href="${origin}" class="email-masthead_name"><img src="" alt="PHAMONIS"></a>
             </td>
           </tr>
           <!-- Email Body -->
@@ -444,7 +448,7 @@ exports.ForgotPassword = function(user,token){
                       <tr>
                         <td align="center">
                           <div>
-                          <a style="text-decoration:none;color:white" href="https://phamonis.herokuapp.com/#/reset-password/${token}" class="button button--red">Reset your password</a>
+                          <a style="text-decoration:none;color:white" href="${origin}/#/reset-password/${token}" class="button button--red">Reset your password</a>
                           </div>
                         </td>
                       </tr>
@@ -457,7 +461,7 @@ exports.ForgotPassword = function(user,token){
                       <tr>
                         <td>
                           <p class="sub">If you’re having trouble clicking the password reset button, copy and paste the URL below into your web browser.</p>
-                          <p class="sub"><a href="https://phamonis.herokuapp.com/#/reset-password/${token}">https://phamonis.herokuapp.com/#/reset-password/${token}</a></p>
+                          <p class="sub"><a href="${origin}/#/reset-password/${token}">${origin}/#/reset-password/${token}</a></p>
                         </td>
                       </tr>
                     </table>

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-
+import {map} from 'lodash'
+import * as moment from 'moment'
 declare var $:any;
 declare var jquery:any;
 declare var Chart:any;
@@ -16,115 +17,111 @@ export class LineBasicPoseComponent implements   OnInit, OnChanges  {
   data:any
   
   
-  colors: String[] = ['#2ecc71', '#3498db']
+  colors: String[] = ['#2ecc71', '#3498db', '#f1c40f', '#2d3436', '#a29bfe', '#ffeaa7']
 
   constructor() { }
 
   ngOnChanges(change: SimpleChanges){
-    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-		var config = {
-			type: 'line',
-			data: {
-				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-				datasets: [{
-					backgroundColor: this.colors[0],
-					borderColor: this.colors[1],
-					data: [
-            10.,152,145,10,152,145,10,152,145,10,152,145
-					],
-					fill: false,
-				} ]
+	var config = {
+		type: 'line',
+		data: {
+			labels: map(this.data.labels, date=>{return moment(date).format("LL")}),
+			datasets: [{
+				backgroundColor: this.colors[Math.floor(Math.random() * 5)],
+				borderColor:this.colors[Math.floor(Math.random() * 5)],
+				data:this.data.data,
+				fill: false,
+			} ]
+		},
+		options: {
+			responsive: true,
+			title: {
+				display: true,
+				text: 'Device Released'
 			},
-			options: {
-				responsive: true,
-				title: {
+			tooltips: {
+				mode: 'index',
+				intersect: false,
+			},
+			legend: {
+			display: false
+			},
+			hover: {
+				mode: 'nearest',
+				intersect: true
+			},
+			scales: {
+				xAxes: [{
 					display: true,
-					text: 'Poses Recognized'
-				},
-				tooltips: {
-					mode: 'index',
-					intersect: false,
-				},
-        legend: {
-        display: false
-        },
-				hover: {
-					mode: 'nearest',
-					intersect: true
-				},
-				scales: {
-					xAxes: [{
+					scaleLabel: {
 						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Month'
-						}
-					}],
-					yAxes: [{
+						labelString: 'Month'
+					}
+				}],
+				yAxes: [{
+					display: true,
+					scaleLabel: {
 						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Released'
-						}
-					}]
-				}
+						labelString: 'Released'
+					}
+				}]
 			}
+		}
     };
+    
     
     var canvas: HTMLCanvasElement = <HTMLCanvasElement> document.getElementById('line-pose-canvas');
     var ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
 			let chart = new Chart(ctx, config);
   }
   ngOnInit() {
-    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-		var config = {
-			type: 'line',
-			data: {
-				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-				datasets: [{ 
-					backgroundColor: this.colors[0],
-					borderColor: this.colors[1],
-					data: [
-            10,152,145,10,152,145,10,152,145,10,152,145,10,152,145,10,152,145,
-					],
-					fill: false,
-				} ]
+	var config = {
+		type: 'line',
+		data: {
+			labels: map(this.data.labels, date=>{return moment(date).format("LL")}),
+			datasets: [{
+				backgroundColor: this.colors[Math.floor(Math.random() * 5)],
+				borderColor:this.colors[Math.floor(Math.random() * 5)],
+				data:this.data.data,
+				fill: false,
+			} ]
+		},
+		options: {
+			responsive: true,
+			title: {
+				display: true,
+				text: 'Device Released'
 			},
-			options: {
-				responsive: true,
-				title: {
+			tooltips: {
+				mode: 'index',
+				intersect: false,
+			},
+			legend: {
+			display: false
+			},
+			hover: {
+				mode: 'nearest',
+				intersect: true
+			},
+			scales: {
+				xAxes: [{
 					display: true,
-					text: 'Poses Recongnized'
-				},
-				tooltips: {
-					mode: 'index',
-					intersect: false,
-				},
-        legend: {
-        display: false
-        },
-				hover: {
-					mode: 'nearest',
-					intersect: true
-				},
-				scales: {
-					xAxes: [{
+					scaleLabel: {
 						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Month'
-						}
-					}],
-					yAxes: [{
+						labelString: 'Month'
+					}
+				}],
+				yAxes: [{
+					display: true,
+					scaleLabel: {
 						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Value'
-						}
-					}]
-				}
+						labelString: 'Released'
+					}
+				}]
 			}
+		}
     };
+    
     
     var canvas: HTMLCanvasElement = <HTMLCanvasElement> document.getElementById('line-pose-canvas');
     var ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;

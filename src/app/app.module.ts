@@ -66,7 +66,7 @@ const appRoutes: Routes = [
       {path: '', component: LoginComponent}, 
       {path: 'forgot-password', component: ForgotPasswordComponent},
       {path: 'reset-password/:token', component: ResetPasswordComponent},
-      {path: 'account-activation/:token', component: AccountActivitionComponent}
+      {path: 'activate-account/:token', component: AccountActivitionComponent}
     ]
   }, {
     path: '',

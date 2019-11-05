@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-
+import {map} from 'lodash'
 declare var $:any;
 declare var jquery:any;
 declare var Chart:any;
@@ -16,34 +16,21 @@ export class HorizontalBarComponent implements  OnInit, OnChanges  {
   @Input()
   data:any
   
-  colors: String[] = ['#2ecc71', '#3498db', '#f1c40f']
+  colors: String[] = ['#2ecc71', '#3498db', '#f1c40f', '#2d3436', '#a29bfe', '#ffeaa7']
   constructor() { }
 
-  ngOnChanges(change: SimpleChanges){
-    
+  ngOnChanges(change: SimpleChanges){   
     var horizontalBarChartData = { 
-			datasets: [{ 
-        label:'Patient',
-				backgroundColor: this.colors[1],
-				borderColor:this.colors[1],
-				data: [
-          10
-				]
-			},{ 
-        label:'Doctor',
-				backgroundColor: this.colors[0],
-				borderColor:this.colors[0],
-				data: [
-          80
-				]
-			},{ 
-        label:'Nurse',
-				backgroundColor: this.colors[2],
-				borderColor:this.colors[2],
-				data: [
-          50
-				]
-			}]
+      datasets: 
+      map(this.data.labels, label=>{
+        let color = this.colors[Math.floor(Math.random() * 5)]
+        return Object.create({ 
+            label:label,
+            backgroundColor: color,
+            borderColor:color,
+            data: [this.data.data[this.data.labels.indexOf(label)]]
+          })
+        })
 
     };
     
@@ -74,29 +61,16 @@ export class HorizontalBarComponent implements  OnInit, OnChanges  {
 
   ngOnInit() { 
     var horizontalBarChartData = { 
-			datasets: [{ 
-        label:'Patient',
-				backgroundColor: this.colors[1],
-				borderColor:this.colors[1],
-				data: [
-          10
-				]
-			},{ 
-        label:'Doctor',
-				backgroundColor: this.colors[0],
-				borderColor:this.colors[0],
-				data: [
-          80
-				]
-			},{ 
-        label:'Nurse',
-				backgroundColor: this.colors[2],
-				borderColor:this.colors[2],
-				data: [
-          50
-				]
-			}]
-
+      datasets: 
+      map(this.data.labels, label=>{
+        let color = this.colors[Math.floor(Math.random() * 5)]
+          return Object.create({ 
+            label:label,
+            backgroundColor: color,
+            borderColor:color,
+            data: [this.data.data[this.data.labels.indexOf(label)]]
+          })
+        })
     };
     
     var canvas: HTMLCanvasElement = <HTMLCanvasElement> document.getElementById('horizontal-canvas');

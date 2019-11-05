@@ -3,10 +3,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var PiSchema = new Schema({
-    model: String, 
-    serial_number:String,
-    route_ip: {type: String, default: null},
-    session_token: { 
+    model: String,
+    serial_number: String,
+    route_ip: { type: String, default: null },
+    session_token: {
         type: String,
         default: null
     },
@@ -25,6 +25,10 @@ var PiSchema = new Schema({
     active: {
         type: Boolean,
         default: false
+    },
+    timeStamp: {
+        type: Date,
+        default: Date.now()
     }
 });
 

@@ -3,7 +3,7 @@
 
 var path = require('path');
 
-module.exports = function(app){
+module.exports = function(app) {
 
     // ANALYTICS USAGE
 
@@ -15,6 +15,7 @@ module.exports = function(app){
     app.use('/api/pi', require('./api/pi'));
     app.use('/api/pose', require('./api/pose'));
     app.use('/api/emergency', require('./api/emergencyRequests'));
+    app.use('/api/stats', require('./api/stats'));
     // app.use('/api/discussion', require('./api/discussionBoard'));
     // app.use('/api/schedule', require('./api/scheduleManager'));
     // app.use('/api/diagnosis', require('./api/diagnosis'));
@@ -26,7 +27,7 @@ module.exports = function(app){
     app.route('/*')
         .get(function(req, res) {
             // Commented path is for angular 6 build post production
-            res.sendFile(path.resolve( __dirname + '/dist/App/index.html'));
+            res.sendFile(path.resolve(__dirname + '/dist/App/index.html'));
             // res.sendFile(path.resolve( __dirname + '/index.html'));
         });
 
