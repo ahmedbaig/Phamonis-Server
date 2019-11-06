@@ -9,6 +9,10 @@ var router = express.Router();
 
 router.post('/create/:token', auth.isAuthenticated(), controller.create);
 
+router.get('/get-requests/:token', auth.isAdmin(), controller.getRequests);
+
+router.get('/request-status/:request/:token', auth.isAdmin(), controller.requestStatus);
+
 // router.post('/detail/:token', auth.isAdmin(), controller.detail);
 
 // router.post('/update/:token', auth.isAdmin(), controller.update);

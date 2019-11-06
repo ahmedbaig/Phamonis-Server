@@ -811,131 +811,27 @@
 
                     <div class="widget-feed">
                         <ul class="list-info overflow-y-auto relative scrollable" style="max-height: 340px">
-                            <li class="border bottom mrg-btm-10">
+                            <li class="border bottom mrg-btm-10" *ngFor="let item of requests;let i = index">
                                 <div class="pdd-vertical-10">
-                                    <span class="thumb-img bg-primary">
-                        <span class="text-white">JH</span>
-                                    </span>
-
-                                    <div class="info">
-                                        <a href="" class="text-link">
-                                            <span class="title">
-                            <b class="font-size-15">Jordan Hurst</b>
-                          </span>
+                                    <div class="info" style="padding-left: 0!important;">
+                                        <a [routerLink]="[ '/profile', item.reqeust.user ]" class="text-link">
+                                            <b class="font-size-15">{{item.user.firstName}} {{item.user.lastName}}</b>
                                         </a>
 
-                                        <span class="sub-title">5 mins ago</span>
+                                        <i style="float:right;cursor:pointer" (click)="check(item.reqeust._id)" class="ti-check text-danger pdd-right-5"></i>
+                                        <span class="sub-title">{{date[i]}} minutes</span>
                                     </div>
 
                                     <div class="mrg-top-10">
                                         <p class="no-mrg-btm">
-                                            Remember, a Jedi can feel the Force flowing through him. You mean it controls your actions? Partially.
+                                            {{item.reqeust.comments}}
                                         </p>
                                     </div>
 
-                                    <ul class="feed-action">
-                                        <li>
-                                            <a href="">
-                                                <i class="ti-heart text-danger pdd-right-5"></i>
 
-                                                <span>168</span>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="">
-                                                <i class="ti-comments text-primary pdd-right-5"></i>
-
-                                                <span>18</span>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </li>
 
-                            <li class="border bottom mrg-btm-10">
-                                <div class="pdd-vertical-10">
-                                    <span class="thumb-img bg-success">
-                        <span class="text-white">JW</span>
-                                    </span>
-
-                                    <div class="info">
-                                        <a href="" class="text-link">
-                                            <span class="title">
-                            <b class="font-size-15">Jennifer Watkins</b>
-                          </span>
-                                        </a>
-
-                                        <span class="sub-title">5 mins ago</span>
-                                    </div>
-
-                                    <div class="mrg-top-15">
-                                        <p>
-                                            What good's a reward if you ain't around to use it?
-                                        </p>
-                                    </div>
-
-                                    <ul class="feed-action">
-                                        <li>
-                                            <a href="">
-                                                <i class="ti-heart text-danger pdd-right-5"></i>
-
-                                                <span>168</span>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="">
-                                                <i class="ti-comments text-primary pdd-right-5"></i>
-
-                                                <span>18</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li class="border bottom">
-                                <div class="pdd-vertical-10">
-                                    <span class="thumb-img bg-warning">
-                        <span class="text-white">MB</span>
-                                    </span>
-
-                                    <div class="info">
-                                        <a href="" class="text-link">
-                                            <span class="title">
-                            <b class="font-size-15">Michael Birch</b>
-                          </span>
-                                        </a>
-
-                                        <span class="sub-title">5 mins ago</span>
-                                    </div>
-
-                                    <div class="mrg-top-15">
-                                        <p>
-                                            What good's a reward if you ain't around to use it? Besides, attacking that battle station ain't my idea of courage.
-                                        </p>
-                                    </div>
-
-                                    <ul class="feed-action">
-                                        <li>
-                                            <a href="">
-                                                <i class="ti-heart text-danger pdd-right-5"></i>
-
-                                                <span>168</span>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="">
-                                                <i class="ti-comments text-primary pdd-right-5"></i>
-
-                                                <span>18</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>

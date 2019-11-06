@@ -188,7 +188,7 @@ exports.accountActivation = function(user, token) {
           <!-- Logo -->
           <tr>
             <td class="email-masthead">
-              <a href="${origin}" class="email-masthead_name"><img src="" alt="PHAMONIS"></a>
+              <a href="${origin}" class="email-masthead_name"><img src="https://phamonis.herokuapp.com/assets/images/logo/logo1.gif" alt="PHAMONIS"></a>
             </td>
           </tr>
           <!-- Email Body -->
@@ -205,7 +205,7 @@ exports.accountActivation = function(user, token) {
                       <tr>
                         <td align="center">
                           <div>
-                            <a style="text-decoration: none;color: white;" href="${origin}/#/activate-account/${token}" class="button button--blue">Verify Email</a>
+                            <a style="text-decoration: none;color: white;" href="${origin}/#/auth/activate-account/${token}" class="button button--blue">Verify Email</a>
                           </div>
                         </td>
                       </tr>
@@ -217,7 +217,7 @@ exports.accountActivation = function(user, token) {
                         <td>
                           <p class="sub">If you’re having trouble clicking the button, copy and paste the URL below into your web browser.
                           </p>
-                          <p class="sub"><a href="${origin}/#/activate-account/${token}">${origin}/#/activate-account/${token}  </a></p>
+                          <p class="sub"><a href="${origin}/#/auth/activate-account/${token}">${origin}/#/auth/activate-account/${token}  </a></p>
                         </td>
                       </tr>
                     </table>
@@ -431,7 +431,7 @@ exports.ForgotPassword = function(user, token) {
           <!-- Logo -->
           <tr>
             <td class="email-masthead">
-              <a href="${origin}" class="email-masthead_name"><img src="" alt="PHAMONIS"></a>
+              <a href="${origin}" class="email-masthead_name"><img src="https://phamonis.herokuapp.com/assets/images/logo/logo1.gif" alt="PHAMONIS"></a>
             </td>
           </tr>
           <!-- Email Body -->
@@ -448,7 +448,7 @@ exports.ForgotPassword = function(user, token) {
                       <tr>
                         <td align="center">
                           <div>
-                          <a style="text-decoration:none;color:white" href="${origin}/#/reset-password/${token}" class="button button--red">Reset your password</a>
+                          <a style="text-decoration:none;color:white" href="${origin}/#/auth/reset-password/${token}" class="button button--red">Reset your password</a>
                           </div>
                         </td>
                       </tr>
@@ -461,7 +461,7 @@ exports.ForgotPassword = function(user, token) {
                       <tr>
                         <td>
                           <p class="sub">If you’re having trouble clicking the password reset button, copy and paste the URL below into your web browser.</p>
-                          <p class="sub"><a href="${origin}/#/reset-password/${token}">${origin}/#/reset-password/${token}</a></p>
+                          <p class="sub"><a href="${origin}/#/auth/reset-password/${token}">${origin}/#/auth/reset-password/${token}</a></p>
                         </td>
                       </tr>
                     </table>

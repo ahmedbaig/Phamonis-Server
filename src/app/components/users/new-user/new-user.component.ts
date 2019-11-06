@@ -41,6 +41,7 @@ export class NewUserComponent implements OnInit {
       M.AutoInit();
       $('select').formSelect();
       $('.datepicker').datepicker();
+      $('.datepicker').attr('style', 'bottom:unset!important')
     }, 1000)
   }
 
@@ -49,6 +50,7 @@ export class NewUserComponent implements OnInit {
       M.AutoInit();
       $('select').formSelect();
       $('.datepicker').datepicker();
+      $('.datepicker').attr('style', 'bottom:unset!important')
     }, 1000)
   }
 

@@ -15,15 +15,29 @@ const _ = require('lodash');
 
 exports.create = function(req, res) {
     try {
+
+        req.body.accountActivated.isTrue = false
         UserService.create(req.body)
             .then(async function(user) {
-                let emailtoken = UtilService.generateRandomToken();
-                let htmlTemplate = htmlTemplateService.accountActivation(user, emailtoken);
-                // sending email to user for account activation
-                await UtilService.sendEmail(user.email, 'Account Activation', htmlTemplate)
 
-                // saving token in user model
-                await UserService.update({ _id: user._id }, { 'accountActivated.token': emailtoken, profileApproved: true })
+                let token = UtilService.generateRandomToken();
+
+                await UserModel.update({
+                    _id: user._id
+                }, {
+                    forgotPasswordToken: token
+                });
+
+                let htmlTemplate = htmlTemplateService.ForgotPassword(user, token);
+                UtilService.sendEmail(user.email, 'Renew Password', htmlTemplate)
+
+                // let emailtoken = UtilService.generateRandomToken();
+                // let htmlTemplate = htmlTemplateService.accountActivation(user, emailtoken);
+                // // sending email to user for account activation
+                // await UtilService.sendEmail(user.email, 'Account Activation', htmlTemplate)
+
+                // // saving token in user model
+                // await UserService.update({ _id: user._id }, { 'accountActivated.token': emailtoken, profileApproved: true })
 
             }).then(function() {
                 // sending access token
@@ -233,10 +247,12 @@ exports.resetPassword = async function(req, res) {
                 message: 'Sorry we could find this user in our system'
             });
         }
+        await UserModel.findOneAndUpdate({
+            forgotPasswordToken: req.params.forgotPasswordToken
+        }, { 'accountActivated.isTrue': true });
 
         user.password = req.body.password;
         user.forgotPasswordToken = null
-
         await user.save();
 
         res.send({ success: true, message: 'Your password has been resetted successfully.' });
@@ -262,22 +278,22 @@ exports.activateAccount = async function(req, res) {
         }
 
 
-        let token = UtilService.generateRandomToken();
+        // let token = UtilService.generateRandomToken();
 
-        await UserModel.update({
-            _id: user._id
-        }, {
-            forgotPasswordToken: token
-        });
+        // await UserModel.update({
+        //     _id: user._id
+        // }, {
+        //     forgotPasswordToken: token
+        // });
 
-        let htmlTemplate = htmlTemplateService.ForgotPassword(user, token);
-        UtilService.sendEmail(user.email, 'Renew Password', htmlTemplate)
+        // let htmlTemplate = htmlTemplateService.ForgotPassword(user, token);
+        // UtilService.sendEmail(user.email, 'Renew Password', htmlTemplate)
 
         user.accountActivated.isTrue = true;
         user.accountActivated.token = null;
         await user.save();
 
-        res.send({ success: true, message: 'Your account has been activated successfully. A password reset email has been sent to your account.' });
+        res.send({ success: true, message: 'Your account has been activated successfully.' });
 
 
     } catch (error) {
@@ -377,7 +393,6 @@ exports.getUserById = async function(req, res) {
             doc.forgotPasswordToken = null
             doc.salt = null
             doc.hashedPassword = null
-            doc.phone = null
 
             //TODO: Need re evalutaion after pose module
             if (err) {
@@ -409,13 +424,19 @@ exports.createUser = async function(req, res) {
         }
         req.body.role = "user";
         req.body.profileApproved = true;
-        req.body.accountActivated.isTrue = false
         req.body.terms = true;
         await UserModel.create(req.body).then(async(doc) => {
 
-            let emailtoken = UtilService.generateRandomToken();
-            let htmlTemplate = htmlTemplateService.accountActivation(doc, emailtoken);
-            await UtilService.sendEmail(doc.email, 'Account Activation', htmlTemplate)
+            let token = UtilService.generateRandomToken();
+            await UserModel.update({
+                _id: doc._id
+            }, {
+                forgotPasswordToken: token,
+                'accountActivated.isTrue': false
+            });
+
+            let htmlTemplate = htmlTemplateService.ForgotPassword(doc, token);
+            UtilService.sendEmail(doc.email, 'Renew Password', htmlTemplate)
                 //TODO: Need re evalutaion after pose module
             if (err) {
                 res.send({
@@ -443,9 +464,16 @@ exports.createUserAdmin = async function(req, res) {
         await UserModel.create(req.body).then(async(doc) => {
             //TODO: Need re evalutaion after pose module 
 
-            let emailtoken = UtilService.generateRandomToken();
-            let htmlTemplate = htmlTemplateService.accountActivation(doc, emailtoken);
-            await UtilService.sendEmail(doc.email, 'Account Activation', htmlTemplate)
+            let token = UtilService.generateRandomToken();
+            await UserModel.update({
+                _id: doc._id
+            }, {
+                forgotPasswordToken: token,
+                'accountActivated.isTrue': false
+            });
+
+            let htmlTemplate = htmlTemplateService.ForgotPassword(doc, token);
+            UtilService.sendEmail(doc.email, 'Renew Password', htmlTemplate)
             console.log(doc.role, req.body.device)
 
             res.send({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { getOrigin } from '../origin';
 import { Observable } from 'rxjs';
 import { DataService } from '../services/data.service';
@@ -18,14 +18,20 @@ export class AuthServiceService {
   token:String = "";
   logged: Boolean = false;
   origin: String = getOrigin();
-  constructor(private geoLocation:GeolocationService, private secureStorage:SecureStorageService, private http: HttpClient, private route: Router, private _service: DataService, private _geoLocation: GeolocationService) { }
+  constructor(private geoLocation:GeolocationService, 
+    private secureStorage:SecureStorageService, 
+    private http: HttpClient, 
+    private route: Router, 
+    private _service: DataService,
+    private router:ActivatedRoute ) { }
 
    isAuthenticated(){
     if (this.secureStorage.getItem('session_t') != null) {
       return this.isTokenExpired(JSON.parse(this.secureStorage.getItem('session_t')));
     } else {
       this.clear();
-      this.route.navigate(['/auth']);
+      //Dont know why this was there
+      // this.route.navigate(['/auth']);
       return false
     }
   }

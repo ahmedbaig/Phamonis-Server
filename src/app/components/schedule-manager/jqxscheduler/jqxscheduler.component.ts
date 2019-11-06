@@ -116,7 +116,7 @@ export class JqxschedulerComponent implements OnInit, OnChanges {
     $("#scheduler").jqxScheduler({
         date: new $.jqx.date(2015, 11, 23),
         width: window.innerWidth - subtract,
-        height: 500,
+        height: 1000,
         source: adapter,
         view: 'weekView',
         theme: 'energyblue',

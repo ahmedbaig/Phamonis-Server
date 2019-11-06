@@ -22,7 +22,11 @@ var UserSchema = new Schema({
     },
     gender: String,
     age: String,
-    phone: String,
+    phone: {
+        type: String,
+        required: true,
+        unique: true
+    },
     profilePicture: {
         type: String,
         default: "!logged-user.jpg"

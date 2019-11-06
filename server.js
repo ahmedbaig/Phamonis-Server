@@ -47,10 +47,11 @@ app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 
     // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', "access-control-allow-headers,access-control-allow-origin,content-type");
+    res.setHeader('Access-Control-Allow-Headers', "access-control-allow-headers,access-control-allow-origin,content-type,authorization_token,service_id");
 
     if (req.method === 'OPTIONS') {
         res.sendStatus(200);
+        next();
     } else {
         next();
     }

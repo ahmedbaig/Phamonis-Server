@@ -66,6 +66,34 @@ export class DataService {
       headers: headers
     });
   }
+
+  checkService(phone:String, code:String, sid:String):Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization_Token': 'AC3bc2f767a2795d5f061cfa191682357f',
+      'Service_ID': 'VA7251cff344c374298a98f518076da207',
+     })
+    let body = {
+      phone, code, sid
+    }
+    return this.http.post(this.origin+"/api/verify/check-verification", body,{
+      headers: headers
+    });
+  }
+  
+  verifyService(phone:String):Observable<any>{
+    const headers = new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization_Token': 'AC3bc2f767a2795d5f061cfa191682357f',
+        'Service_ID': 'VA7251cff344c374298a98f518076da207',
+       })
+    let body = {
+      phone
+    }
+    return this.http.post(this.origin+"/api/verify/verification-sms", body,{
+      headers: headers
+    });
+  }
   
 
 }
