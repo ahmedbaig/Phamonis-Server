@@ -73,23 +73,17 @@ function isPiAuthenticated() {
                         message: "Not Found"
                     })
                 }
-                if (session.isDeleted == false) {
-                    await PiModel.findById(session.pi).exec((err, pi) => {
-                        if (err) {
-                            res.send({
-                                success: false,
-                                message: err.message
-                            })
-                        }
-                        req.pi = pi;
-                        next();
-                    })
-                } else {
-                    res.send({
-                        success: false,
-                        message: "Authorization error!"
-                    })
-                }
+                await PiModel.findById(session.pi).exec((err, pi) => {
+                    if (err) {
+                        res.send({
+                            success: false,
+                            message: err.message
+                        })
+                    }
+                    req.pi = pi;
+                    next();
+                })
+
             })
         });
 }

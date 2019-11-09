@@ -2,21 +2,21 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var PoseSchema = new Schema({    
+var PoseSchema = new Schema({
     pi: {
-        type:String,
+        type: String,
         default: '',
         required: true
     },
     user: {
-        type:String,
+        type: String,
         default: '',
         required: true
-    }, 
+    },
     item: String,
-    pose: [Object],
+    pose: Object,
     isDeleted: {
-        type:Boolean,
+        type: Boolean,
         default: false
     },
     timeStamp: {

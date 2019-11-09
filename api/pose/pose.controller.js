@@ -8,7 +8,8 @@ const _ = require('lodash');
 
 
 exports.create = async function(req, res) {
-    console.log("Pose recieved:", req.body, req.files)
+    // console.log("Pose recieved:", req.body, req.files)
+    console.log(JSON.parse(req.body.pose))
     PiModel.findOne({ serial_number: req.body.serial_number }).exec(async(err, pi) => {
         console.log(pi)
         if (pi == null) {
@@ -42,6 +43,7 @@ exports.create = async function(req, res) {
         pose.pi = pi._id;
         pose.user = pi.user;
         pose.item = req.body.path
+        pose.pose = JSON.parse(req.body.pose)
         await pose.save((err, doc) => {
             console.log(err, doc)
             if (err) {
