@@ -37,7 +37,7 @@ export class LineBasicPoseComponent implements   OnInit, OnChanges  {
 			responsive: true,
 			title: {
 				display: true,
-				text: 'Device Released'
+				text: 'Poses Captured'
 			},
 			tooltips: {
 				mode: 'index',
@@ -90,7 +90,7 @@ export class LineBasicPoseComponent implements   OnInit, OnChanges  {
 			responsive: true,
 			title: {
 				display: true,
-				text: 'Device Released'
+				text: 'Poses Captured'
 			},
 			tooltips: {
 				mode: 'index',

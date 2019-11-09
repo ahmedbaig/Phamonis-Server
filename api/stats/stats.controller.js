@@ -34,3 +34,16 @@ exports.dashboardStats = async function(req, res) {
         })
     }
 }
+
+exports.dashboard = async function(req, res) {
+    try {
+        await UsersModel.findById(req.user._id, async(err, user) => {
+
+        })
+    } catch (e) {
+        res.send({
+            success: false,
+            message: e.message
+        })
+    }
+}

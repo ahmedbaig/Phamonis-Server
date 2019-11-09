@@ -9,6 +9,8 @@ var router = express.Router();
 
 router.get('/dashboard-stats/:token', auth.isAdmin(), controller.dashboardStats);
 
+router.get('/dashboard/:token', auth.isAuthenticated(), controller.dashboard);
+
 // router.get('/verify/:token', auth.isPiAuthenticated(), controller.verify);
 
 module.exports = router;

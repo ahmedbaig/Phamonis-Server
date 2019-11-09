@@ -1,46 +1,46 @@
 'use strict';
 var compose = require('composable-middleware');
-const UserSession  = require('../api/userSession/userSession.model')
+const UserSession = require('../api/userSession/userSession.model')
 const UserModel = require("../api/user/user.model")
 
-const PiSession  = require('../api/piSession/piSession.model')
+const PiSession = require('../api/piSession/piSession.model')
 const PiModel = require("../api/pi/pi.model")
 
 function isAuthenticated() {
     return compose()
         // Attach user to request
         .use(async function(req, res, next) {
-            await UserSession.findById(req.params.token).exec(async (err, session)=>{
-                if(err){
+            await UserSession.findById(req.params.token).exec(async(err, session) => {
+                if (err) {
                     res.send({
                         success: false,
                         message: "Invalid token"
                     })
                 }
-                if(session.isDeleted == false){
-                    await UserModel.findById(session.user).exec((err, user)=>{
-                        if(err){
+                if (session.isDeleted == false) {
+                    await UserModel.findById(session.user).exec((err, user) => {
+                        if (err) {
                             res.send({
                                 success: false,
                                 message: err.message
                             })
                         }
-                        if(user.accountActivated.isTrue==false){
+                        if (user.accountActivated.isTrue == false) {
                             res.send({
                                 success: false,
                                 message: "Account not activated via email."
                             })
                         }
-                        if(user.profileApproved == false){
+                        if (user.profileApproved == false) {
                             res.send({
                                 success: false,
                                 message: "Account not approved by a supervisor."
                             })
                         }
-                        res.user = user; 
+                        req.user = user;
                         next();
                     })
-                }else{
+                } else {
                     res.send({
                         success: false,
                         message: "Authorization error!"
@@ -57,34 +57,34 @@ function isAuthenticated() {
 function isPiAuthenticated() {
     return compose()
         // Attach user to request
-        .use(async function(req, res, next) { 
-            
-            await PiSession.findById(req.params.token).exec(async (err, session)=>{
-                if(err){
+        .use(async function(req, res, next) {
+
+            await PiSession.findById(req.params.token).exec(async(err, session) => {
+                if (err) {
                     res.send({
                         success: false,
                         message: "Invalid token"
                     })
                 }
-                
-                if(session == null){
+
+                if (session == null) {
                     res.send({
                         success: false,
                         message: "Not Found"
                     })
                 }
-                if(session.isDeleted == false){
-                    await PiModel.findById(session.pi).exec((err, pi)=>{
-                        if(err){
+                if (session.isDeleted == false) {
+                    await PiModel.findById(session.pi).exec((err, pi) => {
+                        if (err) {
                             res.send({
                                 success: false,
                                 message: err.message
                             })
                         }
-                        req.pi = pi; 
+                        req.pi = pi;
                         next();
                     })
-                }else{
+                } else {
                     res.send({
                         success: false,
                         message: "Authorization error!"
@@ -102,44 +102,44 @@ function isStaff() {
     return compose()
         // Attach user to request
         .use(async function(req, res, next) {
-            await UserSession.findById(req.params.token).exec(async (err, session)=>{
-                if(err){
+            await UserSession.findById(req.params.token).exec(async(err, session) => {
+                if (err) {
                     res.send({
                         success: false,
                         message: "Invalid token"
                     })
                 }
-                if(session.isDeleted == false){
-                    await UserModel.findById(session.user).exec((err, user)=>{
-                        if(err){
+                if (session.isDeleted == false) {
+                    await UserModel.findById(session.user).exec((err, user) => {
+                        if (err) {
                             res.send({
                                 success: false,
                                 message: err.message
                             })
                         }
-                        if(user.accountActivated.isTrue==false){
+                        if (user.accountActivated.isTrue == false) {
                             res.send({
                                 success: false,
                                 message: "Account not activated via email."
                             })
                         }
-                        if(user.profileApproved == false){
+                        if (user.profileApproved == false) {
                             res.send({
                                 success: false,
                                 message: "Account not approved by a supervisor."
                             })
                         }
-                        if(user.role == 'nurse'){
+                        if (user.role == 'nurse') {
                             req.user = user;
                             next();
-                        }else{
+                        } else {
                             res.send({
                                 success: false,
                                 message: "Your account does not have required level access"
                             })
                         }
                     })
-                }else{
+                } else {
                     res.send({
                         success: false,
                         message: "Authorization error!"
@@ -157,44 +157,44 @@ function isAdmin() {
     return compose()
         // Attach user to request
         .use(async function(req, res, next) {
-            await UserSession.findById(req.params.token).exec(async (err, session)=>{
-                if(err){
+            await UserSession.findById(req.params.token).exec(async(err, session) => {
+                if (err) {
                     res.send({
                         success: false,
                         message: "Invalid token"
                     })
                 }
-                if(session.isDeleted == false){
-                    await UserModel.findById(session.user).exec((err, user)=>{
-                        if(err){
+                if (session.isDeleted == false) {
+                    await UserModel.findById(session.user).exec((err, user) => {
+                        if (err) {
                             res.send({
                                 success: false,
                                 message: err.message
                             })
                         }
-                        if(user.accountActivated.isTrue==false){
+                        if (user.accountActivated.isTrue == false) {
                             res.send({
                                 success: false,
                                 message: "Account not activated via email."
                             })
                         }
-                        if(user.profileApproved == false){
+                        if (user.profileApproved == false) {
                             res.send({
                                 success: false,
                                 message: "Account not approved by a supervisor."
                             })
                         }
-                        if(user.role == 'admin'){
+                        if (user.role == 'admin') {
                             req.user = user;
                             next();
-                        }else{
+                        } else {
                             res.send({
                                 success: false,
                                 message: "Your account does not have superuser level access"
                             })
                         }
                     })
-                }else{
+                } else {
                     res.send({
                         success: false,
                         message: "Authorization error!"

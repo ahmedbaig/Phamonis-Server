@@ -102,15 +102,18 @@ cron.schedule('*/10 * * * *', async() => {
             await Promise.all(_.map(pis, pi => {
                 if (pi.active == true && pi.route_ip != null) {
                     request(`http://${pi.route_ip}:5000/alive`, async function(error, response, body) {
-                        // console.log('error:', error); // Print the error if one occurred
-                        // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-                        // console.log('body:', body); // Print the HTML for the Google homepage.
-                        // console.log('success:', body); // Print the HTML for the Google homepage
-                        if (JSON.parse(body).success == 1) {
-                            console.log("Active PI");
-                            await PiModel.update({ serial_number: JSON.parse(body).serial_number }, { status: true }, (err, update) => {
-                                console.log(`PI: ${JSON.parse(body).serial_number} status is alive`)
-                            })
+                        if (response) {
+                            // console.log('statusCode:', response); // Print the response status code if a response was received
+                            // console.log('body:', body); // Print the HTML for the Google homepage.
+                            // console.log('success:', body); // Print the HTML for the Google homepage
+                            if (JSON.parse(body).success == 1) {
+                                console.log("Active PI");
+                                await PiModel.update({ serial_number: JSON.parse(body).serial_number }, { status: true }, (err, update) => {
+                                    console.log(`PI: ${JSON.parse(body).serial_number} status is alive`)
+                                })
+                            }
+                        } else {
+                            console.log('Cannot reach:', error.address); // Print the error if one occurred
                         }
                     });
                 }
