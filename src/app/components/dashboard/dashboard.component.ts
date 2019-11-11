@@ -5,7 +5,8 @@ import { DataService } from 'src/app/services/data.service';
 import Swal from 'sweetalert2';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SecureStorageService } from 'src/app/auth/secure-storage.service';  
-import { delay } from 'lodash'
+import { delay, map } from 'lodash'
+import * as moment from 'moment'
 declare var $:any
 declare var app:any
 @Component({
@@ -42,6 +43,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }).then(()=>{ 
       this._notification.getNotifications(this.secureStorage.getUserId(), JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
         this.notifications = res.unread
+        map(res.unread, unread=>{
+          this.timestamp[unread._id] = moment(unread.createdt).format("LLLL")
+        })
       })  
     })
   }

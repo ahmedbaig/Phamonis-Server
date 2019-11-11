@@ -38,7 +38,9 @@ exports.dashboardStats = async function(req, res) {
 exports.dashboard = async function(req, res) {
     try {
         await UsersModel.findById(req.user._id, async(err, user) => {
+            await PoseModel.find({ user: req.user._id }, async(err, poses) => {
 
+            })
         })
     } catch (e) {
         res.send({

@@ -129,7 +129,7 @@ export class EditHardwareComponent implements OnInit {
     let body = {model: this.model, serial_number: this.serial_number, active: this.active, status: this.status, user: this.user, threshold: this.threshold}
     this._piService.updateDevice(body, JSON.parse(this.secureStorage.getItem('session_t')).jwt, this.route.snapshot.params['id']).subscribe(res=>{
       if(res.success){
-        Swal.fire("Success", res.message, "success")
+        Swal.fire(res.message, "Please reboot device for updates", "success")
         this.router.navigate(['/pi'])
       }else{
         Swal.fire("Opps", res.message, "error")

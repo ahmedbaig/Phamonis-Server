@@ -386,24 +386,26 @@ exports.getUserPatients = async function(req, res) {
 
 exports.getUserById = async function(req, res) {
     try {
-        await UserModel.findById(req.params.userId).exec((err, doc) => {
+        await UserModel.findById(req.params.userId).exec(async(err, doc) => {
             doc.accountActivated.token = null
             doc.points = null
             doc.profileApproved = null
             doc.forgotPasswordToken = null
             doc.salt = null
             doc.hashedPassword = null
-
-            //TODO: Need re evalutaion after pose module
-            if (err) {
+            await UserSession.find({ user: req.params.userId, isDeleted: false }, (err, sessions) => {
+                //TODO: Need re evalutaion after pose module -- done
+                if (err) {
+                    res.send({
+                        success: false,
+                        message: err
+                    })
+                }
                 res.send({
-                    success: false,
-                    message: err
+                    success: true,
+                    user: doc,
+                    sessions
                 })
-            }
-            res.send({
-                success: true,
-                user: doc
             })
         })
     } catch (e) {

@@ -119,7 +119,8 @@ exports.checkService = async function(req, res) {
 
                     } else {
                         const userSession = new UserSession();
-                        userSession.userId = user._id;
+                        userSession.user = user._id;
+                        userSession.geoLocationData = req.body.data
                         await userSession.save((err, doc) => {
                             if (err) {
                                 //console.log(err);

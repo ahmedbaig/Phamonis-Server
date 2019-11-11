@@ -30,8 +30,9 @@ export class AuthServiceService {
       return this.isTokenExpired(JSON.parse(this.secureStorage.getItem('session_t')));
     } else {
       this.clear();
-      //Dont know why this was there
-      // this.route.navigate(['/auth']);
+      //Dont know why this was there -- why was this here
+      // I know why this there. Because when there is nothing in storage it'll bounce back
+      this.route.navigate(['/auth']);
       return false
     }
   }

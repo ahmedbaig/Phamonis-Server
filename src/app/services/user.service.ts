@@ -61,6 +61,7 @@ export class UserService {
   addQualification(data:FormData, token:String):Observable<any>{
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
+    console.log(data)
     return this.http.post(this.origin+`/api/user/upload-qualification/${token}`, data, {
       headers: headers
     });

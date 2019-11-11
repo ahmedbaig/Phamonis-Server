@@ -74,6 +74,13 @@ var UserSchema = new Schema({
         type: Number,
         default: 0
     },
+    code: {
+        timeStamp: String,
+        code: {
+            type: Number,
+            default: 0
+        }
+    },
     terms: {
         type: Boolean,
         required: true

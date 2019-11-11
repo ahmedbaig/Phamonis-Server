@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     requests: any = [];
     date:any = [];
     constructor(public _auth:AuthServiceService, private _stats:StatsService, private secureStorage:SecureStorageService, private erService:ErService) { }
-    ngOnInit(){
+    ngOnInit(){ 
       this._stats.getDashboard(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
         this.horizontalDataPose = Object.create({labels: Object.keys(res.poseGroup), data: Object.keys(res.poseGroup).map(pose=>res.poseGroup[pose].length)})
         this.lineData = Object.create({labels: Object.keys(res.piGroup), data: Object.keys(res.piGroup).map(pose=>res.piGroup[pose].length)})

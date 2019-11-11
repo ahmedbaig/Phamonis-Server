@@ -13,6 +13,7 @@ const _ = require('lodash');
 const moment = require('moment');
 
 const PiModel = require('./api/pi/pi.model')
+const UserModel = require('./api/user/user.model')
 
 const app = express();
 
@@ -94,6 +95,16 @@ app.get('/dist-user-qualification/:filename', function(req, res) {
 });
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+cron.schedule('*/1 * * * *', async() => {
+    console.log('Reset user codes...');
+    await UserModel.find({}, async(err, allusers) => {
+        await Promise.all(_.map(allusers, async user => {
+            await UserModel.update({ _id: user._id }, { code: { code: Math.floor(Math.random() * 6), timeStamp: moment() } })
+        }))
+    })
+})
 
 cron.schedule('*/10 * * * *', async() => {
     console.log('Reset all devices status...');

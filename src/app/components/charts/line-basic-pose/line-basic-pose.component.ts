@@ -25,7 +25,7 @@ export class LineBasicPoseComponent implements   OnInit, OnChanges  {
 	var config = {
 		type: 'line',
 		data: {
-			labels: map(this.data.labels, date=>{return moment(date).format("LL")}),
+			labels: map(this.data.labels, date=>{return moment(date).format("LLLL")}),
 			datasets: [{
 				backgroundColor: this.colors[Math.floor(Math.random() * 5)],
 				borderColor:this.colors[Math.floor(Math.random() * 5)],
@@ -52,9 +52,9 @@ export class LineBasicPoseComponent implements   OnInit, OnChanges  {
 			},
 			scales: {
 				xAxes: [{
-					display: true,
+					display: false,
 					scaleLabel: {
-						display: true,
+						display: false,
 						labelString: 'Month'
 					}
 				}],
@@ -78,7 +78,7 @@ export class LineBasicPoseComponent implements   OnInit, OnChanges  {
 	var config = {
 		type: 'line',
 		data: {
-			labels: map(this.data.labels, date=>{return moment(date).format("LL")}),
+			labels: map(this.data.labels, date=>{return moment(date).format("LLLL")}),
 			datasets: [{
 				backgroundColor: this.colors[Math.floor(Math.random() * 5)],
 				borderColor:this.colors[Math.floor(Math.random() * 5)],
@@ -105,9 +105,9 @@ export class LineBasicPoseComponent implements   OnInit, OnChanges  {
 			},
 			scales: {
 				xAxes: [{
-					display: true,
+					display: false,
 					scaleLabel: {
-						display: true,
+						display: false,
 						labelString: 'Month'
 					}
 				}],

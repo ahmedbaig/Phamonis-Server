@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
       return
     }
 
-    this._service.checkService(this.phone, this.code, this.sid).subscribe(check=>{
+    this._service.checkService(this.phone, this.code, this.sid, this.data).subscribe(check=>{
       if(check.verification.valid == false){
         Swal.fire('Error', "The code you entered is not valid ", 'error')
         return 
@@ -120,7 +120,7 @@ export class LoginComponent implements OnInit {
                   } 
                   return 
                 }
-                this._service.verifyService(userResponse.user.phone).subscribe(async verification=>{
+                this._service.verifyService(userResponse.user.phone, this.data).subscribe(async verification=>{
                   if(verification.success){
                     this.phone = userResponse.user.phone
                     this.sid = verification.sid 

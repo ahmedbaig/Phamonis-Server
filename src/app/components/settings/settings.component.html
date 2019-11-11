@@ -55,15 +55,28 @@
                                         </span>
                                         <span class="mrg-left-10 font-size-16 text-dark text-bold">{{item.model}}</span>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-2">
                                         <p class="mrg-top-10">
                                             <span>{{item.serial_number}}</span>
                                         </p>
                                     </div>
+
+                                    <div class="col-md-2">
+                                        <p class="mrg-top-10">
+                                            <span>{{item.route_ip}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="label label-danger right" *ngIf="item.active==false">Deactivated</span>
+                                        <a class="btn-floating pulse green right" *ngIf="item.status==true&&item.active==true"><i
+                                                    class="ti-control-record"> </i></a>
+                                        <a class="btn-floating red right" *ngIf="item.status==false&&item.active==true"><i
+                                                    class="ti-control-record"> </i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card" *ngIf="_auth.role!='user'">
+                        <!-- <div class="card" *ngIf="_auth.role!='user'">
                             <div class="card-heading border bottom">
                                 <div class="row">
                                     <div class="col-md-10">
@@ -126,6 +139,30 @@
                                         <p class="mrg-top-10">
                                             <span>{{item.institute}}</span>
                                         </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="card">
+                            <div class="card-heading border bottom">
+                                <h4 class="card-title">Active Sessions</h4>
+                            </div>
+                            <div class="card-block">
+                                <div class="row" *ngFor="let chunks of sessions">
+                                    <div class="col-md-4" *ngFor="let session of chunks">
+                                        <div class="card-media">
+                                            <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(session.src)" style="width: 90%;margin: auto;display: flex;align-content: center;" allowfullscreen></iframe>
+                                        </div>
+                                        <div class="card-block">
+                                            <div class="relative scrollable ps-container ps-theme-default ps-active-y" style="height: 240px;" data-ps-id="20bdee71-45a4-d4d6-a96b-23200e8fae04">
+                                                <h5 class="mrg-btm-20 no-mrg-top">{{session.timeStamp}}</h5>
+                                                <p>{{session.location}} </p>
+                                                <p>{{session.route}} </p>
+                                                <button *ngIf="session.current==false" (click)="logoutSession(session.token)" class="btn btn-danger">Logout Session</button>
+                                                <button *ngIf="session.current==true" class="disabled btn btn-default">Current Session</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
