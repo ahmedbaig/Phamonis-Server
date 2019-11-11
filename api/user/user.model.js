@@ -75,7 +75,7 @@ var UserSchema = new Schema({
         default: 0
     },
     code: {
-        timeStamp: String,
+        timeStamp: Date,
         code: {
             type: Number,
             default: 0

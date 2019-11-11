@@ -5,7 +5,7 @@ const path = require('path');
 const _ = require('lodash');
 const PiModel = require('../pi/pi.model')
 const PiSession = require('../piSession/piSession.model')
-const UsersModel = require('../user/user.model')
+const UserModel = require('../user/user.model')
 const PoseModel = require('../pose/pose.model')
 const ConnectionsModel = require('./connections.model')
 const NotificationModel = require('../notification/notification.model')
@@ -85,10 +85,10 @@ exports.acceptRequest = async function(req, res) {
 
 exports.fetchConnectionString = async function(req, res) {
     try {
-        await UserModel.find({ code: req.user._id }, async(err, user) => {
+        await UserModel.find({ _id: req.user._id }, async(err, user) => {
             res.send({
                 success: true,
-                code: user[0].code
+                code: user[0].code.code
             })
         })
     } catch (e) {

@@ -96,12 +96,11 @@ app.get('/dist-user-qualification/:filename', function(req, res) {
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-
 cron.schedule('*/1 * * * *', async() => {
     console.log('Reset user codes...');
     await UserModel.find({}, async(err, allusers) => {
         await Promise.all(_.map(allusers, async user => {
-            await UserModel.update({ _id: user._id }, { code: { code: Math.floor(Math.random() * 6), timeStamp: moment() } })
+            await UserModel.update({ _id: user._id }, { code: { code: Math.floor(100000 + Math.random() * 900000), timeStamp: moment(new Date) } })
         }))
     })
 })

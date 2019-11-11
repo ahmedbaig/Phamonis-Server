@@ -204,3 +204,7 @@ html.sidebar-left-collapsed .sidebar-left {
     color: white!important;
     text-align: center;
 }
+
+.card {
+    height: 100%!important;
+}
