@@ -26,6 +26,13 @@ export class PiService {
       headers: headers
     });
   }
+  getDeviceUser(token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.get(this.origin+`/api/pi/get-device-detail-user/${token}`,{
+      headers: headers
+    });
+  }
   removeDevice(token:String, device: String):Observable<any>{
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
@@ -45,6 +52,13 @@ export class PiService {
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
     return this.http.post(this.origin+`/api/pi/update-device/${token}/${device}`, body, {
+      headers: headers
+    });
+  }
+  updateDeviceUser(body:any, token:String, device:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.origin+`/api/pi/update-device-user/${token}/${device}`, body, {
       headers: headers
     });
   }

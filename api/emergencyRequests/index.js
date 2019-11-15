@@ -11,6 +11,8 @@ router.post('/create/:token', auth.isAuthenticated(), controller.create);
 
 router.get('/get-requests/:token', auth.isAdmin(), controller.getRequests);
 
+router.get('/get-user-requests/:token', auth.isAuthenticated(), controller.getUserRequests);
+
 router.get('/request-status/:request/:token', auth.isAdmin(), controller.requestStatus);
 
 // router.post('/detail/:token', auth.isAdmin(), controller.detail);

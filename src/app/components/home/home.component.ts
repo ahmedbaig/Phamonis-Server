@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
             })
           }) 
         
-        }else {
+        }else  { 
           this._connections.getCode(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
             this.code = res.code.code
             this.codeExpire = 60 - moment(new Date).diff(moment(res.code.timeStamp), 'seconds')
@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit {
           this.codeExpire = 60 - moment(new Date).diff(moment(res.code.timeStamp), 'seconds')
           this.getCode(moment(new Date).diff(moment(res.code.timeStamp), 'seconds'))
         })
-      }, 62000 - (interval * 1000))
+      }, 60000 - (interval * 1000))
     }
 
     check(request:String){

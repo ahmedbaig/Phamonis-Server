@@ -3,7 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { DataService } from 'src/app/services/data.service';
 import { SecureStorageService } from 'src/app/auth/secure-storage.service';
 import { PiService } from 'src/app/services/pi.service';
-import {filter, map, chunk } from 'lodash'
+import {filter, map, chunk, sortBy} from 'lodash'
 import * as moment from 'moment'
 import { AuthServiceService } from 'src/app/auth/auth-service.service';
 import Swal from 'sweetalert2';
@@ -35,7 +35,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.user_service.getUser(this.secureStorage.getUserId()!, JSON.parse(this.secureStorage.getItem('session_t')).jwt!).subscribe(res=>{
       this.user = res.user
-      this.sessions = chunk( map(res.sessions, (session)=>{
+      this.sessions = chunk( map( sortBy(res.sessions, [function(o:any){return o.lastUsed}]), (session)=>{
         let body = {
           src: this.geolocation.getMapSrc(session.geoLocationData.latitude, session.geoLocationData.longitude),
           location: `${session.geoLocationData.city} ${session.geoLocationData.region} ${session.geoLocationData.country_name}`,

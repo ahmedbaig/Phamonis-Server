@@ -46,13 +46,13 @@
                         <a [routerLink]="[ '/pose/view-data' ]">View Data</a>
                     </li>
 
-                    <li>
+                    <!-- <li>
                         <a [routerLink]="[ '/pose/analytics' ]">Analytics</a>
                     </li>
 
                     <li>
                         <a [routerLink]="[ '/pose/status-report' ]">Status Report</a>
-                    </li>
+                    </li> -->
 
                     <li>
                         <a [routerLink]="[ '/pose/connections' ]">User Connections</a>
@@ -75,6 +75,57 @@
 
             </li>
 
+            <!-- <li class="nav-item dropdown" *ngIf="_auth.role=='user'||_auth.role=='doctor'">
+                <a class="dropdown-toggle" [routerLink]="[ '/messages' ]">
+                    <span class="icon-holder">
+            <i class="ti-comments"></i>
+          </span>
+
+                    <span class="title">Messages</span>
+
+                </a>
+
+            </li> -->
+            <li class="nav-item dropdown" *ngIf="_auth.role=='admin'">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+            <i class="ti-user"></i>
+          </span>
+
+                    <span class="title">Advanced</span>
+
+                    <span class="arrow">
+            <i class="ti-angle-right"></i>
+          </span>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li *ngIf="_auth.role=='admin'">
+                        <a [routerLink]="[ '/users' ]">  Users 
+            </a>
+
+                    </li>
+
+
+                    <li class="" *ngIf="_auth.role=='admin'">
+                        <a [routerLink]="[ '/hospitals' ]">  Hospitals  
+            </a>
+
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item dropdown" *ngIf=" _auth.role=='admin'">
+                <a class="dropdown-toggle" [routerLink]="[ '/pi' ]">
+                    <span class="icon-holder">
+            <i class="fab fa-raspberry-pi"></i>
+          </span>
+
+                    <span class="title">Pi Modules</span>
+
+                </a>
+
+            </li>
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -134,58 +185,6 @@
                     </li>
 
                 </ul>
-            </li>
-
-            <li class="nav-item dropdown" *ngIf="_auth.role=='user'||_auth.role=='doctor'">
-                <a class="dropdown-toggle" [routerLink]="[ '/messages' ]">
-                    <span class="icon-holder">
-            <i class="ti-comments"></i>
-          </span>
-
-                    <span class="title">Messages</span>
-
-                </a>
-
-            </li>
-            <li class="nav-item dropdown" *ngIf="_auth.role=='nurse'||_auth.role=='admin'">
-                <a class="dropdown-toggle" href="javascript:void(0);">
-                    <span class="icon-holder">
-            <i class="ti-user"></i>
-          </span>
-
-                    <span class="title">Advanced</span>
-
-                    <span class="arrow">
-            <i class="ti-angle-right"></i>
-          </span>
-                </a>
-
-                <ul class="dropdown-menu">
-                    <li *ngIf="_auth.role=='nurse'||_auth.role=='admin'">
-                        <a [routerLink]="[ '/users' ]">  Users 
-            </a>
-
-                    </li>
-
-
-                    <li class="" *ngIf="_auth.role=='admin'">
-                        <a [routerLink]="[ '/hospitals' ]">  Hospitals  
-            </a>
-
-                    </li>
-                </ul>
-            </li>
-
-            <li class="nav-item dropdown" *ngIf=" _auth.role=='admin'">
-                <a class="dropdown-toggle" [routerLink]="[ '/pi' ]">
-                    <span class="icon-holder">
-            <i class="fab fa-raspberry-pi"></i>
-          </span>
-
-                    <span class="title">Pi Modules</span>
-
-                </a>
-
             </li>
             <!-- <li class="nav-item dropdown" *ngIf="_auth.role=='admin'">
                 <a class="dropdown-toggle" [routerLink]="[ '/requests' ]">

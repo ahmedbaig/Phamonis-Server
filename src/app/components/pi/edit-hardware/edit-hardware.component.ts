@@ -3,7 +3,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { PiService } from 'src/app/services/pi.service';
 import { UserService } from 'src/app/services/user.service';
 import { SecureStorageService } from 'src/app/auth/secure-storage.service';
-import { delay, filter, map, chunk, clone } from 'lodash' 
+import { delay, filter, map, chunk, clone, reverse } from 'lodash' 
 import { getOrigin } from 'src/app/origin';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
@@ -55,7 +55,7 @@ export class EditHardwareComponent implements OnInit {
             }
             this.poses.push(body)
           })).then(()=>{
-            this.poses = chunk(this.poses, 3)
+            this.poses =  chunk(reverse(this.poses), 3) 
             console.log(this.poses)
           })
         }) 

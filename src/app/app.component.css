@@ -201,10 +201,11 @@ html.sidebar-left-collapsed .sidebar-left {
 }
 
 .mdl-card--expand>h5 {
-    color: white!important;
     text-align: center;
+    margin-top: 10px;
 }
 
-.card {
+
+/* .card {
     height: 100%!important;
-}
+} */

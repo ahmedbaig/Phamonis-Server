@@ -26,6 +26,22 @@ exports.fetchConnections = async function(req, res) {
     }
 }
 
+exports.fetchStaffConnections = async function(req, res) {
+    try {
+        await ConnectionsModel.find({ connection: req.user._id }, async(err, requests) => {
+            res.send({
+                success: true,
+                requests
+            })
+        })
+    } catch (e) {
+        res.send({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
 exports.declineRequest = async function(req, res) {
     try {
         await ConnectionsModel.update({ _id: req.body.connectionId }, { declined: true }, () => {

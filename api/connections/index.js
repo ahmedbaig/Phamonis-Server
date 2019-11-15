@@ -11,6 +11,8 @@ var router = express.Router();
 
 router.get('/connections-list/:token', auth.isAuthenticated(), controller.fetchConnections);
 
+router.get('/connections-list-staff/:token', auth.isAuthenticated(), controller.fetchStaffConnections);
+
 router.get('/connections-string/:token', auth.isAuthenticated(), controller.fetchConnectionString);
 
 router.post('/decline-connection/', auth.isAuthenticated(), controller.declineRequest);

@@ -151,9 +151,9 @@
                             <div class="card-block">
                                 <div class="row" *ngFor="let chunks of sessions">
                                     <div class="col-md-4" *ngFor="let session of chunks">
-                                        <div class="card-media">
+                                        <!-- <div class="card-media">
                                             <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(session.src)" style="width: 90%;margin: auto;display: flex;align-content: center;" allowfullscreen></iframe>
-                                        </div>
+                                        </div> -->
                                         <div class="card-block">
                                             <div class="relative scrollable ps-container ps-theme-default ps-active-y" style="height: 240px;" data-ps-id="20bdee71-45a4-d4d6-a96b-23200e8fae04">
                                                 <h5 class="mrg-btm-20 no-mrg-top">{{session.timeStamp}}</h5>

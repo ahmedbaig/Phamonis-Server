@@ -1,3 +1,116 @@
-<p>
-  device-configuration works!
-</p>
+<!-- Content Wrapper START -->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="page-title">
+            <h4></h4>
+        </div>
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-heading border bottom">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="card-title">Hardware Information</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="input-field col-md-12 col s12">
+                                <input type="text" [(ngModel)]="model" name="model" class="form-control">
+                                <label for="">Model</label>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="input-field col-md-12 col s12">
+                                <input type="text" disabled [(ngModel)]="serial_number" name="serial_number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col s12 center-align">
+                                <div class="input-field col s12">
+                                    <select id="threshold" [(ngModel)]="threshold" name="threshold">
+                                      <option value="0" disabled>Still Capturing Threshold</option>
+                                      <option value="10">10 minutes</option>
+                                      <option value="30">30 minutes</option>
+                                      <option value="60">60 minutes</option>
+                                  </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-heading border bottom">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="card-title">Hardware Status</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="label label-danger right" *ngIf="active==false">Deactivated</span>
+                                <a class="btn-floating pulse green right" *ngIf="status==true&&active==true"><i
+                                      class="ti-control-record"> </i></a>
+                                <a class="btn-floating red right" *ngIf="status==false&&active==true"><i
+                                      class="ti-control-record"> </i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5 class="">Device Active</h5>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="toggle-checkbox checkbox-inline">
+                                    <input type="checkbox" [(ngModel)]="active" name="active" id="active" checked="">
+                                    <label for="active"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h5 class="">Device Status</h5>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="toggle-checkbox checkbox-inline">
+                                    <input type="checkbox" [(ngModel)]="status" name="status" id="status" checked="">
+                                    <label for="status"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col s12 center-align">
+                            <button class="waves-effect waves-light btn btn-info" (click)="save()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card" style="max-height: 855px;">
+                    <div class="card-heading border bottom">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="card-title">Hardware Sessions</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <div class="table-overflow">
+                            <table class="table" style="max-height: 800px;overflow-y: scroll;overflow-x: hidden;height: 700px;">
+                                <thead>
+                                    <tr>
+                                        <th>Time Stamp</th>
+                                        <th>Route IP</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of sessions">
+                                        <td>{{item.timeStamp}}</td>
+                                        <td>{{item.routeIp}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content Wrapper END -->

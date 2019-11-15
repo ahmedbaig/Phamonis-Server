@@ -19,6 +19,14 @@ export class ErService {
       headers: headers
     });
   } 
+  
+  getAllUser(token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.get(this.origin+"/api/emergency/get-user-requests/"+token,{
+      headers: headers
+    });
+  } 
 
   check(request:String, token:String):Observable<any>{
     const headers = new HttpHeaders()
