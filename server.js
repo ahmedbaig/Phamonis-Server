@@ -78,6 +78,10 @@ app.get('/dist-image/:filename', function(req, res) {
     res.sendFile(path.resolve('./dist/App/assets/images/' + filename));
 })
 
+app.get('/chat', function(req, res) {
+    res.sendFile(path.resolve(__dirname, 'chat/index.html'));
+})
+
 app.get('/dist-pose/:folder/:filename', function(req, res) {
     var filename = req.params.filename.replace(/'/g, '');
     var folder = req.params.folder.replace(/'/g, '');

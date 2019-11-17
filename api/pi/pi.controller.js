@@ -122,6 +122,47 @@ exports.getDeviceById = async function(req, res) {
     }
 }
 
+exports.getDeviceStaffByUserId = async function(req, res) {
+    try {
+        let device = {}
+
+        await PiModel.findOne({ user: req.params.id })
+            .exec(async function(err, doc) {
+                if (doc.user != "") {
+                    await UserModel.findById(doc.user, async(err, user) => {
+                        let newdoc = doc.toObject()
+                        newdoc.detail = _.clone(user)
+                        await PoseModel.find({ pi: doc._id, isDeleted: false }, async(err, poses) => {
+                            newdoc.poses = _.cloneDeep(_.sortBy(poses, [(o => {
+                                return o.timeStamp
+                            })]))
+                            await PiSessions.find({ pi: doc._id }, (err, sessions) => {
+                                newdoc.sessions = _.cloneDeep(_.sortBy(sessions, [(o) => {
+                                    return o.timeStamp
+                                }]))
+                                device = newdoc
+                                res.send({
+                                    success: true,
+                                    device: device
+                                });
+                            })
+                        })
+                    })
+                } else {
+                    res.send({
+                        success: true,
+                        device: doc
+                    });
+                }
+            })
+    } catch (e) {
+        res.send({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
 exports.getDeviceByUserId = async function(req, res) {
     try {
         let device = {}

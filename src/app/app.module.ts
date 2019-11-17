@@ -20,20 +20,16 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserConnectionsComponent } from './components/pose-monitor/user-connections/user-connections.component';
-import { DeviceConfigurationComponent } from './components/pose-monitor/device-configuration/device-configuration.component';
-import { DiagnosisComponent } from './components/diagnosis/diagnosis.component';
+import { DeviceConfigurationComponent } from './components/pose-monitor/device-configuration/device-configuration.component'; 
 import { SearchBoardComponent } from './components/discussion-board/search-board/search-board.component';
 import { MyBoardsComponent } from './components/discussion-board/my-boards/my-boards.component';
-import { MessagesComponent } from './components/messages/messages.component';
 import { UpcomingAppointmentsComponent } from './components/schedule-manager/upcoming-appointments/upcoming-appointments.component';
 import { PastAppointmentsComponent } from './components/schedule-manager/past-appointments/past-appointments.component';
 import { PatientMonitorComponent } from './components/patient-monitor/patient-monitor.component';
 import { NewUserComponent } from './components/users/new-user/new-user.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
-import { PlaceAppointmentComponent } from './components/schedule-manager/place-appointment/place-appointment.component';
-import { UploadDiagnosisComponent } from './components/upload-diagnosis/upload-diagnosis.component';
-import { EditDiagnosisComponent } from './components/edit-diagnosis/edit-diagnosis.component'; 
+import { PlaceAppointmentComponent } from './components/schedule-manager/place-appointment/place-appointment.component'; 
 import { ViewDataComponent } from './components/pose-monitor/view-data/view-data.component';
 import { AnalyticsComponent } from './components/pose-monitor/analytics/analytics.component';
 import { StatusReportComponent } from './components/pose-monitor/status-report/status-report.component';
@@ -56,7 +52,8 @@ import { ProfileDoctorComponent } from './components/profile-doctor/profile-doct
 import { HorizontalBarComponent } from './components/charts/horizontal-bar/horizontal-bar.component';
 import { LineBasicComponent } from './components/charts/line-basic/line-basic.component';
 import { DonutComponent } from './components/charts/donut/donut.component';
-import { LineBasicPoseComponent } from './components/charts/line-basic-pose/line-basic-pose.component'; 
+import { LineBasicPoseComponent } from './components/charts/line-basic-pose/line-basic-pose.component';
+import { PatientDataComponent } from './components/patient-monitor/patient-data/patient-data.component'; 
 
 const appRoutes: Routes = [
   {
@@ -79,17 +76,13 @@ const appRoutes: Routes = [
         {path: 'status-report', component: StatusReportComponent},
         {path: 'connections', component: UserConnectionsComponent},
         {path: 'configuration', component: DeviceConfigurationComponent}
-      ]},
-      {path: 'diagnosis', component: DiagnosisComponent},
-      {path: 'upload-diagnose', component: UploadDiagnosisComponent},
-      {path: 'edit-diagnose/:id', component: EditDiagnosisComponent},
+      ]}, 
       {path: 'boards', children: [
         {path: 'search', component: SearchBoardComponent},
         {path: 'board/:id', component: DetailBoardComponent},
         {path: 'my-boards', component: MyBoardsComponent},
         {path: 'create', component: NewBoardComponent}
       ]},
-      {path: 'messages', component: MessagesComponent},
       {path: 'notifications', component: NotificationsComponent},
       {path: 'profile/:id', component: ProfileComponent},
       {path: 'profile-doctor/:id', component: ProfileDoctorComponent},
@@ -101,6 +94,7 @@ const appRoutes: Routes = [
         {path: 'detail/:id', component: DetailAppointmentComponent}
       ]},
       {path: 'patient-monitor', component: PatientMonitorComponent},
+      {path: 'patient-data/:id', component: PatientDataComponent},
       {path: 'users', children: [
         {path: '', component: AllUsersComponent},
         {path: 'new-user', component: NewUserComponent},
@@ -137,20 +131,16 @@ const config = {useHash:true};
     ViewDataComponent,
     AnalyticsComponent,
     UserConnectionsComponent,
-    DeviceConfigurationComponent,
-    DiagnosisComponent,
+    DeviceConfigurationComponent, 
     SearchBoardComponent,
     MyBoardsComponent,
-    MessagesComponent,
     UpcomingAppointmentsComponent,
     PastAppointmentsComponent,
     PatientMonitorComponent,
     NewUserComponent,
     ProfileComponent,
     NotificationsComponent,
-    PlaceAppointmentComponent,
-    UploadDiagnosisComponent,
-    EditDiagnosisComponent,
+    PlaceAppointmentComponent, 
     StatusReportComponent,
     NewBoardComponent,
     DetailAppointmentComponent,
@@ -170,7 +160,8 @@ const config = {useHash:true};
     HorizontalBarComponent,
     LineBasicComponent,
     DonutComponent,
-    LineBasicPoseComponent 
+    LineBasicPoseComponent,
+    PatientDataComponent 
   ],
   imports: [
     NgbModule,

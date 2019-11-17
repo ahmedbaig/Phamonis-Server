@@ -15,7 +15,9 @@ router.get('/connections-list-staff/:token', auth.isAuthenticated(), controller.
 
 router.get('/connections-string/:token', auth.isAuthenticated(), controller.fetchConnectionString);
 
-router.post('/decline-connection/', auth.isAuthenticated(), controller.declineRequest);
+router.post('/decline-connection/:token', auth.isAuthenticated(), controller.declineRequest);
+
+router.post('/undecline-connection/:token', auth.isAuthenticated(), controller.undeclineRequest);
 
 router.post('/add-connection/:token', auth.isAuthenticated(), controller.addRequest);
 

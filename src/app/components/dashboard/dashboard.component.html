@@ -22,12 +22,12 @@
                         </div>
                     </a>
                     <ul class="dropdown-menu">
-                        <li *ngIf="_auth.role!='admin'">
+                        <!-- <li *ngIf="_auth.role!='admin'">
                             <a [routerLink]="[ '/profile', secureStorage.getUserId() ]">
                                 <i class="ti-user pdd-right-10"></i>
                                 <span>Profile</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li *ngIf="_auth.role!='admin'">
                             <a [routerLink]="[ '/settings' ]">
                                 <i class="ti-settings pdd-right-10"></i>
@@ -49,7 +49,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="notifications dropdown">
+                <li class="notifications dropdown" *ngIf="_auth.role!='admin'">
                     <span *ngIf="notifications.length != 0" class="counter">{{notifications.length}}</span>
                     <a href="" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="ti-bell"></i>
@@ -62,7 +62,7 @@
                         <li>
                             <ul class="list-info overflow-y-auto relative scrollable">
                                 <li *ngFor="let notification of notifications">
-                                    <a [href]="notification.link">
+                                    <a (click)="read(notification.link)">
 
                                         <div class="info">
                                             <span class="title"> 
@@ -74,7 +74,7 @@
                                         </div>
                                     </a>
                                 </li>
-                                <li class="notice-footer">
+                                <!-- <li class="notice-footer">
                                     <span>
 								<a
 									[routerLink]="[ '/notifications' ]"
@@ -84,7 +84,7 @@
 								<i class="ti-angle-right pdd-left-5 font-size-10"></i>
 								</a>
 								</span>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                     </ul>

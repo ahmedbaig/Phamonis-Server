@@ -54,9 +54,9 @@
                         <a [routerLink]="[ '/pose/status-report' ]">Status Report</a>
                     </li> -->
 
-                    <li>
+                    <!-- <li>
                         <a [routerLink]="[ '/pose/connections' ]">User Connections</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a [routerLink]="[ '/pose/configuration' ]">Device Configuration</a>
                     </li>
@@ -126,7 +126,7 @@
                 </a>
 
             </li>
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
             <i class="ti-agenda"></i>
@@ -148,7 +148,7 @@
                         <a [routerLink]="[ '/schedule/past' ]">Past Appointments</a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
 
             <!-- <li class="nav-item dropdown" *ngIf="_auth.role=='user'">
                 <a class="dropdown-toggle" [routerLink]="[ '/diagnosis' ]"> 
@@ -162,7 +162,7 @@
 
             </li> -->
 
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
             <i class="ti-blackboard"></i>
@@ -185,14 +185,14 @@
                     </li>
 
                 </ul>
-            </li>
-            <!-- <li class="nav-item dropdown" *ngIf="_auth.role=='admin'">
-                <a class="dropdown-toggle" [routerLink]="[ '/requests' ]">
+            </li> -->
+            <!-- <li class="nav-item dropdown" *ngIf="_auth.role!='admin'">
+                <a class="dropdown-toggle" target="_blank" [href]='messages'>
                     <span class="icon-holder">
-            <i class="ti-alert"></i>
+            <i class="ti-comments"></i>
           </span>
 
-                    <span class="title">Emergency Requests</span>
+                    <span class="title">Service Directory</span>
 
                 </a>
 

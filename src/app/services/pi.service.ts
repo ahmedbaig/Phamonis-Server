@@ -33,6 +33,21 @@ export class PiService {
       headers: headers
     });
   }
+  
+  hideImage(id:String, status:Number, token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.get(this.origin+`/api/pose/status-poses/${token}/${id}?status=${status}`,{
+      headers: headers
+    });
+  }
+  getDeviceStaff( token:String, id:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.get(this.origin+`/api/pi/get-device-detail-staff/${token}/${id}`,{
+      headers: headers
+    });
+  }
   removeDevice(token:String, device: String):Observable<any>{
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');

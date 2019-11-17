@@ -23,6 +23,11 @@
                                         </h5>
                                     </div>
                                 </div>
+                                <div class="col-md-12 col s12 center-align">
+                                    <button *ngIf="item.deleted==false" (click)="hideImage(item.id, 0)" class="waves-effect waves-light btn btn-danger">Hide</button>
+                                    <button *ngIf="item.deleted==true" (click)="hideImage(item.id, 1)" class="waves-effect waves-light btn btn-info">Show</button>
+
+                                </div>
                             </div>
                         </div>
                     </div>

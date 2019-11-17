@@ -24,11 +24,13 @@ export class ViewDataComponent implements OnInit {
         _piService.getDeviceUser(JSON.parse(secureStorage.getItem('session_t')).jwt).subscribe(res=>{ 
           Promise.all(map(res.device.poses, pose=>{
             let body = {
+              id:pose._id,
               pose: this.origin+`/dist-pose/${pose.item}`,
               name: pose.item,
-              createdt: moment(pose.timestamp).format("LLLL")
+              deleted:pose.isDeleted,
+              createdt: moment(pose.timeStamp).format("LLLL")
             }
-            this.poses.push(body)
+            this.poses.push(clone(body))
           })).then(()=>{
             this.poses = chunk(reverse(this.poses), 3) 
             console.log(this.poses)
@@ -37,6 +39,28 @@ export class ViewDataComponent implements OnInit {
       }
     });
    }
+
+   hideImage(id:String, status:Number){
+    this._piService.hideImage(id, status, JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
+      
+      this._piService.getDeviceUser(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{ 
+        Promise.all(map(res.device.poses, pose=>{
+          let body = {
+            id:pose._id,
+            pose: this.origin+`/dist-pose/${pose.item}`,
+            name: pose.item,
+            deleted:pose.isDeleted,
+            createdt: moment(pose.timeStamp).format("LLLL")
+          }
+          this.poses.push(clone(body))
+        })).then(()=>{
+          this.poses = chunk(reverse(this.poses), 3) 
+          console.log(this.poses)
+        })
+      }) 
+    })
+   }
+    
 
   ngOnInit() {
     this._userService.getAllUsers(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{ 

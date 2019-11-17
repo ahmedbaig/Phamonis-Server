@@ -18,6 +18,16 @@ export class UserService {
     });
   }
 
+  
+  getPoses(id: String, token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.get(this.origin+`/api/pose//all-poses/${token}/${id}`, {
+      headers: headers
+    });
+  }
+
+
   getAllUsers(token:String):Observable<any>{
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
@@ -46,6 +56,14 @@ export class UserService {
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
     return this.http.post(this.origin+`/api/user/new-user-admin/${token}`, body, {
+      headers: headers
+    });
+  }
+  
+  createUserAdminChat(body:any, token:String):Observable<any>{
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.origin+`/api/chat/insert-user/${token}`, body, {
       headers: headers
     });
   }

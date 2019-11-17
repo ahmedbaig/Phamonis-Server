@@ -61,7 +61,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     })
   }
- 
+  read(id:String){
+    this._notification.readNotification(id, JSON.parse(this.secureStorage.getItem('session_t')).jwt, this._auth.getUser()._id).subscribe(res=>{
+      this._notification.getNotifications(this.secureStorage.getUserId(), JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
+        this.notifications = res.unread
+        map(res.unread, unread=>{
+          this.timestamp[unread._id] = moment(unread.createdt).format("LLLL")
+        })
+      })
+    })
+  }
   ngOnDestroy(){
     $('#loader').removeClass('hide')
   }

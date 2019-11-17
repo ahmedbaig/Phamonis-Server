@@ -10,7 +10,8 @@ const UserModel = require('./user.model');
 const UtilService = require('../utility/util');
 const htmlTemplateService = require('../utility/htmltemplates');
 const UserSession = require('../userSession/userSession.model');
-const PiSession = require('../pi/pi.model')
+const PiModel = require('../pi/pi.model')
+const ConnectionsModel = require('../connections/connections.model')
 const _ = require('lodash');
 
 exports.create = function(req, res) {
@@ -320,16 +321,26 @@ exports.delete = async function(req, res) {
 
 exports.getUsers = async function(req, res) {
     try {
-        await UserModel.find({}).exec((err, doc) => {
+        let users = []
+        await UserModel.find({}).exec(async(err, doc) => {
             if (err) {
                 res.send({
                     success: false,
                     message: err
                 })
             }
-            res.send({
-                success: true,
-                users: doc
+            await Promise.all(_.map(doc, async function(user) {
+                await PiModel.findOne({ user: user._id }, (err, found) => {
+                    if (found == null) {
+                        users.push(user)
+                    }
+                })
+            })).then(() => {
+                res.send({
+                    success: true,
+                    users: users,
+                    allUsers: doc
+                })
             })
         })
     } catch (e) {

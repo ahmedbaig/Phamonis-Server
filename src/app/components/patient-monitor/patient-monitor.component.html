@@ -1,3 +1,47 @@
-<p>
-  patient-monitor works!
-</p>
+<!-- Content Wrapper START -->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="page-title">
+            <h4>Patients List</h4>
+        </div>
+        <div class="card">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tab-info">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="patients">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-overflow">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Patient Name</th>
+                                                        <th>Email</th>
+                                                        <th>Phone Number</th>
+                                                        <th>Gender</th>
+                                                        <th>Date of Birth</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let patient of patients">
+                                                        <td><a [routerLink]="[ '/patient-data', patient.user._id ]">{{patient.user.firstName}} {{patient.user.lastName}}</a></td>
+                                                        <td>{{patient.user.email}}</td>
+                                                        <td>{{patient.user.phone}}</td>
+                                                        <td>{{patient.user.gender}}</td>
+                                                        <td>{{patient.user.dateOfBirth}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content Wrapper END -->
+</div>

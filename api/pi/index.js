@@ -17,6 +17,8 @@ router.get('/get-device-detail/:token/:device', auth.isAuthenticated(), controll
 
 router.get('/get-device-detail-user/:token', auth.isAuthenticated(), controller.getDeviceByUserId)
 
+router.get('/get-device-detail-staff/:token/:id', auth.isAuthenticated(), controller.getDeviceStaffByUserId)
+
 router.get('/get-device-all/:token', auth.isAuthenticated(), controller.getDeviceAll)
 
 router.get('/remove-device/:token/:device', auth.isAdmin(), controller.removeDeviceById)

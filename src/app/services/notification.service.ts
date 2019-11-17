@@ -17,4 +17,8 @@ export class NotificationService {
       headers: headers
     });
   }
+
+  readNotification(id:String, token:String, user:String):Observable<any>{
+    return this.http.get(this.origin+`/api/notification/read-notification/${token}/${user}/${id}`)
+  }
 }

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Phamonis | Chat</title>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="./assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicon/manifest.json">
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://connectycube.com/wp-content/themes/fuzzybloks2018/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://connectycube.com/wp-content/themes/fuzzybloks2018/favicon/favicon-16x16.png">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/chat//css/style.css">
+
+    <script src="https://unpkg.com/navigo@4.3.6/lib/navigo.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/connectycube@1.7.2/dist/connectycube.min.js" defer></script>
+
+    <link rel="stylesheet" href="./assets/chat/style/style.css" />
+    <link rel="stylesheet" href="./assets/chat/css/sinch.css" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./assets/chat/sinch.min.js"></script>
+</head>
+
+<body>
+    <div id="page"></div>
+
+    <!-- Underscore TEMPLATES  -->
+    <script type="text/template" id="tpl_login">
+        <div class="login__wrapper">
+            <div class="login__container">
+                <div class="login__inner">
+                    <div class="login__top">
+                        <h1>Phamonis Service Directory</h1>
+                        <h3 class="logging-in-label" style="display: none;">Logging in... please wait</h3>
+                    </div>
+                    <%_.forEach(users, function (u,i) {%>
+                        <button name="login_submit" value="<%= u.id %>" class="btn m-login__button j-login__button">
+                            <%= u.login %>
+                        </button>
+                        <%})%>
+                </div>
+
+                <div class="login__footer">
+                    <span class="footer__version">SDK v. <%= version %></span>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="tpl_dashboardContainer">
+        <div class="dashboard">
+            <div class="sidebar j-sidebar active">
+                <div class="sidebar__inner">
+                    <div class="sidebar__header">
+                        <div class="dashboard__status_wrap">
+                            <h2 class="dashboard__title">
+                                <%- user.user_tags %>
+                            </h2>
+                            <p class="dashboard__status j-dashboard_status">
+                                Logged in as
+                                <%- user.name %>
+                            </p>
+                        </div>
+                        <a href="#" class="logout j-logout">logout</a>
+                    </div>
+                    <div class="sidebar__content">
+                        <ul class="sidebar__tabs">
+                            <li class="sidebar__tab">
+                                <a href="#" class="sidebar__tab_link j-sidebar__tab_link <% tabName === " chat " ? print('active') : '' %>" data-type="chat">chats</a>
+                            </li>
+                            <li class="sidebar__tab">
+                                <a href="#" class="sidebar__tab_link j-sidebar__tab_link <% tabName === " public " ? print('active') : '' %>" data-type="public">public chats</a>
+                            </li>
+                            <li class="sidebar__tab m-sidebar__tab_new">
+                                <a href="#!/dialog/create" class="sidebar__tab_link j-sidebar__create_dialog m-sidebar__tab_link_new" data-type="create">
+                                    <i class="material-icons">add_circle_outline</i>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="sidebar__dilog_list j-sidebar__dilog_list">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="content j-content">
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="tpl_welcome">
+        <div class="content__title j-content__title j-welcome">
+            Welcome to chat sample!
+        </div>
+        <div class="notifications j-notifications hidden"></div>
+        <div class="content__inner j-content__inner">
+            <div class="welcome__message">
+                <p>Please select you opponent to start chatting.</p>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="tpl_userConversations">
+        <li class="dialog__item j-dialog__item" id="<%= dialog._id %>" data-id="<%= dialog.jidOrUserId %>" data-name="<%- dialog.name %>">
+            <a class="dialog__item_link" href="#!/dialog/<%= dialog._id %>">
+            <span class="dialog__avatar m-user__img_<%= dialog.color %> m-type_<%= dialog.type === 2 ? 'group' : 'chat' %>" >
+                <% if(dialog.type === 2) { %>
+                    <i class="material-icons">supervisor_account</i>
+                <% } else { %>
+                    <i class="material-icons">account_circle</i>
+                <% } %>
+            </span>
+            <span class="dialog__info">
+                <span class="dialog__name"><%- dialog.name %></span>
+                <span class="dialog__last_message j-dialog__last_message <%= dialog.attachment ? 'attachment' : ''%>"><%- dialog.last_message%></span>
+            </span>
+            <span class="dialog_additional_info">
+                <span class="dialog__last_message_date j-dialog__last_message_date">
+                    <%= dialog.last_message_date_sent %>
+                </span>
+                <span class="dialog_unread_counter j-dialog_unread_counter <% !dialog.unread_messages_count ? print('hidden') : '' %>">
+                    <% dialog.unread_messages_count ? print(dialog.unread_messages_count) : '' %>
+                </span>
+            </span>
+        </a>
+        </li>
+    </script>
+
+    <script type="text/template" id="tpl_conversationContainer">
+        <div class="content__title j-content__title j-dialog">
+            <button class="open_sidebar j-open_sidebar"></button>
+            <h1 class="dialog__title j-dialog__title">
+                <%- title %>
+            </h1>
+            <div class="action_links">
+                <a href="#!/dialog/<%- _id %>/edit" class="add_to_dialog j-add_to_dialog <% type !== 2 ? print('hidden') : ''%>">
+                    <i class="material-icons">person_add</i>
+                </a>
+                <a href="#" class="video_call j-video_call" id='call_decoy' style="margin: 0 17px 0 0;" onclick="callMaker()">
+                    <i class="material-icons">videocam</i>
+                </a>
+                <button id='hangup_decoy' style="display:none" onclick="hangupMaker()">Hangup</button>
+                <button id='answer_decoy' style="display:none" onclick="acceptMaker()">Answer</button>
+                <a href="#" class="quit_fom_dialog_link j-quit_fom_dialog_link <% type === 1 ? print('hidden') : ''%>" data-dialog="<%- _id %>">
+                    <i class="material-icons">delete</i>
+                </a>
+            </div>
+        </div>
+        <div class="notifications j-notifications hidden"></div>
+        <div class="content__inner j-content__inner">
+            <div class=" messages j-messages"></div>
+            <form name="send_message" class="send_message" autocomplete="off">
+                <textarea name="message_feald" class="message_feald" id="message_feald" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Type a message" autofocus></textarea>
+                <div class="message__actions">
+                    <div class="attachments_preview j-attachments_preview"></div>
+                    <label for="attach_btn" class="attach_btn">
+                    <i class="material-icons">attachment</i>
+                    <input type="file" id="attach_btn" name="attach_file" class="attach_input" accept="image/*"/>
+                </label>
+                    <button class="send_btn">send</button>
+                </div>
+            </form>
+        </div>
+    </script>
+
+    <script type="text/template" id="tpl_UpdateDialogContainer">
+        <div class="content__title j-content__title update_dialog__header j-update_dialog">
+            <a href="#!/dialog/<%- _id %>" class="back_to_dialog j-back_to_dialog">
+                <i class="material-icons">arrow_back</i>
+            </a>
+            <form action="#" name="update_chat_name" class="update_chat_name_form">
+                <input type="text" name="update_chat__title" class="update_chat__title_input j-update_chat__title_input" value="<%- title %>" disabled>
+                <button type="button" class="update_chat__title_button j-update_chat__title_button">
+                <i class="material-icons m-user_icon">create</i>
+            </button>
+            </form>
+        </div>
+        <div class="notifications j-notifications hidden"></div>
+        <div class="content__inner j-content__inner">
+            <p class="update__chat__description"><span class="update__chat_counter j-update__chat_counter">0</span>&nbsp;user selected:</p>
+            <div class="update_chat__user_list j-update_chat__user_list">
+            </div>
+            <form action="" name="update_dialog" class="dialog_form m_dialog_form_update j-update_dialog_form">
+                <button type="button" class="btn m-update_dialog_btn_cancel j-update_dialog_btn_cancel" name="update_dialog_cancel">cancel</button>
+                <button class="btn m-update_dialog_btn j-update_dialog_btn" type="submit" name="update_dialog_submit" disabled>add member</button>
+            </form>
+        </div>
+    </script>
+
+    <script type="text/template" id="tpl_editChatUser">
+        <div class="user__item <% selected ? print('disabled selected') : ''%>" id="<%= id %>">
+            <span class="user__avatar m-user__img_<%= color %>">
+            <i class="material-icons m-user_icon">account_circle</i>
+        </span>
+            <div class="user__details">
+                <p class="user__name">
+                    <%= name %>
+                </p>
+                <% if (last_request_at) { %>
+                    <p class="user__last_seen">
+                        <%= last_request_at %>
+                    </p>
+                    <% } %>
+            </div>
+        </div>
+    </script>
+    <style type="text/css">
+        .myself {
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .myself .message__avatar {
+            float: right;
+            flex: 38px 0 0;
+        }
+        
+        .myself .message__content {
+            text-align: right;
+        }
+        
+        .myself .message__status {
+            float: left;
+            margin: 0px;
+        }
+    </style>
+    <script type="text/template" id="tpl_message">
+        <div class="message__wrap <%= sender.name == me ? 'myself' : 'left' %> " id="<%= message.id %>" data-status="<%= message.status %>">
+            <span class="message__avatar m-user__img_<%= sender ? sender.color : 'not_loaded' %>">
+            <i class="material-icons">account_circle</i>
+        </span>
+            <div class="message__content">
+                <div class="message__sender_and_status">
+                    <p class="message__sender_name">
+                        <%- sender ? sender.name : 'unknown user (' + message.sender_id + ')' %>, </p>
+                    <div class="message__timestamp">
+                        <%= message.date_sent %>
+                    </div>
+                    <p class="message__status j-message__status">
+
+
+                        <% if (message.status == "delivered") { %>
+                            <i class="material-icons" style="font-size: 15px;margin-left: 10px;">
+                        done_all
+                    </i>
+                            <% } %>
+                                <% if (message.status == "seen") { %>
+                                    <i class="material-icons" style="color:green;font-size: 15px;margin-left: 10px;">
+                        done_all
+                    </i>
+                                    <% } %>
+                                        <% if (message.status == "not delivered yet") { %>
+                                            <i class="material-icons" style="font-size: 15px;margin-left: 10px;">
+                        done
+                    </i>
+                                            <% } %>
+                                                <% if (message.status == "not sent") { %>
+                                                    <i class="material-icons" style="font-size: 15px;margin-left: 10px;">
+                        schedule
+                    </i>
+                                                    <% } %>
+                    </p>
+                </div>
+                <div class="message__text_and_date">
+                    <div class="message__text_wrap">
+                        <% if (message.message) { %>
+                            <p class="message__text">
+                                <%= message.message %>
+                            </p>
+                            <% } %>
+                                <% if (message.attachments.length) { %>
+                                    <div class="message__attachments_wtap">
+                                        <% _.each(message.attachments, function(attachment){ %>
+                                            <img src="<%= attachment.src %>" alt="attachment" class="message_attachment">
+                                            <% }); %>
+                                    </div>
+                                    <% } %>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="tpl_notificationMessage">
+        <div class="message__wrap" id="<%= id %>">
+            <p class="m-notification_message">
+                <%= text %>
+            </p>
+        </div>
+    </script>
+
+    <script type="text/template" id="tpl_newGroupChat">
+        <div class="content__title j-content__title j-create_dialog">
+            <button class="back_to_dialog j-back_to_dialog">
+            <i class="material-icons">arrow_back</i>
+        </button>
+            <h1 class="group_chat__title">New Chat</h1>
+        </div>
+        <div class="notifications j-notifications hidden"></div>
+        <div class="content__inner j-content__inner">
+            <p class="group__chat__description">Select participants:</p>
+            <div class="group_chat__user_list j-group_chat__user_list">
+            </div>
+            <form action="" name="create_dialog" class="dialog_form m-dialog_form_create j-create_dialog_form">
+                <input class="dialog_name" name="dialog_name" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Add conversation name" disabled>
+                <button class="btn m-create_dialog_btn j-create_dialog_btn" type="submit" name="create_dialog_submit" disabled>create</button>
+            </form>
+        </div>
+    </script>
+
+    <script type="text/template" id="tpl_newGroupChatUser">
+        <div class="user__item <% user.selected ? print('disabled selected') : ''%>" id="<%= user.id %>">
+            <span class="user__avatar m-user__img_<%= user.color %>">
+            <i class="material-icons m-user_icon">account_circle</i>
+        </span>
+            <div class="user__details">
+                <p class="user__name">
+                    <%- user.name %>
+                </p>
+                <% if (user.last_request_at) { %>
+                    <p class="user__last_seen">
+                        <%= user.last_request_at %>
+                    </p>
+                    <% } %>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="tpl_message__typing">
+        <div class="message__wrap m-typing j-istyping" id="is__typing">
+            <% _.each(users, function(user){  %>
+                <span class="message__avatar <%- typeof user === 'number' ? 'm-typing_unknown m-typing_' + user : 'm-user__img_' + user.color %>">
+                <i class="material-icons">account_circle</i>
+            </span>
+                <% }); %>
+                    <% if (users.length){ %>
+                        <div id="fountainG">
+                            <div id="fountainG_1" class="fountainG"></div>
+                            <div id="fountainG_2" class="fountainG"></div>
+                            <div id="fountainG_3" class="fountainG"></div>
+                        </div>
+                        <% } %>
+        </div>
+    </script>
+
+    <script type="text/template" id="tpl_attachmentPreview">
+        <div class="attachment_preview__wrap m-loading" id="<%= id %>">
+            <img class="attachment_preview__item" src="<%= src %>">
+        </div>
+    </script>
+
+    <script type="text/template" id="tpl_attachmentLoadError">
+        <p class="attachment__error">Can't load attachment...</p>
+    </script>
+
+    <script type="text/template" id="tpl_lost_connection">
+        <div class="titile">Waiting for network.</div>
+        <div class="spinner"><img src="img/loader2.gif" alt="wating"></div>
+    </script>
+
+    <script type="text/template" id="tpl_loading">
+        <div class="loading__wrapper">
+            <div class="loading_inner">
+                <p class="loading__description">Loading...</p>
+            </div>
+        </div>
+    </script>
+
+
+    <!-- MODALS -->
+    <div class="modal fade" id="connect_err" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4>Connect to chat is failed</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p class="text-danger">
+                        Something wrong with connect to chat. Check internet connection or user info and trying again.
+                    </p>
+                </div>
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="error_no_calles" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Error</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p class="text-danger">Please choose users to call</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="income_call" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Call from <strong class="j-ic_initiator"></strong></h4>
+                </div>
+
+                <div class="modal-footer">
+                    <button onclick="hangupMaker()">Hangup</button>
+                    <button onclick="acceptMaker()">Answer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOUNDS -->
+    <audio id="endCallSignal" preload="auto">
+    <source src="./assets/chat/audio/end_of_call.ogg" type="audio/ogg" />
+    <source src="./assets/chat/audio/end_of_call.mp3" type="audio/mp3" />
+</audio>
+
+    <audio id="callingSignal" loop preload="auto">
+    <source src="./assets/chat/audio/calling.ogg" type="audio/ogg" />
+    <source src="./assets/chat/audio/calling.mp3" type="audio/mp3" />
+</audio>
+
+    <audio id="ringtoneSignal" loop preload="auto">
+    <source src="./assets/chat/audio/ringtone.ogg" type="audio/ogg" />
+    <source src="./assets/chat/audio/ringtone.mp3" type="audio/mp3" />
+</audio>
+
+
+    <!-- {{-- video --}} -->
+    <div class="main_video" style="display:none">
+
+        <div class="containerq">
+
+            <div id="chromeFileWarning" class="frame big">
+                <b style="color: red;">Warning!</b> Protocol "file" used to load page in Chrome.<br><br> Please avoid loading files directly from disk when developing WebRTC applications using Chrome.<br> Chrome disables access to microphone which prevents
+                proper functionality.<br>
+                <br> You can allow working with "file:", if you start Chrome with the flag <i>--allow-file-access-from-files</i>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="frame small">
+                <div class="inner loginBox" style="display: none">
+                    <h3 id="login">Sign in</h3>
+                    <form id="userForm">
+                        <input id="username" placeholder="USERNAME"><br>
+                        <input id="password" type="password" placeholder="PASSWORD"><br>
+                        <button id="loginUser">Login</button>
+                        <button id="createUser">Create</button>
+                    </form>
+                    <div id="userInfo">
+                        <h3><span id="username"></span></h3>
+                        <button id="logOut">Logout</button>
+                    </div>
+                </div>
+
+                <div id="callLog">
+                </div>
+                <div class="error">
+                </div>
+            </div>
+
+            <div class="frame">
+                <h3>Video Call</h3>
+                <div id="call">
+                    <form id="newCall">
+                        <input hidden id="callUserName" placeholder="Username (alice)"><br>
+                        <button id='call' style="display:none">Call</button><button id='hangup'><i class="material-icons">call_end</i></button><button style="display:none" id='answer'>Answer</button>
+                    </form>
+                </div>
+                <div class="clearfix"><br></div>
+                <video id="videooutgoing" autoplay muted></video>
+                <video id="videoincoming" autoplay></video>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./assets/chat/video.js"></script>
+
+
+    <script src="./assets/chat/js/config.js" defer></script>
+    <script src="./assets/chat/js/user.js" defer></script>
+    <script src="./assets/chat/js/dialog.js" defer></script>
+    <script src="./assets/chat/js/message.js" defer></script>
+    <script src="./assets/chat/js/listeners.js" defer></script>
+    <script src="./assets/chat/js/helpers.js" defer></script>
+    <script src="./assets/chat/js/app.js" defer></script>
+    <script src="./assets/chat/js/login.js" defer></script>
+    <script src="./assets/chat/js/route.js" defer></script>
+
+
+    <script>
+        $(document).ready(function() {
+            var url_string = window.location.href
+            var url = new URL(url_string);
+            var c = url.searchParams.get("t");
+            var role = url.searchParams.get("r") == 'd' ? 'doctor' : 'patient';
+            console.log(c);
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // document.getElementById("demo").innerHTML =
+                    console.log(this.responseText);
+                }
+            };
+            xhttp.open("GET", `https://192.168.8.100:4040/api/connections/`, true);
+            xhttp.send();
+        })
+    </script>
+</body>
+
+</html>

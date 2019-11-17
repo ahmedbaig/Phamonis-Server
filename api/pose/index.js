@@ -13,4 +13,6 @@ router.post('/delete/:token/:item', auth.isAuthenticated(), controller.delete);
 
 router.get('/all-poses/:token/:user', auth.isAuthenticated(), controller.getall);
 
+router.get('/status-poses/:token/:id', auth.isAuthenticated(), controller.statusPose);
+
 module.exports = router;

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from 'src/app/auth/auth-service.service';
 import { delay } from 'lodash' 
 import Swal from 'sweetalert2'
+import { getOrigin } from 'src/app/origin';
+import { SecureStorageService } from 'src/app/auth/secure-storage.service';
 declare var app:any;
 @Component({
   selector: 'app-navigation',
@@ -10,8 +12,9 @@ declare var app:any;
 })
 export class NavigationComponent implements OnInit {
   type: String = ""
-  constructor(public _auth:AuthServiceService) { }
-
+  messages:String = ""
+  public origin:String = getOrigin()
+  constructor(public _auth:AuthServiceService, private secureStorage:SecureStorageService) { }
   ngOnInit() {
     delay(()=>{
       // Swal.fire({
@@ -24,6 +27,7 @@ export class NavigationComponent implements OnInit {
       // });
       
       app.init();
+      this.messages = this.origin+"/chat?t="+JSON.parse(this.secureStorage.getItem('session_t')).jwt+"&r=d"
     }, 2000)
   }
 

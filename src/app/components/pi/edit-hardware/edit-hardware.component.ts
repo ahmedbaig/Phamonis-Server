@@ -51,9 +51,9 @@ export class EditHardwareComponent implements OnInit {
             let body = {
               pose: this.origin+`/dist-pose/${pose.item}`,
               name: pose.item,
-              createdt: moment(pose.timestamp).format("LLLL")
+              createdt: moment(pose.timeStamp).format("LLLL")
             }
-            this.poses.push(body)
+            this.poses.push(clone(body))
           })).then(()=>{
             this.poses =  chunk(reverse(this.poses), 3) 
             console.log(this.poses)
@@ -65,7 +65,7 @@ export class EditHardwareComponent implements OnInit {
 
   ngOnInit() {
     this._userService.getAllUsers(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
-      this.users = filter(res.users, o=>{return o.role=='user'}) 
+      this.users = filter(res.allUsers, o=>{return o.role=='user'}) 
       delay(()=>{
         M.AutoInit();
         $('#users').formSelect();

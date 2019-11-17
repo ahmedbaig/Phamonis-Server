@@ -120,7 +120,8 @@ exports.create = async function(req, res) {
 
 exports.delete = async function(req, res) {
     try {
-        await PoseModel.findByIdAndUpdate(req.params.item, { isDeleted: true });
+        let status = req.query.status == 1 ? true : false;
+        await PoseModel.findByIdAndUpdate(req.params.item, { isDeleted: status });
         res.send({
             success: true,
             message: "Image removed"
@@ -133,6 +134,21 @@ exports.delete = async function(req, res) {
     }
 }
 
+exports.statusPose = async function(req, res) {
+    try {
+        await PoseModel.findOneAndUpdate({ _id: req.params.id }, { isDeleted: true }).then(() => {
+            res.send({
+                success: true,
+                message: "Image Deleted"
+            })
+        })
+    } catch (e) {
+        res.send({
+            success: false,
+            message: e.message
+        })
+    }
+}
 exports.getall = async function(req, res) {
     try {
         await PoseModel.find({ user: req.params.user, isDeleted: false }).exec((err, arr) => {
