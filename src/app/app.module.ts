@@ -56,6 +56,7 @@ import { LineBasicPoseComponent } from './components/charts/line-basic-pose/line
 import { PatientDataComponent } from './components/patient-monitor/patient-data/patient-data.component'; 
 
 const appRoutes: Routes = [
+  {path: 'reset-password/:token', component: ResetPasswordComponent},
   {
     path: 'auth',
     component: AuthComponent,

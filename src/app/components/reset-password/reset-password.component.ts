@@ -4,7 +4,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import Swal from 'sweetalert2';
 import { AuthServiceService } from 'src/app/auth/auth-service.service';
+import { delay } from 'lodash'
+import { SecureStorageService } from 'src/app/auth/secure-storage.service';
 
+declare var $:any;
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
@@ -14,9 +17,23 @@ export class ResetPasswordComponent implements OnInit {
 
   registerForm!: FormGroup; 
   submitted:boolean = false
-  constructor(private formBuilder: FormBuilder, private route:Router, private router:ActivatedRoute, private _service: DataService, private _auth: AuthServiceService) { }
+  constructor(private formBuilder: FormBuilder, private route:Router, private router:ActivatedRoute, private _service: DataService, private _auth: AuthServiceService, private secureStorage:SecureStorageService) { }
 
   ngOnInit() {
+    if(this.secureStorage.getItem('session_t')!=null){
+      this._auth.verifyToken(JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res => {
+        if (res.success) {  
+          $('#loader').removeClass('hide')
+          this.route.navigate(['/'])
+        }else{
+          $('#loader').addClass('hide')        
+        }
+      });
+    }else{
+      delay(()=>{
+        $('#loader').addClass('hide')        
+      }, 500)
+    }
     this.registerForm = this.formBuilder.group({ 
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]

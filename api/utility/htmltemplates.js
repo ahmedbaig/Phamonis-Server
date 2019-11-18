@@ -448,7 +448,7 @@ exports.ForgotPassword = function(user, token) {
                       <tr>
                         <td align="center">
                           <div>
-                          <a style="text-decoration:none;color:white" href="${origin}/#/auth/reset-password/${token}" class="button button--red">Reset your password</a>
+                          <a style="text-decoration:none;color:white" href="${origin}/#/reset-password/${token}" class="button button--red">Reset your password</a>
                           </div>
                         </td>
                       </tr>
@@ -461,7 +461,7 @@ exports.ForgotPassword = function(user, token) {
                       <tr>
                         <td>
                           <p class="sub">If you’re having trouble clicking the password reset button, copy and paste the URL below into your web browser.</p>
-                          <p class="sub"><a href="${origin}/#/auth/reset-password/${token}">${origin}/#/auth/reset-password/${token}</a></p>
+                          <p class="sub"><a href="${origin}/#/reset-password/${token}">${origin}/#/reset-password/${token}</a></p>
                         </td>
                       </tr>
                     </table>

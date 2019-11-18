@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(private AuthService:DataService, private _auth:AuthServiceService){}
 
   ngOnInit(): void { 
-    this._auth.isAuthenticated()
+    // this._auth.isAuthenticated()
   }
  
 }
