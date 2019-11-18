@@ -30,7 +30,7 @@ export class AuthServiceService {
       return this.isTokenExpired(JSON.parse(this.secureStorage.getItem('session_t')));
     } else {
       this.clear();
-      //Dont know why this was there -- why was this here
+      //Dont know why this was there -- why was this here -- Because on reset passwords it needs to hold position
       // I know why this there. Because when there is nothing in storage it'll bounce back
       this.route.navigate(['/auth']);
       return false

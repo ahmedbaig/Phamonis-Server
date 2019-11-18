@@ -27,10 +27,6 @@ export class NewUserComponent implements OnInit {
   phone:String = ""
   gender:String = ""
   role:String = ""
-  full_name:String = ""
-  login:String = ""
-  cid:String = ""
-  cemail:String = ""
   dateOfBirth:String = "" 
   constructor(private _pi:PiService, private _hospital:HospitalService, private secureStorage:SecureStorageService, private _user:UserService, private _auth:AuthServiceService, private router:Router) { }
 
@@ -59,23 +55,6 @@ export class NewUserComponent implements OnInit {
   }
 
   saveUser(){ 
-
-    if(
-      this.full_name!= ""&&
-      this.login!= ""&&
-      this.cid!= ""&&
-      this.cemail!= ""){
-        let body = {
-          full_name: this.full_name,
-          login:this.login,
-          cid: this.cid,
-          cemail: this.cemail
-        }
-        this._user.createUserAdminChat(body, JSON.parse(this.secureStorage.getItem('session_t')).jwt).subscribe(res=>{
-          
-        })
-      }
-
     this.dateOfBirth = $('#dob').val(); 
     let body = {
       firstName:this.firstName,
