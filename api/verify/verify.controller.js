@@ -8,9 +8,9 @@ var request = require('request');
 const UserModel = require('../user/user.model');
 const VerificationModel = require('./verify.model');
 const UserSession = require('../userSession/userSession.model');
-const accountSid = 'AC3bc2f767a2795d5f061cfa191682357f';
-const authToken = '493d561fd71939091befe9126ae3fc7a';
-const serviceId = 'VA7251cff344c374298a98f518076da207';
+const accountSid = '';
+const authToken = '';
+const serviceId = '';
 const client = require('twilio')(accountSid, authToken);
 
 
