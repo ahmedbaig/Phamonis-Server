@@ -61,7 +61,7 @@
     "mongoose-types": "^1.0.3",
     "ng2modules-easypiechart": "0.0.4",
     "node-cron": "^2.0.3",
-    "nodemailer": "^4.4.2",
+    "nodemailer": "^6.4.16",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "rxjs": "^6.1.0",
