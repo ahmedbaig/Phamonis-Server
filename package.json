@@ -55,7 +55,7 @@
     "express-session": "^1.7.6",
     "externalip": "^1.0.2",
     "fb": "^2.0.0",
-    "jsonwebtoken": "^8.1.0",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.11",
     "mongoose": "^4.8.1",
     "mongoose-types": "^1.0.3",
